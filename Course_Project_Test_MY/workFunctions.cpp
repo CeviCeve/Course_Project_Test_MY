@@ -2,11 +2,13 @@
 
 int columns, rows;
 string pytCorp1 = u8"VERY POPYLAR COMPANY";
+const HANDLE hhCon = GetStdHandle(STD_OUTPUT_HANDLE);
 
 
-
-void allLang()
+void basikSettings()
 {
+    system("mkdir Settings");
+
     SetConsoleOutputCP(CP_UTF8);
     SetConsoleCP(CP_UTF8);
     setlocale(LC_ALL, "en_US.UTF-8");
@@ -16,6 +18,19 @@ void allLang()
 
     SetConsoleOutputCP(1251);
     SetConsoleCP(1251);
+
+    UnwrapScreen();
+}
+
+static void UnwrapScreen()
+{
+    COORD NewSBSize;
+    SMALL_RECT DisplayArea = { 0, 0, 0, 0 };
+    NewSBSize = GetLargestConsoleWindowSize(hhCon);
+    SetConsoleScreenBufferSize(hhCon, NewSBSize);
+    DisplayArea.Right = NewSBSize.X - 1;
+    DisplayArea.Bottom = NewSBSize.Y - 1;
+    SetConsoleWindowInfo(hhCon, TRUE, &DisplayArea);
 }
 
 void setCursorPosition(int x, int y)

@@ -18,14 +18,17 @@
 #include <codecvt>
 using namespace std;
 
-void allLang();
+//--------------------------basic settings--------------------------//
+//----------workFunctions.cpp----------//
+void basikSettings();
+static void UnwrapScreen();
 void setCursorPosition(int x, int y);
 void writeBorder();
 void getConsleChords();
 
-
-
-
+//--------------------------read settings--------------------------//
+bool readSettings(string way);
+void masterOfSettings();
 
 class Function
 {
