@@ -1,7 +1,7 @@
 ﻿#include "Header.h"
 
 int columns, rows;
-string pytCorp1 = u8"VERY POPYLAR COMPANY";
+string pytCorp1 = "VERY POPYLAR COMPANY";
 const HANDLE hhCon = GetStdHandle(STD_OUTPUT_HANDLE);
 
 
@@ -9,15 +9,10 @@ void basikSettings()
 {
     system("mkdir Settings");
 
-    SetConsoleOutputCP(CP_UTF8);
-    SetConsoleCP(CP_UTF8);
-    setlocale(LC_ALL, "en_US.UTF-8");
-
-    Function function;
-    SendMessage(::GetConsoleWindow(), WM_SYSKEYDOWN, VK_RETURN, 0x20000000);
-
-    SetConsoleOutputCP(1251);
     SetConsoleCP(1251);
+    SetConsoleOutputCP(1251);
+
+    SendMessage(::GetConsoleWindow(), WM_SYSKEYDOWN, VK_RETURN, 0x20000000);
 
     UnwrapScreen();
 }
@@ -41,34 +36,39 @@ void setCursorPosition(int x, int y)
     SetConsoleCursorPosition(hOut, coord);
 }
 
-void getConsleChords()
+CHORDS getConsleChords()
 {
     CONSOLE_SCREEN_BUFFER_INFO csbi;
+
+    int columns, rows;
 
     GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
     columns = csbi.srWindow.Right - csbi.srWindow.Left + 1;
     rows = csbi.srWindow.Bottom - csbi.srWindow.Top + 1;
-
+    CHORDS chords;
+    chords.y = rows;
+    chords.x = columns;
     //cout << "columns: " << columns << std::endl;
     //cout << "rows: " << rows << std::endl;
+    return chords;
 }
 
 void writeBorder()
 {
-
     system("cls");
 
+    CHORDS chords = getConsleChords();
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
     int chislo = 1;
-    getConsleChords();
+    
 
-    setCursorPosition((((columns - pytCorp1.size()) - 1) / 2), rows / 2);
+    setCursorPosition((((chords.x - pytCorp1.size()) - 1) / 2), chords.y / 2);
     Sleep(100);
 
     for (int i = 0; i < pytCorp1.size(); i++)
     {
         if (chislo > 15)chislo = 1;
-        SetConsoleTextAttribute(hConsole, 6);
+        SetConsoleTextAttribute(hConsole, 14);
         chislo++;
         cout << pytCorp1[i];
         Sleep(50);
@@ -77,11 +77,41 @@ void writeBorder()
 
     for (int i = 0; i < pytCorp1.size(); i++)
     {
-        setCursorPosition((((columns - pytCorp1.size())-1) / 2 + i), rows / 2);
+        setCursorPosition((((chords.x - pytCorp1.size())-1) / 2 + i), chords.y / 2);
         cout << " ";
         Sleep(50);
     }
     Sleep(800);
 
-    _getch();
+}
+
+int gotoThisLine(int maxSize,int positionCursore ,int tapp)
+{
+    int inThisLine;
+
+    if (tapp == 80)
+        if (positionCursore == maxSize - 1)
+            inThisLine = 0;
+        else inThisLine = positionCursore + 1;
+
+    else if (tapp == 72)
+        if (positionCursore == 0)
+            inThisLine = maxSize - 1;
+        else inThisLine = positionCursore - 1;
+
+    else inThisLine = positionCursore;
+
+    return inThisLine;
+}
+
+void draw()
+{
+    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+    // you can loop k higher to see more color choices
+    for (int k = 1; k < 255; k++)
+    {
+        // pick the colorattribute k you want
+        SetConsoleTextAttribute(hConsole, k);
+        cout << k << " I want to be nice today!" << endl;
+    }
 }

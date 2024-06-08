@@ -3,9 +3,10 @@
 int main()
 {
 	basikSettings();
-	writeBorder();
+	//writeBorder();
+	//draw();
 
-	if (readSettings("Settings/settings.txt")) {  }
+	if (readSettings("Settings/settings.txt")) {}
 	else { masterOfSettings(); }
 }
 

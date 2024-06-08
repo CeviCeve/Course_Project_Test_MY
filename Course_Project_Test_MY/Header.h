@@ -18,23 +18,28 @@
 #include <codecvt>
 using namespace std;
 
+//--------------------------структуры--------------------------//
+struct CHORDS
+{
+	int x;
+	int y;
+};
 //--------------------------basic settings--------------------------//
 //----------workFunctions.cpp----------//
 void basikSettings();
+void draw();
 static void UnwrapScreen();
 void setCursorPosition(int x, int y);
 void writeBorder();
-void getConsleChords();
+CHORDS getConsleChords();
+int gotoThisLine(int maxSize, int positionCursore, int tapp);
+
 
 //--------------------------read settings--------------------------//
 bool readSettings(string way);
 void masterOfSettings();
+void settingMenu_1();
 
-class Function
-{
-public:
-	int a;
-};
 
 
 #endif
