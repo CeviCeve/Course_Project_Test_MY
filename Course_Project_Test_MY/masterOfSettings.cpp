@@ -55,21 +55,46 @@ void settingMenu_1()
 			lastCursore = cursoreLine;
 			cursoreLine = gotoThisLine(interface1Size, cursoreLine, tapp);
 		}
-		else if ((tapp >= 65 && tapp <= 122 && cursoreLine != 4) || (tapp >=48 && tapp<=57))
+		else if (((tapp >= 65 && tapp <= 122 && cursoreLine != 4) || (tapp >=48 && tapp<=57) || tapp == 64 || tapp == 46) && cursoreLine != 4)
 		{
+			
 			newSettings[cursoreLine] = newSettings[cursoreLine] + static_cast<char>(tapp);
-			cout << static_cast<char>(tapp);
+			
+			if (cursoreLine == 2 || cursoreLine == 3)
+			{
+				cout << "*";
+			}
+			else cout << static_cast<char>(tapp);
 		}
 		else if (tapp == 8 && newSettings[cursoreLine] != "")
 		{
 			newSettings[cursoreLine].pop_back();
-			setCursorPosition(chords.x / 4 + (maxSize + 3) + newSettings[cursoreLine].length(), 3 + chords.y / 4 + cursoreLine * 2);
+			setCursorPosition(chords.x / 4 + (maxSize + 3) + newSettings[cursoreLine].length(), 3 + chords.y / 4 + cursoreLine * 3);
 			cout << " ";
 		}
 		else if (tapp == 41)
 		{
 			setCursorPosition(1, 1);
 			cout << newSettings[cursoreLine] << endl;
+		}
+		else if (tapp == 13 && cursoreLine == 4)
+		{
+			if (isValidEmail(newSettings[1]))
+			{
+				if (newSettings[2] == newSettings[3] && newSettings[3].size()>3)
+				{
+
+				}
+			}
+			else
+			{
+				setCursorPosition(chords.x / 4 - 3, 3 + chords.y / 4 - 2);
+				SetConsoleTextAttribute(hConsole, 12);
+				cout << "ÍÀÉÄÅÍÀ ÎØÈÁÊÀ. ÈÇÌÅÍÈÒÅ ÄÀÍÍÛÅ";
+				SetConsoleTextAttribute(hConsole, 6);
+				setCursorPosition(chords.x / 4 - 3, 3 + chords.y / 4 + lastCursore * 3);
+
+			}
 		}
 		//cout<< tapp<< " ";
 	}

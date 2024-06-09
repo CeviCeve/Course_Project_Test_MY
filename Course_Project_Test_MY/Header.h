@@ -16,6 +16,7 @@
 #include <cctype>
 #include <iomanip>
 #include <codecvt>
+#include <regex>
 using namespace std;
 
 //--------------------------структуры--------------------------//
@@ -27,12 +28,15 @@ struct CHORDS
 //--------------------------basic settings--------------------------//
 //----------workFunctions.cpp----------//
 void basikSettings();
-void draw();
-static void UnwrapScreen();
+bool isValidEmail(const std::string& email);
 void setCursorPosition(int x, int y);
-void writeBorder();
+static void UnwrapScreen();
 CHORDS getConsleChords();
+
+void draw();
+void writeBorder();
 int gotoThisLine(int maxSize, int positionCursore, int tapp);
+
 
 
 //--------------------------read settings--------------------------//

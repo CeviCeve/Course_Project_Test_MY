@@ -115,3 +115,12 @@ void draw()
         cout << k << " I want to be nice today!" << endl;
     }
 }
+
+bool isValidEmail(const std::string& email)
+{
+    // Определите регулярное выражение
+    const regex pattern("(\\w+)(\\.|_)?(\\w*)@(\\w+)(\\.(\\w+))+");
+
+    // Проверьте, соответствует ли введенная строка регулярному выражению
+    return regex_match(email, pattern);
+}
