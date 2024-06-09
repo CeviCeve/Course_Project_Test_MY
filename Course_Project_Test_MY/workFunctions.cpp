@@ -125,6 +125,7 @@ void draw()
         SetConsoleTextAttribute(hConsole, k);
         cout << k << " I want to be nice today!" << endl;
     }
+    _getch();
 }
 
 bool isValidEmail(const std::string& email)

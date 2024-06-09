@@ -2,7 +2,7 @@
 
 CHORDS chords = getConsleChords();
 string master = "люяреп мюярпней";
-string ex = "ESC дкъ бшундю";
+string ex = "esc ДКЪ БШУНДЮ";
 
 HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 SETTINGS myCorporation;
@@ -12,9 +12,9 @@ void masterOfSettings()
 	system("cls");
 	myCorporation.setAllAdminFunc(0, 0, 0, 0);
 	myCorporation.setBaseFunc1("DARK ", 0);
+	myCorporation.setUserCard1(0, 0, 0, 0);
 		
 	startMasterDraw();
-	ShowConsoleCursor(0);
 
 	//settingMenu_1();
 	settingMenu_2();
@@ -27,6 +27,7 @@ void startMasterDraw()
 	chords = getConsleChords();
 
 	setCursorPosition(chords.x / 2 - master.size() / 2, 1);
+	SetConsoleTextAttribute(hConsole, 14);
 	cout << master;
 
 	setCursorPosition(1, 1);
@@ -54,6 +55,10 @@ void settingMenu_1()
 
 	while (1)
 	{	
+		
+		if(cursoreLine != interface1Size-1)ShowConsoleCursor(1);
+		else ShowConsoleCursor(0);
+
 		setCursorPosition(chords.x / 4 - 3, 3 + chords.y / 4 + lastCursore * 3);
 		SetConsoleTextAttribute(hConsole, 6);
 		cout << "   " << settingsInterface1[lastCursore];
@@ -94,10 +99,23 @@ void settingMenu_1()
 		}
 		else if (tapp == 13 && cursoreLine == 4)
 		{
+			setCursorPosition(chords.x / 4 - 3, 3 + chords.y / 4 - 2);
+			cout << "                                                               ";
+			setCursorPosition(chords.x / 4 - 3, 3 + chords.y / 4 - 2);
+			SetConsoleTextAttribute(hConsole, 2);
+			cout << "дюммше напюаюршбючряъ";
+			Sleep(800);
 			if (isValidEmail(newSettings[1]))
 			{
 				if (newSettings[2] == newSettings[3] && newSettings[3].size() > 3)
 				{
+					setCursorPosition(chords.x / 4 - 3, 3 + chords.y / 4 - 2);
+					cout << "                                                               ";
+					setCursorPosition(chords.x / 4 - 3, 3 + chords.y / 4 - 2);
+					SetConsoleTextAttribute(hConsole, 10);
+					cout << "гюопня нднапем";
+					Sleep(800);
+
 					myCorporation.setAllPartOne(newSettings[0], newSettings[1], newSettings[2]);
 					break;
 				}
@@ -122,12 +140,12 @@ void settingMenu_1()
 }
 void settingMenu_2()
 {
+	ShowConsoleCursor(0);
+
 	system("cls");
 	chords = getConsleChords();
 
-	setCursorPosition(chords.x / 2 - master.size() / 2, 1);
-	cout << master;
-	SetConsoleTextAttribute(hConsole, 6);
+	startMasterDraw();
 
 
 	const int sizeMain = 3;
@@ -220,7 +238,7 @@ void drawObjects(int code)
 
 			if (cursoreLine == 0) { deleteZone(maxSize + chords.x / 3);  drawBase(tapp); }
 			else if (cursoreLine == 1) { deleteZone(maxSize + chords.x / 3); drawAutor(tapp); }
-			else if (cursoreLine == 2) { deleteZone(maxSize + chords.x / 3); drawTempl(); }
+			else if (cursoreLine == 2) { deleteZone(maxSize + chords.x / 3); drawTempl(tapp); }
 			else if (cursoreLine == 3) { deleteZone(maxSize + chords.x / 3); drawRole(); }
 
 
@@ -481,7 +499,7 @@ void drawAutor(int code)
 
 }
 
-void drawTempl()
+void drawTempl(int code)
 {
 
 }
