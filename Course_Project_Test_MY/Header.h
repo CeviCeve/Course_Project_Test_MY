@@ -37,6 +37,40 @@ struct SETTINGS
 		this->email = email;
 		this->corporationPassword = corporationPassword;
 	}
+
+	bool correctTheme;
+	bool correctDB;
+	bool correctCab;
+	bool temporaryPassord;
+
+	void setAllAdminFunc(bool theme, bool correctDB, bool correctCab, bool temporaryPassord)
+	{
+		this->correctTheme = theme;
+		this->correctDB = correctDB;
+		this->correctCab = correctCab;
+		this->temporaryPassord = temporaryPassord;
+
+	}
+
+	string theme;
+	bool profileCorrect;
+
+	void setBaseFunc1(string theme, bool profileCorrect)
+	{
+		this->theme = theme;
+		this->profileCorrect = profileCorrect;
+	}
+
+	bool login;
+	bool password;
+	bool codeIn;
+
+	void setAuthFunc1(bool login, bool password, bool codeIn)
+	{
+		this->login = login;
+		this->password = password;
+		this->codeIn = codeIn;
+	}
 };
 //--------------------------basic settings--------------------------//
 //----------workFunctions.cpp----------//
@@ -63,11 +97,11 @@ void settingMenu_1();
 void settingMenu_2();
 
 void drawObjects(int tapp);
-void drawAdmin();
+void drawAdmin(int code);
 void deleteZone(int maxSizeX);
 
-void drawBase();
-void drawAutor();
+void drawBase(int code);
+void drawAutor(int code);
 void drawTempl();
 void drawRole();
 

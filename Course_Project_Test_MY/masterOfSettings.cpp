@@ -10,6 +10,8 @@ SETTINGS myCorporation;
 void masterOfSettings()
 {
 	system("cls");
+	myCorporation.setAllAdminFunc(0, 0, 0, 0);
+	myCorporation.setBaseFunc1("DARK ", 0);
 		
 	startMasterDraw();
 	ShowConsoleCursor(0);
@@ -130,12 +132,10 @@ void settingMenu_2()
 
 	const int sizeMain = 3;
 
-	const int sizeBase = 2;
 	const int sizeAutor = 3;
 	const int sizeTempl = 7;
 	const int sizeRole = 5;
 	const int sizeRoleSettings = 3;
-	const int sizeAdmin = 4;
 	int tapp = 0;
 	int lastCursore = 0;
 	int cursoreLine = 0;
@@ -144,12 +144,9 @@ void settingMenu_2()
 
 	string setting2_Main[sizeMain] = {"Объект","Администраия","Продолжить"};
 
-	string setting2_Base[sizeBase] = {"Тема", "Настроить профиль"};
-	string setting2_Authorization[sizeAutor] = {"Логин", "Пароль","Код доступа"};
 	string setting2_Templates[sizeTempl] = { "Роль", "Возраст", "Специализация", "Логин", "Код доступа", "Пароль" , "Пол" };
 	string setting2_Role[sizeRole] = {"","","","",""};
 	string setting2_Role_Settings[sizeRoleSettings] = { "Работа с занятостью", "Просмотр занятых", "Название файла:" };
-	string setting2_admin[sizeAdmin] = { "Изменение темы", "Корректировка БД", "Корректировка ЛК", "Временные коды доступа" };
 
 
 	for (int i = 0; i < sizeMain; i++) {
@@ -175,7 +172,7 @@ void settingMenu_2()
 
 		SetConsoleTextAttribute(hConsole, 6);
 		if (cursoreLine == 0) { deleteZone(maxSize + chords.x/5); drawObjects(tapp); }
-		else if (cursoreLine == 1) { deleteZone(maxSize + chords.x / 5); }
+		else if (cursoreLine == 1) { deleteZone(maxSize + chords.x / 5); drawAdmin(tapp); }
 		else if (cursoreLine == 2) { deleteZone(maxSize + chords.x / 5); }
 
 		tapp = _getch();
@@ -221,10 +218,10 @@ void drawObjects(int code)
 
 			setCursorPosition(chords.x / 5 + (maxSize + 3), 3 + chords.y / 5 + cursoreLine * 3 + 1);
 
-			if (cursoreLine == 0) { drawBase(); }
-			else if (cursoreLine == 1) { drawAutor(); }
-			else if (cursoreLine == 2) { drawTempl(); }
-			else if (cursoreLine == 3) { drawRole(); }
+			if (cursoreLine == 0) { deleteZone(maxSize + chords.x / 3);  drawBase(tapp); }
+			else if (cursoreLine == 1) { deleteZone(maxSize + chords.x / 3); drawAutor(tapp); }
+			else if (cursoreLine == 2) { deleteZone(maxSize + chords.x / 3); drawTempl(); }
+			else if (cursoreLine == 3) { deleteZone(maxSize + chords.x / 3); drawRole(); }
 
 
 			tapp = _getch();
@@ -244,8 +241,78 @@ void drawObjects(int code)
 		}
 }
 
-void drawAdmin()
+void drawAdmin(int code)
 {
+	const int sizeAdmin = 4;
+	int tapp;
+	int lastCursore = 0;
+	int cursoreLine = 0;
+	int maxSize = 0;
+
+
+	string setting2_admin[sizeAdmin] = { "] Изменение темы", "] Корректировка БД", "] Корректировка ЛК", "] Временные коды доступа" };
+	string yes ="<   ПОДКЛЮЧЕНО  >";
+	string no = "< НЕ ПОДКЛЮЧЕНО >";
+
+
+	for (int i = 0; i < sizeAdmin; i++) maxSize = max(setting2_admin[i].size(), maxSize);
+
+	for (int i = 0; i < sizeAdmin; i++) {
+		setCursorPosition(chords.x / 5 + 23 + maxSize+2, 3 + chords.y / 5 + i * 3 + 1);
+		if (i == 0) if (!myCorporation.correctTheme ? cout << no : cout << yes);
+		if (i == 1) if (!myCorporation.correctDB  ? cout << no : cout << yes);
+		if (i == 2) if (!myCorporation.correctCab ? cout << no : cout << yes);
+		if (i == 3) if (!myCorporation.temporaryPassord ? cout << no : cout << yes);
+	}
+
+	for (int i = 0; i < sizeAdmin; i++) {
+		setCursorPosition(chords.x / 5 + 23, 3 + chords.y / 5 + i * 3 + 1);
+		cout << setting2_admin[i];
+	}
+
+	if (code == 77)
+		while (1)
+		{
+			setCursorPosition(chords.x / 5 - 3 + 23, 3 + chords.y / 5 + lastCursore * 3 + 1);
+			SetConsoleTextAttribute(hConsole, 6);
+			cout << "   " << setting2_admin[lastCursore];
+
+			setCursorPosition(chords.x / 5 - 3 + 23, 3 + chords.y / 5 + cursoreLine * 3 + 1);
+			SetConsoleTextAttribute(hConsole, 11);
+			cout << ">> " << setting2_admin[cursoreLine];
+
+			setCursorPosition(chords.x / 5 + (maxSize + 3), 3 + chords.y / 5 + cursoreLine * 3 + 1);
+			for (int i = 0; i < sizeAdmin; i++) {
+				SetConsoleTextAttribute(hConsole, 14);
+				setCursorPosition(chords.x / 5 + 23 + maxSize + 2, 3 + chords.y / 5 + i * 3 + 1);
+				if (i == 0) if (!myCorporation.correctTheme ? cout << no : cout << yes);
+				if (i == 1) if (!myCorporation.correctDB ? cout << no : cout << yes);
+				if (i == 2) if (!myCorporation.correctCab ? cout << no : cout << yes);
+				if (i == 3) if (!myCorporation.temporaryPassord ? cout << no : cout << yes);
+			}
+
+			tapp = _getch();
+
+			if (tapp == 80 || tapp == 72)
+			{
+				lastCursore = cursoreLine;
+				cursoreLine = gotoThisLine(sizeAdmin, cursoreLine, tapp);
+			}
+			else if (tapp == 75)
+			{
+				setCursorPosition(chords.x / 5 - 3 + 23, 3 + chords.y / 5 + cursoreLine * 3 + 1);
+				SetConsoleTextAttribute(hConsole, 6);
+				cout << "   " << setting2_admin[cursoreLine];
+				break;
+			}
+			else if (tapp == 13 || tapp ==77)
+			{
+				if (cursoreLine == 0) if (!myCorporation.correctTheme ? myCorporation.correctTheme=true : myCorporation.correctTheme=false);
+				if (cursoreLine == 1) if (!myCorporation.correctDB ? myCorporation.correctDB = true : myCorporation.correctDB = false);
+				if (cursoreLine == 2) if (!myCorporation.correctCab ? myCorporation.correctCab = true : myCorporation.correctCab = false);
+				if (cursoreLine == 3) if (!myCorporation.temporaryPassord ? myCorporation.temporaryPassord = true : myCorporation.temporaryPassord = false);
+			}
+		}
 
 }
 
@@ -258,13 +325,159 @@ void deleteZone(int maxSizeX)
 	}
 }
 
-void drawBase()
+void drawBase(int code)
 {
+	int tapp = 0;
+	int lastCursore = 0;
+	int cursoreLine = 0;
+	int maxSize = 0;
+	const int sizeBase = 2;
 
+	int num = 1;
+
+	string setting2_Base[sizeBase] = { "] Тема", "] Настроить профиль" };
+	string yes = "<   ПОДКЛЮЧЕНО  >";
+	string no = "< НЕ ПОДКЛЮЧЕНО >";
+
+
+	for (int i = 0; i < sizeBase; i++) maxSize = max(setting2_Base[i].size(), maxSize);
+
+	for (int i = 0; i < sizeBase; i++)
+	{
+		SetConsoleTextAttribute(hConsole, 6);
+		setCursorPosition(chords.x / 5 + 28 + maxSize + 2, 3 + chords.y / 5 + i * 3 + 2);
+		cout << setting2_Base[i];
+	}
+
+	for (int i = 0; i < sizeBase; i++)
+	{
+		SetConsoleTextAttribute(hConsole, 6);
+		setCursorPosition(chords.x / 5 + 44 + maxSize + 7, 3 + chords.y / 5 + i * 3 + 2);
+		if (i == 0) cout << "< " << myCorporation.theme << " >";
+		if (i == 1)if (!myCorporation.profileCorrect ? cout << no : cout << yes);
+	}
+
+	if (code == 77)
+		while (1)
+		{
+
+			for (int i = 0; i < sizeBase; i++)
+			{
+				SetConsoleTextAttribute(hConsole, 14);
+				setCursorPosition(chords.x / 5 + 44 + maxSize + 7, 3 + chords.y / 5 + i * 3 + 2);
+				if (i == 0) cout << "< " << myCorporation.theme << " >";
+				if (i == 1)if (!myCorporation.profileCorrect ? cout << no : cout << yes);
+			}
+			setCursorPosition(chords.x / 5 + 28 + maxSize + 2 -3, 3 + chords.y / 5 + lastCursore * 3 + 2);
+			SetConsoleTextAttribute(hConsole, 6);
+			cout << "   " << setting2_Base[lastCursore];
+
+			setCursorPosition(chords.x / 5 + 28 + maxSize + 2 -3, 3 + chords.y / 5 + cursoreLine * 3 + 2);
+			SetConsoleTextAttribute(hConsole, 14);
+			cout << ">> " << setting2_Base[cursoreLine];
+
+			//setCursorPosition(chords.x / 5 + (maxSize + 3), 3 + chords.y / 5 + cursoreLine * 3 + 1);
+
+
+			tapp = _getch();
+
+			if (tapp == 80 || tapp == 72)
+			{
+				lastCursore = cursoreLine;
+				cursoreLine = gotoThisLine(sizeBase, cursoreLine, tapp);
+			}
+			else if (tapp == 75)
+			{
+				setCursorPosition(chords.x / 5 - 3 + 28 + maxSize + 2, 3 + chords.y / 5 + cursoreLine * 3 + 2);
+				SetConsoleTextAttribute(hConsole, 6);
+				cout << "   " << setting2_Base[cursoreLine];
+				break;
+			}
+			else if (tapp == 13 || tapp == 77)
+			{
+				if (cursoreLine == 0) 
+				{
+					num++;
+					if (num == 0 || num > 2) {myCorporation.theme = "LIGHT"; }					
+					else if (num == 1) myCorporation.theme = "DARK ";
+					else if (num == 2) { myCorporation.theme = "BLUE "; num = -1; }
+				}
+				else if (!myCorporation.profileCorrect ? myCorporation.profileCorrect = true : myCorporation.profileCorrect = false);
+			}
+		}
 }
 
-void drawAutor()
+void drawAutor(int code)
 {
+	const int sizeAutor = 3;
+	int tapp;
+	int lastCursore = 0;
+	int cursoreLine = 0;
+	int maxSize = 0;
+
+
+	string setting2_Authorization[sizeAutor] = { "] Логин", "] Пароль","] Код доступа" };
+	string yes = "<   ПОДКЛЮЧЕНО  >";
+	string no = "< НЕ ПОДКЛЮЧЕНО >";
+
+
+	for (int i = 0; i < sizeAutor; i++) maxSize = max(setting2_Authorization[i].size(), maxSize);
+
+	SetConsoleTextAttribute(hConsole, 6);
+
+	for (int i = 0; i < sizeAutor; i++) {
+		setCursorPosition(chords.x / 5 + 49 + maxSize + 7, 3 + chords.y / 5 + i * 3 + 2);
+		if (i == 0) if (!myCorporation.login ? cout << no : cout << yes);
+		if (i == 1) if (!myCorporation.password ? cout << no : cout << yes);
+		if (i == 2) if (!myCorporation.codeIn ? cout << no : cout << yes);
+	}
+
+	for (int i = 0; i < sizeAutor; i++) {
+		setCursorPosition(chords.x / 5 + 49, 3 + chords.y / 5 + i * 3 + 2);
+		cout << setting2_Authorization[i];
+	}
+
+	if (code == 77)
+		while (1)
+		{
+			setCursorPosition(chords.x / 5 + 33 + maxSize , 3 + chords.y / 5 + lastCursore * 3 + 2);
+			SetConsoleTextAttribute(hConsole, 6);
+			cout << "   " << setting2_Authorization[lastCursore];
+
+			setCursorPosition(chords.x / 5 + 33 + maxSize , 3 + chords.y / 5 + cursoreLine * 3 + 2);
+			SetConsoleTextAttribute(hConsole, 14);
+			cout << ">> " << setting2_Authorization[cursoreLine];
+
+			setCursorPosition(chords.x / 5 + (maxSize + 3), 3 + chords.y / 5 + cursoreLine * 3 + 2);
+			for (int i = 0; i < sizeAutor; i++) {
+				SetConsoleTextAttribute(hConsole, 14);
+				setCursorPosition(chords.x / 5 + 50 + maxSize + 7, 3 + chords.y / 5 + i * 3 + 2);
+				if (i == 0) if (!myCorporation.login ? cout << no : cout << yes);
+				if (i == 1) if (!myCorporation.password ? cout << no : cout << yes);
+				if (i == 2) if (!myCorporation.codeIn ? cout << no : cout << yes);
+			}
+
+			tapp = _getch();
+
+			if (tapp == 80 || tapp == 72)
+			{
+				lastCursore = cursoreLine;
+				cursoreLine = gotoThisLine(sizeAutor, cursoreLine, tapp);
+			}
+			else if (tapp == 75)
+			{
+				setCursorPosition(chords.x / 5 + 33 + maxSize, 3 + chords.y / 5 + cursoreLine * 3 + 2);
+				SetConsoleTextAttribute(hConsole, 6);
+				cout << "   " << setting2_Authorization[cursoreLine];
+				break;
+			}
+			else if (tapp == 13 || tapp == 77)
+			{
+				if (cursoreLine == 0) if (!myCorporation.login ? myCorporation.login = true : myCorporation.login = false);
+				if (cursoreLine == 1) if (!myCorporation.password ? myCorporation.password = true : myCorporation.password = false);
+				if (cursoreLine == 2) if (!myCorporation.codeIn ? myCorporation.codeIn = true : myCorporation.codeIn = false);
+			}
+		}
 
 }
 
