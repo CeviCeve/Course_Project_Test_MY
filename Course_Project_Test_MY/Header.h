@@ -25,6 +25,19 @@ struct CHORDS
 	int x;
 	int y;
 };
+struct SETTINGS
+{
+	string title;
+	string email;
+	string corporationPassword;
+
+	void setAllPartOne(string title, string email, string corporationPassword)
+	{
+		this->title = title;
+		this->email = email;
+		this->corporationPassword = corporationPassword;
+	}
+};
 //--------------------------basic settings--------------------------//
 //----------workFunctions.cpp----------//
 void basikSettings();
@@ -32,18 +45,31 @@ bool isValidEmail(const std::string& email);
 void setCursorPosition(int x, int y);
 static void UnwrapScreen();
 CHORDS getConsleChords();
+void ShowConsoleCursor(bool showFlag);
+
 
 void draw();
 void writeBorder();
 int gotoThisLine(int maxSize, int positionCursore, int tapp);
+void leave();
 
 
 
 //--------------------------read settings--------------------------//
 bool readSettings(string way);
 void masterOfSettings();
+void startMasterDraw();
 void settingMenu_1();
+void settingMenu_2();
 
+void drawObjects(int tapp);
+void drawAdmin();
+void deleteZone(int maxSizeX);
+
+void drawBase();
+void drawAutor();
+void drawTempl();
+void drawRole();
 
 
 #endif

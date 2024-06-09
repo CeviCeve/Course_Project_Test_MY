@@ -53,6 +53,17 @@ CHORDS getConsleChords()
     return chords;
 }
 
+void ShowConsoleCursor(bool showFlag)
+{
+    HANDLE out = GetStdHandle(STD_OUTPUT_HANDLE);
+
+    CONSOLE_CURSOR_INFO     cursorInfo;
+
+    GetConsoleCursorInfo(out, &cursorInfo);
+    cursorInfo.bVisible = showFlag; // set the cursor visibility
+    SetConsoleCursorInfo(out, &cursorInfo);
+}
+
 void writeBorder()
 {
     system("cls");
@@ -123,4 +134,22 @@ bool isValidEmail(const std::string& email)
 
     // Проверьте, соответствует ли введенная строка регулярному выражению
     return regex_match(email, pattern);
+}
+
+void leave()
+{
+
+    CHORDS chords = getConsleChords();
+    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+    string leave = "До скорой встречи!";
+
+    system("cls");
+
+    setCursorPosition(chords.x / 2 - leave.size()/2, 5);
+    SetConsoleTextAttribute(hConsole, 10);
+    cout << leave;
+    SetConsoleTextAttribute(hConsole, 0);
+    setCursorPosition(chords.x / 2 - leave.size() / 2, chords.y-5);
+    cout << " ";
+    exit(0);
 }
