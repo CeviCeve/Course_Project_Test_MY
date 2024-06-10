@@ -37,10 +37,10 @@ struct SETTINGS
 		this->corporationPassword = corporationPassword;
 	}
 
-	bool correctTheme;
-	bool correctDB;
-	bool correctCab;
-	bool temporaryPassord;
+	bool correctTheme=0;
+	bool correctDB = 0;
+	bool correctCab = 0;
+	bool temporaryPassord = 0;
 	void setAllAdminFunc(bool theme, bool correctDB, bool correctCab, bool temporaryPassord)
 	{
 		this->correctTheme = theme;
@@ -52,7 +52,7 @@ struct SETTINGS
 
 
 	string theme;
-	bool profileCorrect;
+	bool profileCorrect = 0;
 	void setBaseFunc1(string theme, bool profileCorrect)
 	{
 		this->theme = theme;
@@ -60,9 +60,9 @@ struct SETTINGS
 	}
 
 
-	bool login;
-	bool password;
-	bool codeIn;
+	bool login = 0;
+	bool password = 0;
+	bool codeIn = 0;
 	void setAuthFunc1(bool login, bool password, bool codeIn)
 	{
 		this->login = login;
@@ -70,10 +70,10 @@ struct SETTINGS
 		this->codeIn = codeIn;
 	}
 
-	bool role;
-	bool age;
-	bool specialization;
-	bool sex;
+	bool role = 0;
+	bool age = 0;
+	bool specialization = 0;
+	bool sex = 0;
 	string personalChar[4] = { "","","","" };
 	void setUserCard1(bool role, bool age, bool specialization, bool sex)
 	{
@@ -83,12 +83,23 @@ struct SETTINGS
 		this->sex = sex;
 	}
 
-	string customizableChar[7];
 	int sizeCustomizable;
+	string customizableChar[5];
 	void setCustomizable(string mass[], int sizeMass)
 	{
 		sizeCustomizable = sizeMass;
 		for (int i = 0; i < sizeMass; i++) customizableChar[i] = mass[i];
+	}
+	string getCustom()
+	{
+		string a ="";
+		for (int i = 0; i < 5; i++)
+		{
+			a += customizableChar[i] + " ";
+			if (customizableChar[i] != "") sizeCustomizable = i;
+		}
+		a += to_string(sizeCustomizable+1);
+		return a;
 	}
 };
 struct USER_SETTINGS
@@ -124,7 +135,6 @@ int gotoThisLine(int maxSize, int positionCursore, int tapp);
 void leave();
 
 
-
 //--------------------------read settings--------------------------//
 bool readSettings(string way);
 void masterOfSettings();
@@ -139,7 +149,8 @@ void deleteZone(int maxSizeX);
 void drawBase(int code);
 void drawAutor(int code);
 void drawTempl(int code);
-void drawRole();
+void drawRole(int code);
+void completeSetting();
 
 //---------------------------objects-----------------------------//
 void printUserCardController(int numCardStyle, SETTINGS settings, USER_SETTINGS userSettings);

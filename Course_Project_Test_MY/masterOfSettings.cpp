@@ -16,8 +16,9 @@ void masterOfSettings()
 		
 	startMasterDraw();
 
-	//settingMenu_1();
+	settingMenu_1();
 	settingMenu_2();
+	completeSetting();
 
 	ShowConsoleCursor(1);
 }
@@ -150,10 +151,6 @@ void settingMenu_2()
 
 	const int sizeMain = 3;
 
-	const int sizeAutor = 3;
-	const int sizeTempl = 7;
-	const int sizeRole = 5;
-	const int sizeRoleSettings = 3;
 	int tapp = 0;
 	int lastCursore = 0;
 	int cursoreLine = 0;
@@ -162,9 +159,6 @@ void settingMenu_2()
 
 	string setting2_Main[sizeMain] = {"Объект","Администраия","Продолжить"};
 
-	string setting2_Templates[sizeTempl] = { "Роль", "Возраст", "Специализация", "Логин", "Код доступа", "Пароль" , "Пол" };
-	string setting2_Role[sizeRole] = {"","","","",""};
-	string setting2_Role_Settings[sizeRoleSettings] = { "Работа с занятостью", "Просмотр занятых", "Название файла:" };
 
 
 	for (int i = 0; i < sizeMain; i++) {
@@ -191,7 +185,7 @@ void settingMenu_2()
 		SetConsoleTextAttribute(hConsole, 6);
 		if (cursoreLine == 0) { deleteZone(maxSize + chords.x/5); drawObjects(tapp); }
 		else if (cursoreLine == 1) { deleteZone(maxSize + chords.x / 5); drawAdmin(tapp); }
-		else if (cursoreLine == 2) { deleteZone(maxSize + chords.x / 5); }
+		else if (cursoreLine == 2) { deleteZone(maxSize + chords.x / 5); break; }
 
 		tapp = _getch();
 
@@ -239,7 +233,7 @@ void drawObjects(int code)
 			if (cursoreLine == 0) { deleteZone(maxSize + chords.x / 3);  drawBase(tapp); }
 			else if (cursoreLine == 1) { deleteZone(maxSize + chords.x / 3); drawAutor(tapp); }
 			else if (cursoreLine == 2) { deleteZone(maxSize + chords.x / 3); drawTempl(tapp); }
-			else if (cursoreLine == 3) { deleteZone(maxSize + chords.x / 3); drawRole(); }
+			else if (cursoreLine == 3) { deleteZone(maxSize + chords.x / 3); drawRole(tapp); }
 
 
 			tapp = _getch();
@@ -336,7 +330,7 @@ void drawAdmin(int code)
 
 void deleteZone(int maxSizeX)
 {
-	for (int i = chords.y/5; i < chords.y/2; i++)
+	for (int i = chords.y/5; i < chords.y/2 +10; i++)
 	{
 		setCursorPosition(maxSizeX, i);
 		for (int y = 0; y < chords.x - (maxSizeX)-1; y++)printf(" ");
@@ -501,10 +495,228 @@ void drawAutor(int code)
 
 void drawTempl(int code)
 {
+	int tapp = 0;
+	int lastCursore = 0;
+	int cursoreLine = 0;
+	int maxSize = 0;
 
+	const int sizeTempl = 7;
+	string setting2_Templates[sizeTempl] = { "] Роль", "] Возраст", "] Специализация", "] Логин", "] Код доступа", "] Пароль" , "] Пол" };
+
+	string yes = "<   ПОДКЛЮЧЕНО  >";
+	string no = "< НЕ ПОДКЛЮЧЕНО >";
+
+
+	for (int i = 0; i < sizeTempl; i++) maxSize = max(setting2_Templates[i].size(), maxSize);
+
+	for (int i = 0; i < sizeTempl; i++) {
+		SetConsoleTextAttribute(hConsole, 6);
+		setCursorPosition(chords.x / 5 + 49 + maxSize + 7, 3 + chords.y / 5 + i * 3 + 2);
+		if (i == 0) if (!myCorporation.role ? cout << no : cout << yes);
+		if (i == 1) if (!myCorporation.age ? cout << no : cout << yes);
+		if (i == 2) if (!myCorporation.specialization ? cout << no : cout << yes);
+		if (i == 3) if (!myCorporation.login ? cout << no : cout << yes);
+		if (i == 4) if (!myCorporation.codeIn ? cout << no : cout << yes);
+		if (i == 5) if (!myCorporation.password ? cout << no : cout << yes);
+		if (i == 6) if (!myCorporation.sex ? cout << no : cout << yes);
+	}
+
+	for (int i = 0; i < sizeTempl; i++)
+	{
+		setCursorPosition(chords.x / 5 + 33 + maxSize, 3 + chords.y / 5 + i * 3 + 2);
+		cout << setting2_Templates[i];
+	}
+
+	if (code == 77)
+		while (1)
+		{
+			setCursorPosition(chords.x / 5 + 33 + maxSize-3, 3 + chords.y / 5 + lastCursore * 3 + 2);
+			SetConsoleTextAttribute(hConsole, 6);
+			cout << "   " << setting2_Templates[lastCursore];
+
+			setCursorPosition(chords.x / 5 + 33 + maxSize-3, 3 + chords.y / 5 + cursoreLine * 3 + 2);
+			SetConsoleTextAttribute(hConsole, 14);
+			cout << ">> " << setting2_Templates[cursoreLine];
+
+			setCursorPosition(chords.x / 5 + (maxSize + 3), 3 + chords.y / 5 + cursoreLine * 3 + 2);
+
+			for (int i = 0; i < sizeTempl; i++) {
+				SetConsoleTextAttribute(hConsole, 14);
+				setCursorPosition(chords.x / 5 + 49 + maxSize + 7, 3 + chords.y / 5 + i * 3 + 2);
+				if (i == 0) if (!myCorporation.role ? cout << no : cout << yes);
+				if (i == 1) if (!myCorporation.age ? cout << no : cout << yes);
+				if (i == 2) if (!myCorporation.specialization ? cout << no : cout << yes);
+				if (i == 3) if (!myCorporation.login ? cout << no : cout << yes);
+				if (i == 4) if (!myCorporation.codeIn ? cout << no : cout << yes);
+				if (i == 5) if (!myCorporation.password ? cout << no : cout << yes);
+				if (i == 6) if (!myCorporation.sex ? cout << no : cout << yes);
+
+			}
+
+			tapp = _getch();
+
+			if (tapp == 80 || tapp == 72)
+			{
+				lastCursore = cursoreLine;
+				cursoreLine = gotoThisLine(sizeTempl, cursoreLine, tapp);
+			}
+			else if (tapp == 75)
+			{
+				setCursorPosition(chords.x / 5 + 33 + maxSize -3, 3 + chords.y / 5 + cursoreLine * 3 + 2);
+				SetConsoleTextAttribute(hConsole, 6);
+				cout << "   " << setting2_Templates[cursoreLine];
+				break;
+			}
+			else if (tapp == 13 || tapp == 77)
+			{
+				if (cursoreLine == 0) if (!myCorporation.role ? myCorporation.role = true : myCorporation.role = false);
+				if (cursoreLine == 1) if (!myCorporation.age ? myCorporation.age = true : myCorporation.age = false);
+				if (cursoreLine == 2) if (!myCorporation.specialization ? myCorporation.specialization = true : myCorporation.specialization = false);
+				if (cursoreLine == 3) if (!myCorporation.login ? myCorporation.login = true : myCorporation.login = false);
+				if (cursoreLine == 4) if (!myCorporation.codeIn ? myCorporation.codeIn = true : myCorporation.codeIn = false);
+				if (cursoreLine == 5) if (!myCorporation.password ? myCorporation.password = true : myCorporation.password = false);
+				if (cursoreLine == 6) if (!myCorporation.sex ? myCorporation.sex = true : myCorporation.sex = false);
+
+			}
+		}
 }
 
-void drawRole()
+void drawRole(int code)
 {
+	const int sizeRole = 5;
+	const int interface1Size = 5;
+	int maxSize = 0;
+	int cursoreLine = 0;
+	int lastCursore = 0;
+	int tapp;
 
+	string settingsInterface1[interface1Size] = { "] 1:","] 2:","] 3:","] 4:","] 5:" };
+	string setting2_Role[sizeRole];
+	
+	for (int i = 0; i < interface1Size; i++)
+	{
+		setting2_Role[i] = myCorporation.customizableChar[i];
+	}
+
+	for (int i = 0; i < interface1Size; i++) maxSize = max(settingsInterface1[i].size(), maxSize);
+
+
+	SetConsoleTextAttribute(hConsole, 6);
+	for (int i = 0; i < interface1Size; i++) {
+		setCursorPosition(chords.x / 5 + 49 + maxSize + 7, 3 + chords.y / 5 + i * 3 + 2);
+		cout << settingsInterface1[i];
+	}
+
+	SetConsoleTextAttribute(hConsole, 14);
+	for (int i = 0; i < interface1Size; i++) {
+		setCursorPosition(chords.x / 5 + 58 + maxSize + 3, 3 + chords.y / 5 + i * 3 + 2);
+		cout << myCorporation.customizableChar[i];
+	}
+
+	if (code == 77)
+	{
+		ShowConsoleCursor(1);
+		while (1)
+		{
+			setCursorPosition(chords.x / 5 + 49 + maxSize + 4, 3 + chords.y / 5 + lastCursore * 3 + 2);
+			SetConsoleTextAttribute(hConsole, 6);
+			cout << "   " << settingsInterface1[lastCursore];
+
+			setCursorPosition(chords.x / 5 + 49 + maxSize + 4, 3 + chords.y / 5 + cursoreLine * 3 + 2);
+			SetConsoleTextAttribute(hConsole, 14);
+			cout << ">> " << settingsInterface1[cursoreLine];
+
+			setCursorPosition(chords.x / 5 + 58 + (maxSize + 3) + myCorporation.customizableChar[cursoreLine].length(), 3 + chords.y / 4 + cursoreLine * 3 - 1);
+			tapp = _getch();
+
+			if (tapp == 80 || tapp == 72)
+			{
+				lastCursore = cursoreLine;
+				cursoreLine = gotoThisLine(interface1Size, cursoreLine, tapp);
+			}
+			else if (tapp == 75)
+			{
+				ShowConsoleCursor(0);
+				setCursorPosition(chords.x / 5 + 53 + maxSize, 3 + chords.y / 5 + cursoreLine * 3 + 2);
+				SetConsoleTextAttribute(hConsole, 6);
+				cout << "   " << settingsInterface1[cursoreLine] << " " << setting2_Role[cursoreLine];
+				break;
+			}
+			else if (((tapp >= 65 && tapp <= 122) || (tapp >= 48 && tapp <= 57) || tapp == 64 || tapp == 46))
+			{
+				if (tapp != 77) {
+					setting2_Role[cursoreLine] = setting2_Role[cursoreLine] + static_cast<char>(tapp);
+					myCorporation.customizableChar[cursoreLine] = myCorporation.customizableChar[cursoreLine] + static_cast<char>(tapp);
+					cout << static_cast<char>(tapp);
+				}
+			}
+			else if (tapp == 8 && setting2_Role[cursoreLine] != "")
+			{
+				setting2_Role[cursoreLine].pop_back();
+				myCorporation.customizableChar[cursoreLine].pop_back();
+				setCursorPosition(chords.x / 5 + 58 + (maxSize + 3) + setting2_Role[cursoreLine].length(), 3 + chords.y / 4 + cursoreLine * 3 - 1);
+				cout << " ";
+			}
+			else if (tapp == 41)
+			{
+				setCursorPosition(1, 1);
+				cout << setting2_Role[cursoreLine] << endl;
+			}
+			else if (tapp == 27)
+			{
+				leave();
+			}
+		}
+	}
+}
+
+void completeSetting()
+{
+	system("cls");
+
+	CHORDS chords = getConsleChords();
+	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+	int chislo = 1;
+	string pytCorp1 = "ЗАВЕРШЕНИЕ И ПОДГОТОВКА К ОТКРЫТИЮ";
+
+	setCursorPosition((((chords.x - pytCorp1.size()) - 1) / 2), chords.y / 2);
+	Sleep(100);
+
+	for (int i = 0; i < pytCorp1.size(); i++)
+	{
+		if (chislo > 15)chislo = 1;
+		SetConsoleTextAttribute(hConsole, 14);
+		chislo++;
+		cout << pytCorp1[i];
+		Sleep(50);
+	}
+
+	ofstream a("Settings/user.txt");
+	ofstream b("Settings/app.txt");
+	ofstream c("Settings/admin.txt");
+	ofstream d("Settings/settings.txt");
+
+	a << myCorporation.profileCorrect << " " << myCorporation.login << " " << myCorporation.password << " " << myCorporation.codeIn << endl;
+	a << myCorporation.role << " " << myCorporation.age << " " << myCorporation.specialization << " " << myCorporation.sex;
+
+	b << myCorporation.title << " " << myCorporation.email << " " << myCorporation.corporationPassword << endl;
+	b << myCorporation.theme << " " << myCorporation.getCustom();
+
+	c << myCorporation.correctTheme << " " << myCorporation.correctDB << " " << myCorporation.correctCab << " " << myCorporation.temporaryPassord;
+
+	d << "1";
+
+	a.close();
+	b.close();
+	c.close();
+	d.close();
+
+	Sleep(800);
+	for (int i = 0; i < pytCorp1.size(); i++)
+	{
+		setCursorPosition((((chords.x - pytCorp1.size()) - 1) / 2 + i), chords.y / 2);
+		cout << " ";
+		Sleep(50);
+	}
+	Sleep(800);
 }

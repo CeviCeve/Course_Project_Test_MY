@@ -29,8 +29,8 @@ void printUserCardController(int numCardStyle, SETTINGS settings, USER_SETTINGS 
 	}
 
 	if (numCardStyle == 1)userCard1(name, name2, thisData, thisData2, maxsize);
-	if (numCardStyle == 1)userCard2(name, name2, thisData, thisData2, maxsize);
-	if (numCardStyle == 1)userCard3(name, name2, thisData, thisData2, maxsize);
+	if (numCardStyle == 2)userCard2(name, name2, thisData, thisData2, maxsize);
+	if (numCardStyle == 3)userCard3(name, name2, thisData, thisData2, maxsize);
 
 }
 
