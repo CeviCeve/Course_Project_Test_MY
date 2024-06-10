@@ -2,13 +2,9 @@
 
 int main()
 {
-	basikSettings();
-	writeBorder();
 	//draw();
-
-	nameController("Damage Inc");
-	_getch();
-	_getch();
+	basikSettings();
+	//writeBorder();
 
 	if (readSettings("Settings/settings.txt")) { myApp(); }
 	else { masterOfSettings(); }

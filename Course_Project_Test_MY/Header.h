@@ -114,10 +114,21 @@ struct USER_SETTINGS
 	string sex2;
 
 	string personalChar2[4];
-	string customizableChar[7];
+	string customizableChar[5];
 
 	int card;
 
+};
+
+struct newSETTINGS_ALL
+{
+	string name;
+	string email;
+	string password;
+	string theme;
+
+	string newCharacteristics[5];
+	int sizeChar;
 };
 //--------------------------basic settings--------------------------//
 //----------workFunctions.cpp----------//
@@ -137,6 +148,7 @@ void leave();
 
 //--------------------------read settings--------------------------//
 bool readSettings(string way);
+newSETTINGS_ALL readSettingsFile();
 void masterOfSettings();
 void startMasterDraw();
 void settingMenu_1();
@@ -152,6 +164,8 @@ void drawTempl(int code);
 void drawRole(int code);
 void completeSetting();
 
+//--------------------------- main menu ---------------------------//
+void newSettings();
 //---------------------------objects-----------------------------//
 void printUserCardController(int numCardStyle, SETTINGS settings, USER_SETTINGS userSettings);
 void userCard1(string name[], string name2[], string thisData[], string thisData2[], int maxsize);
@@ -162,5 +176,8 @@ void nameController(string name);
 void a(int space);
 //---------------------------myApp--------------------------//
 void myApp();
+void entrance();
+void reg();
+void inf();
 
 #endif
