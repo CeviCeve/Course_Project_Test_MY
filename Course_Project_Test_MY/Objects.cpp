@@ -1,6 +1,8 @@
 #include "Header.h"
 
 HANDLE honsole = GetStdHandle(STD_OUTPUT_HANDLE);
+string letters[26];
+CHORDS hords = getConsleChords();
 
 void printUserCardController(int numCardStyle, SETTINGS settings, USER_SETTINGS userSettings)
 {
@@ -75,3 +77,213 @@ void userCard3(string name[], string name2[], string thisData[], string thisData
 		<< "[================L----------------------------------------------]";
 }
 
+
+
+void nameController(string name)
+{
+	string abc = "abcdefghijklmnopqrstuvwxyz";
+	string abcB = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+	for (int i = name.size(); i >= 0; i--)
+	{
+		setCursorPosition(hords.x - name.size() * 6 + i * 7, 5);
+		a(hords.x - name.size() * 6 + i * 7 - 7);
+		for (int y = 0; y < 26; y++)
+		{
+			if (abc[y] == name[i] || abcB[y] == name[i])
+			{
+				cout << letters[y];
+				break;
+			}
+		}
+	}
+}
+
+void a(int space)
+{
+
+	string space1 = "";
+	for (int i = 0; i < space+7; i++)space1 += " ";
+	letters[0] =
+			" ___ \n"
+	+space1+"|   |\n"
+	+ space1 + "|___|\n"
+	+ space1 + "|   |\n"
+	+ space1 + "|   |";
+
+
+	letters[1] =
+		" ___ \n"
+		+ space1 + "|   \\\n"
+		+ space1 + "|___/\n"
+		+ space1 + "|    \\\n"
+		+ space1 + "L____/";
+
+	letters[2] =
+		" ____\n"
+		+ space1 + "/    \n"
+		+ space1 + "|    \n"
+		+ space1 + "|   \n"
+		+ space1 + "\\____\n";
+
+	letters[3] =
+		" ____\n"
+		+ space1 + "|    \\\n"
+		+ space1 + "|    |\n"
+		+ space1 + "|    /\n"
+		+ space1 + "L___/";
+
+	letters[4] =
+		" ____\n"
+		+ space1 + "|    \n"
+		+ space1 + "|____\n"
+		+ space1 + "|    \n"
+		+ space1 + "|____\n";
+
+	letters[5] =
+		" ____\n"
+		+ space1 + "|    \n"
+		+ space1 + "|___ \n"
+		+ space1 + "|    \n"
+		+ space1 + "|    ";
+
+	letters[6] =
+		" ____\n"
+		+ space1 + "/    \n"
+		+ space1 + "|  __\n"
+		+ space1 + "|   |\n"
+		+ space1 + "\\___/\n";
+
+	letters[7] =
+		"|    \n"
+		+ space1 + "|    \n"
+		+ space1 + "|___ \n"
+		+ space1 + "|   \\\n"
+		+ space1 + "|   |";
+
+	letters[8] =
+		"_____\n"
+		+ space1 + "  |  \n"
+		+ space1 + "  |  \n"
+		+ space1 + "  |  \n"
+		+ space1 + "_____\n";
+
+	letters[9] =
+		"__   \n"
+		+ space1 + "|    \n"
+		+ space1 + "|  __\n"
+		+ space1 + "|   |\n"
+		+ space1 + "\\___/\n";
+
+	letters[10] =
+		"|  / \n"
+		+ space1 + "| /  \n"
+		+ space1 + "|/   \n"
+		+ space1 + "| \\ \n"
+		+ space1 + "|  \\\n";
+
+	letters[11] =
+		"|    \n"
+		+ space1 + "|    \n"
+		+ space1 + "|    \n"
+		+ space1 + "|    \n"
+		+ space1 + "|___|";
+
+	letters[12] =
+		"|\\  /|\n"
+		+ space1 + "| \\/ |\n"
+		+ space1 + "|    |\n"
+		+ space1 + "|    |\n"
+		+ space1 + "|    |";
+
+	letters[13] =
+		"|   |\n"
+		+ space1 + "|\\  |\n"
+		+ space1 + "| \\ |\n"
+		+ space1 + "|  \\|\n"
+		+ space1 + "|   |";
+
+	letters[14] =
+		" ___ \n"
+		+ space1 + "/   \\\n"
+		+ space1 + "|   |\n"
+		+ space1 + "|   |\n"
+		+ space1 + "\\___/";
+
+	letters[15] =
+		" ___ \n"
+		+ space1 + "|   \\\n"
+		+ space1 + "|___/\n"
+		+ space1 + "|    \n"
+		+ space1 + "|    ";
+
+	letters[16] = 
+		" ___ \n"
+		+ space1 + "/   \\\n"
+		+ space1 + "\\___/\n"
+		+ space1 + "   / \n"
+		+ space1 + "  |_/";
+
+	letters[17] =
+		" ___ \n"
+		+ space1 + "|   |\n"
+		+ space1 + "|___/\n"
+		+ space1 + "|  \\\n"
+		+ space1 + "|   \\";
+
+	letters[18] =
+		" ___ \n"
+		+ space1 + "/    \n"
+		+ space1 + "\\___ \n"
+		+ space1 + "    \\\n"
+		+ space1 + " ___/";
+
+	letters[19] =
+		"_____\n"
+		+ space1 + "  |  \n"
+		+ space1 + "  |  \n"
+		+ space1 + "  |  \n"
+		+ space1 + "  |  \n";
+
+	letters[20] =
+		"|   |\n"
+		+ space1 + "|   |\n"
+		+ space1 + "|   |\n"
+		+ space1 + "|   |\n"
+		+ space1 + "\\___/";
+
+	letters[21] = 
+		"     \n"
+		+ space1 + "|   |\n"
+		+ space1 + "\\   /\n"
+		+ space1 + " \\ /\n"
+		+ space1 + "  V";
+
+	letters[22] =
+		"     \n"
+		+ space1 + "| | |\n"
+		+ space1 + "\\ | /\n"
+		+ space1 + " \\|/\n"
+		+ space1 + "  V";
+
+	letters[23] =
+		"\\   /\n"
+		+ space1 + " \\ / \n"
+		+ space1 + "  X  \n"
+		+ space1 + " / \\\n"
+		+ space1 + "/   \\";
+
+	letters[24] =
+		"|   |\n"
+		+ space1 + " \\ / \n"
+		+ space1 + "  |  \n"
+		+ space1 + "  |  \n"
+		+ space1 + "  |  ";
+
+	letters[25] =
+		"_____\n"
+		+ space1 + "    /\n"
+		+ space1 + "   / \n"
+		+ space1 + "  /  \n"
+		+ space1 + "/____\n";
+}

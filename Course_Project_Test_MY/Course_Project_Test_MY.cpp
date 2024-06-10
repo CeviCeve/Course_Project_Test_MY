@@ -6,7 +6,11 @@ int main()
 	writeBorder();
 	//draw();
 
-	if (readSettings("Settings/settings.txt")) {}
+	nameController("Damage Inc");
+	_getch();
+	_getch();
+
+	if (readSettings("Settings/settings.txt")) { myApp(); }
 	else { masterOfSettings(); }
 }
 

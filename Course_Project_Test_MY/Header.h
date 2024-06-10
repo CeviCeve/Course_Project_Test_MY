@@ -158,6 +158,9 @@ void userCard1(string name[], string name2[], string thisData[], string thisData
 void userCard2(string name[], string name2[], string thisData[], string thisData2[], int maxsize);
 void userCard3(string name[], string name2[], string thisData[], string thisData2[], int maxsize);
 
-
+void nameController(string name);
+void a(int space);
+//---------------------------myApp--------------------------//
+void myApp();
 
 #endif

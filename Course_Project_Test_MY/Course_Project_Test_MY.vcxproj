@@ -129,6 +129,7 @@
   <ItemGroup>
     <ClCompile Include="Course_Project_Test_MY.cpp" />
     <ClCompile Include="masterOfSettings.cpp" />
+    <ClCompile Include="myApp.cpp" />
     <ClCompile Include="Objects.cpp" />
     <ClCompile Include="ReadSettings.cpp" />
     <ClCompile Include="workFunctions.cpp" />
