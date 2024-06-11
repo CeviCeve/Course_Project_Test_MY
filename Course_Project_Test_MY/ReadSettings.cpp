@@ -14,17 +14,29 @@ bool readSettings(string way)
 	else { return 1; }
 }
 
-newSETTINGS_ALL readSettingsFile()
+SETTINGS readSettingsFile()
 {
-	newSETTINGS_ALL all;
+	SETTINGS all;
 	ifstream read("Settings/app.txt");
 
-	read >> all.name >> all.email >> all.password >> all.theme
-		>> all.newCharacteristics[0] >> all.newCharacteristics[1]
-		>> all.newCharacteristics[2] >> all.newCharacteristics[3] >> all.newCharacteristics[4]
-		>> all.sizeChar;
-
+	read >> all.title >> all.email >> all.corporationPassword >> all.theme
+		>> all.customizableChar[0] >> all.customizableChar[1]
+		>> all.customizableChar[2] >> all.customizableChar[3] >> all.customizableChar[4]
+		>> all.sizeCustomizable;
 	read.close();
+
+
+	ifstream read2("Settings/user.txt");
+
+	read2>>all.profileCorrect>>all.login>>all.password>>all.codeIn
+		>>all.role>>all.age>>all.specialization>>all.sex;
+	read2.close();
+
+
+	ifstream read3("Settings/admin.txt");
+
+	read3 >> all.correctTheme >> all.correctDB >> all.correctCab >> all.temporaryPassord;
+	read3.close();
 
 	return all;
 }

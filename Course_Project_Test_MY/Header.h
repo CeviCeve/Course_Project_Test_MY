@@ -118,18 +118,37 @@ struct USER_SETTINGS
 
 	int card;
 
+	void setAll(string theme2,string login2,string password2,string codeIn2,string role2,string age2,string specialization2,string sex2,string personalChar2[],	string customizableChar[],	int card)
+	{
+		this->theme2 = theme2;
+		this->login2 = login2;
+		this->password2 = password2;
+		this->codeIn2 = codeIn2;
+		this->role2 = role2;
+		this->age2 = age2;
+		this->specialization2 = specialization2;
+		this->sex2 = sex2;
+		for (int i = 0; i < 4; i++)this->personalChar2[i] = personalChar2[i];
+		for (int i = 0; i < 5; i++)this->customizableChar[i] = customizableChar[i];
+		this->card;
+	}
+
+	string retStr()
+	{
+		string line = "";
+		for (int i = 0; i < 4; i++)line += personalChar2[i]+" ";
+		for (int i = 0; i < 5; i++)line += customizableChar[i]+" ";
+		return line;
+
+	}
+
+	string setAll()
+	{
+		return theme2 + " " + login2 + " " + " " + password2 + " " + codeIn2 + " " + role2 + " " + age2 + " " + specialization2 + " " + sex2
+			+ " " + retStr() + to_string(card);
+	}
 };
 
-struct newSETTINGS_ALL
-{
-	string name;
-	string email;
-	string password;
-	string theme;
-
-	string newCharacteristics[5];
-	int sizeChar;
-};
 //--------------------------basic settings--------------------------//
 //----------workFunctions.cpp----------//
 void basikSettings();
@@ -148,7 +167,7 @@ void leave();
 
 //--------------------------read settings--------------------------//
 bool readSettings(string way);
-newSETTINGS_ALL readSettingsFile();
+SETTINGS readSettingsFile();
 void masterOfSettings();
 void startMasterDraw();
 void settingMenu_1();
@@ -164,6 +183,7 @@ void drawTempl(int code);
 void drawRole(int code);
 void completeSetting();
 
+void readUserBase();
 //--------------------------- main menu ---------------------------//
 void newSettings();
 //---------------------------objects-----------------------------//
@@ -179,5 +199,9 @@ void myApp();
 void entrance();
 void reg();
 void inf();
+
+void adminMenu();
+void userMenu();
+
 
 #endif

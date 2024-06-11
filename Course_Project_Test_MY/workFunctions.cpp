@@ -8,6 +8,7 @@ const HANDLE hhCon = GetStdHandle(STD_OUTPUT_HANDLE);
 void basikSettings()
 {
     system("mkdir Settings");
+    system("mkdir Data");
 
     SetConsoleCP(1251);
     SetConsoleOutputCP(1251);
@@ -145,9 +146,9 @@ void leave()
     string leave = "До скорой встречи!";
 
     system("cls");
+    system("color 0e");
 
     setCursorPosition(chords.x / 2 - leave.size()/2, 5);
-    SetConsoleTextAttribute(hConsole, 10);
     cout << leave;
     SetConsoleTextAttribute(hConsole, 0);
     setCursorPosition(chords.x / 2 - leave.size() / 2, chords.y-5);
