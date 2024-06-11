@@ -136,15 +136,23 @@ struct USER_SETTINGS
 	string retStr()
 	{
 		string line = "";
-		for (int i = 0; i < 4; i++)line += personalChar2[i]+" ";
-		for (int i = 0; i < 5; i++)line += customizableChar[i]+" ";
+		for (int i = 0; i < 4; i++)
+		{
+			if (personalChar2[i] == "")personalChar2[i] = "0";
+			line += personalChar2[i] + " ";
+		}
+		for (int i = 0; i < 5; i++)
+		{
+			if (customizableChar[i] == "")customizableChar[i] = "0";
+			line += customizableChar[i] + " ";
+		}
 		return line;
 
 	}
 
-	string setAll()
+	string getAll()
 	{
-		return theme2 + " " + login2 + " " + " " + password2 + " " + codeIn2 + " " + role2 + " " + age2 + " " + specialization2 + " " + sex2
+		return theme2 + " " + login2 + " "  + password2 + " " + codeIn2 + " " + role2 + " " + age2 + " " + specialization2 + " " + sex2
 			+ " " + retStr() + to_string(card);
 	}
 };
@@ -157,7 +165,7 @@ void setCursorPosition(int x, int y);
 static void UnwrapScreen();
 CHORDS getConsleChords();
 void ShowConsoleCursor(bool showFlag);
-
+string generateRandomString(int size);
 
 void draw();
 void writeBorder();
@@ -198,6 +206,7 @@ void a(int space);
 void myApp();
 void entrance();
 void reg();
+void reg2();
 void inf();
 
 void adminMenu();

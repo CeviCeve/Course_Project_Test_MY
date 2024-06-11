@@ -1,4 +1,5 @@
 ﻿#include "Header.h"
+#include <random>
 
 int columns, rows;
 string pytCorp1 = "VERY POPYLAR COMPANY";
@@ -154,4 +155,18 @@ void leave()
     setCursorPosition(chords.x / 2 - leave.size() / 2, chords.y-5);
     cout << " ";
     exit(0);
+}
+
+string generateRandomString(int size) {
+    string result;
+    random_device rd;
+    mt19937 gen(rd());
+    uniform_int_distribution<> dis(0, 25);
+
+    for (int i = 0; i < size; ++i) {
+        char c = 'a' + dis(gen);
+        result += c;
+    }
+
+    return result;
 }
