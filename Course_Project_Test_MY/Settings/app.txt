@@ -1,2 +1,2 @@
-Damage.Inc damage@inc.com 12345
-LIGHT admin client master moderator user 5
+damage.inc damage@inc.com 12345
+LIGHT a b c d e 5

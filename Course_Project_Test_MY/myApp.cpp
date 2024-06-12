@@ -286,8 +286,6 @@ void reg2()
 				setCursorPosition(chord.x + maxSize - 25 + newSettings[cursoreLine].size(), 3 + chord.y / 4 + cursoreLine * 3 + 8);
 				newSettings[cursoreLine] = newSettings[cursoreLine] + static_cast<char>(tapp);
 				cout << static_cast<char>(tapp);
-				system("color a2");
-
 		}
 		else if (tapp == 8 && newSettings[cursoreLine] != "")
 		{
@@ -538,25 +536,144 @@ void userMenu()
 		}
 		else if (tapp == 13)
 		{
-			if (cursoreLine == 0) {  job(); }
+			if (cursoreLine == 0) {  job(0); }
 			if (cursoreLine == 1) { myJob(); }
 			if (cursoreLine == 2) { myCab(); }
 		}
-		else if (tapp == 49)job();
+		else if (tapp == 49)job(0);
 		else if (tapp == 50)myJob();
 		else if (tapp == 51)myCab();
 
 	}
 }
 
-void job()
+void job(int num)
 {
-	cout << "_/==================================================\\_\n"
-		"| game-card       |  #ID              Alishv I.I.    |\n"
-		"| market          |----------------------------------|\n"
-		"| 9:00 - 18:00    |        adres: Minsk.Lenina.25    |\n"
-		"| salary: 2000$   |          exp:         5 years    |\n"
-		"|_________________|__________________________________|\n";
+	system("cls");
+	readProductBase();
+	cout << sizeProductBase;
+	cout << endl << num;
+	PRODUCT mass[6];
+	
+
+		if (num == 0) {
+			if (sizeProductBase < 5 ) {
+				for (int i = 0; i < sizeProductBase + 1; i++) {
+
+					setCursorPosition(chord.x - 56, 3 + chord.y / 8 + 8 + 10 * i);
+					cout << "l_/==================================================\\_\n";
+
+					setCursorPosition(chord.x - 56, 4 + chord.y / 8 + 8 + 10 * i);
+					cout << "| game-card       |  #ID              Alishv I.I.    |\n";
+
+					setCursorPosition(chord.x - 56, 5 + chord.y / 8 + 8 + 10 * i);
+					cout << "|                 |----------------------------------|\n";
+
+					setCursorPosition(chord.x - 56, 6 + chord.y / 8 + 8 + 10 * i);
+					cout << "| market-man      |        adres: Minsk.Lenina.25    |\n";
+
+					setCursorPosition(chord.x - 56, 7 + chord.y / 8 + 8 + 10 * i);
+					cout << "| salary: 2000$   |          exp:         5 years    |\n";
+
+					setCursorPosition(chord.x - 56, 8 + chord.y / 8 + 8 + 10 * i);
+					cout << "|_________________|__________________________________|\n";
+				}
+
+
+
+			}
+			if (sizeProductBase == 0) { cout << "net nichego"; }
+			else {
+				for (int i = 0; i < 5; i++) {
+
+					setCursorPosition(chord.x - 56, 3 + chord.y / 8 + 8 + 10 * i);
+					cout << "_/==================================================\\_\n";
+
+					setCursorPosition(chord.x - 56, 4 + chord.y / 8 + 8 + 10 * i);
+					cout << "| game-card       |  #ID              Alishv I.I.    |\n";
+
+					setCursorPosition(chord.x - 56, 5 + chord.y / 8 + 8 + 10 * i);
+					cout << "|                 |----------------------------------|\n";
+
+					setCursorPosition(chord.x - 56, 6 + chord.y / 8 + 8 + 10 * i);
+					cout << "| market-man      |        adres: Minsk.Lenina.25    |\n";
+
+					setCursorPosition(chord.x - 56, 7 + chord.y / 8 + 8 + 10 * i);
+					cout << "| salary: 2000$   |          exp:         5 years    |\n";
+
+					setCursorPosition(chord.x - 56, 8 + chord.y / 8 + 8 + 10 * i);
+					cout << "|_________________|__________________________________|\n";
+
+				}
+			}
+		}
+		else {
+				int fulllist = sizeProductBase / 5;
+				int costrat = sizeProductBase - fulllist * 5;
+				int counter = 0;
+				if (costrat == 0) { costrat = 5; }
+				
+			if (sizeProductBase < (num) * 5) {
+			
+				for (int i = num * 5; counter < costrat ; i++) {
+
+					setCursorPosition(chord.x - 56, 3 + chord.y / 8 + 8 + 10 * counter);
+					cout << "_/==================================================\\_\n";
+
+					setCursorPosition(chord.x - 56, 4 + chord.y / 8 + 8 + 10 * counter);
+					cout << "| game-card       |  #ID              Alishv I.I.    |\n";
+
+					setCursorPosition(chord.x - 56, 5 + chord.y / 8 + 8 + 10 * counter);
+					cout << "|                 |----------------------------------|\n";
+
+					setCursorPosition(chord.x - 56, 6 + chord.y / 8 + 8 + 10 * counter);
+					cout << "| market-man      |        adres: Minsk.Lenina.25    |\n";
+
+					setCursorPosition(chord.x - 56, 7 + chord.y / 8 + 8 + 10 * counter);
+					cout << "| salary: 2000$   |          exp:         5 years    |\n";
+
+					setCursorPosition(chord.x - 56, 8 + chord.y / 8 + 8 + 10 * counter);
+					cout << "|_________________|__________________________________|\n";
+					counter++;
+				}
+
+			}
+			else {
+				for (int i = num * 5; counter < 5; i++) {
+					setCursorPosition(chord.x - 56, 3 + chord.y / 8 + 8 + 10 * counter);
+					cout << "_/==================================================\\_\n";
+
+					setCursorPosition(chord.x - 56, 4 + chord.y / 8 + 8 + 10 * counter);
+					cout << "| game-card       |  #ID              Alishv I.I.    |\n";
+
+					setCursorPosition(chord.x - 56, 5 + chord.y / 8 + 8 + 10 * counter);
+					cout << "|                 |----------------------------------|\n";
+
+					setCursorPosition(chord.x - 56, 6 + chord.y / 8 + 8 + 10 * counter);
+					cout << "| market-man      |        adres: Minsk.Lenina.25    |\n";
+
+					setCursorPosition(chord.x - 56, 7 + chord.y / 8 + 8 + 10 * counter);
+					cout << "| salary: 2000$   |          exp:         5 years    |\n";
+
+					setCursorPosition(chord.x - 56, 8 + chord.y / 8 + 8 + 10 * counter);
+					cout << "|_________________|__________________________________|\n";
+					counter++;
+				}
+
+			}
+		}
+			int a=_getch();
+			if (a == 49) {
+				num--;
+				if (num < 0)num++;
+				job(num);
+			}
+			if (a == 50) {
+				num++;
+				if (num > (sizeProductBase+4)/5)num--;
+				job(num);
+			}
+	
 }
 void myJob()
 {
@@ -693,7 +810,7 @@ void readUserBase()
 	}
 	sizeUserSettings--;
 }
-void reaadProductBase()
+void readProductBase()
 {
 	ofstream read1("Data/products.txt", ios::app);
 	read1.close();

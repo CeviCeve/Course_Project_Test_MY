@@ -27,7 +27,7 @@ void startMasterDraw()
 {
 	chords = getConsleChords();
 
-	setCursorPosition(chords.x / 2 - master.size() / 2, 1);
+	setCursorPosition(chords.x / 2 - master.size() / 2 - 20, 1);
 	SetConsoleTextAttribute(hConsole, 14);
 	cout << master;
 
@@ -182,10 +182,10 @@ void settingMenu_2()
 
 		setCursorPosition(chords.x / 5 + (maxSize + 3), 3 + chords.y / 5 + cursoreLine * 3);
 
-		SetConsoleTextAttribute(hConsole, 6);
+		SetConsoleTextAttribute(hConsole, 6);deleteZone(maxSize + chords.x / 5);
 		if (cursoreLine == 0) { deleteZone(maxSize + chords.x/5); drawObjects(tapp); }
 		else if (cursoreLine == 1) { deleteZone(maxSize + chords.x / 5); drawAdmin(tapp); }
-		else if (cursoreLine == 2) { deleteZone(maxSize + chords.x / 5); break; }
+		else if (cursoreLine == 2 && tapp == 13) {  break; }
 
 		tapp = _getch();
 
@@ -332,7 +332,7 @@ void deleteZone(int maxSizeX)
 {
 	for (int i = chords.y/5; i < chords.y/2 +10; i++)
 	{
-		setCursorPosition(maxSizeX, i);
+		setCursorPosition(maxSizeX-1, i);
 		for (int y = 0; y < chords.x - (maxSizeX)-1; y++)printf(" ");
 	}
 }

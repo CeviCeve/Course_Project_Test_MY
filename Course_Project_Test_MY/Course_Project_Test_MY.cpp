@@ -2,11 +2,9 @@
 
 int main()
 {
-	job();
-	_getch;
-	_getch();
 	//draw();
 	basikSettings();
+	job(0);
 	//writeBorder();
 
 	if (readSettings("Settings/settings.txt")) { myApp(); }

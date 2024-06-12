@@ -167,6 +167,8 @@ struct PRODUCT
 	string exp;
 
 	string login;
+	string profession;
+	string contacts;
 
 	void setAll(string name,string from, string to, string adress, string salary, string type, string exp, string login)
 	{
@@ -221,6 +223,7 @@ void drawRole(int code);
 void completeSetting();
 
 void readUserBase();
+void readProductBase();
 //--------------------------- main menu ---------------------------//
 void newSettings();
 //---------------------------objects-----------------------------//
@@ -244,7 +247,7 @@ void adminMenu();
 void userMenu();
 void myCab();
 void myJob();
-void job();
+void job(int num);
 
 
 #endif

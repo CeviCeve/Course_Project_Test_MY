@@ -49,7 +49,7 @@ CHORDS getConsleChords()
     rows = csbi.srWindow.Bottom - csbi.srWindow.Top + 1;
     CHORDS chords;
     chords.y = rows;
-    chords.x = columns;
+    chords.x = columns+20;
     //cout << "columns: " << columns << std::endl;
     //cout << "rows: " << rows << std::endl;
     return chords;
