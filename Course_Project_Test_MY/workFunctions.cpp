@@ -13,6 +13,8 @@ void basikSettings()
 
     system("mkdir Settings");
     system("mkdir Data");
+    system("mkdir Users");
+
 
     SetConsoleCP(1251);
     SetConsoleOutputCP(1251);

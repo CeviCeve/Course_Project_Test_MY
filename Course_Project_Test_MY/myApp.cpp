@@ -743,7 +743,7 @@ void job(int num)
 		}
 		else if (a == 13 && line != "")
 		{
-
+			thisProduct(stoi(line));
 		}
 	}
 
@@ -757,12 +757,38 @@ void thisProduct(int num)
 	int maxSize = 0;
 	const int sizeBase = 2;
 
-	int num = 1;
+	system("cls");
+
+	nameController(product[num].name);
 
 	string setting2_Base[sizeBase] = { "1. Откликнуться", "2. Назад" };
-
-
 	for (int i = 0; i < sizeBase; i++) maxSize = max(setting2_Base[i].size(), maxSize);
+
+
+	setCursorPosition(chord.x / 5 + 28 + maxSize + 2, 3 + chord.y / 3 +5);
+	cout << "Тип занятости: " << product[num].type;
+	setCursorPosition(chord.x / 5 + 28 + maxSize + 2, 3 + chord.y / 3 + 8);
+
+	cout << "Спеиальность:  " << product[num].profession;
+	setCursorPosition(chord.x / 5 + 28 + maxSize + 2, 3 + chord.y / 3 + 11);
+
+	cout << "Опыт:          " << product[num].exp;
+	setCursorPosition(chord.x / 5 + 28 + maxSize + 2, 3 + chord.y / 3 + 14);
+
+	cout << "Время работы:  " << product[num].from<<" - "<< product[num].to;
+	setCursorPosition(chord.x / 5 + 28 + maxSize + 2, 3 + chord.y / 3 + 17);
+
+	cout << "Адрес:         " << product[num].adress;
+	setCursorPosition(chord.x / 5 + 28 + maxSize + 2, 3 + chord.y / 3 + 20);
+
+	cout << "Зарплата:      " << product[num].salary;
+	setCursorPosition(chord.x / 5 + 28 + maxSize + 2, 3 + chord.y / 3 + 25);
+
+
+	cout << "Вакансию создал: " << product[num].login;
+	setCursorPosition(chord.x / 5 + 28 + maxSize + 2, 3 + chord.y / 3 + 27);
+
+	cout << "Номер для связи: " << product[num].contacts;
 
 	for (int i = 0; i < sizeBase; i++)
 	{
@@ -782,11 +808,11 @@ void thisProduct(int num)
 
 		}
 		setCursorPosition(chord.x / 5 + 28 + maxSize + 2 - 3, 3 + chord.y / 5 + lastCursore * 3 + 2);
-		SetConsoleTextAttribute(hC, 6);
+		SetConsoleTextAttribute(hC, lastColor);
 		cout << "   " << setting2_Base[lastCursore];
 
 		setCursorPosition(chord.x / 5 + 28 + maxSize + 2 - 3, 3 + chord.y / 5 + cursoreLine * 3 + 2);
-		SetConsoleTextAttribute(hC, 14);
+		SetConsoleTextAttribute(hC, activeColor);
 		cout << ">> " << setting2_Base[cursoreLine];
 
 		//setCursorPosition(chords.x / 5 + (maxSize + 3), 3 + chords.y / 5 + cursoreLine * 3 + 1);
@@ -799,16 +825,21 @@ void thisProduct(int num)
 			lastCursore = cursoreLine;
 			cursoreLine = gotoThisLine(sizeBase, cursoreLine, tapp);
 		}
-		else if (tapp == 75)
+		else if (tapp == 27 || (cursoreLine == 1 && tapp==13))
 		{
-			setCursorPosition(chord.x / 5 - 3 + 28 + maxSize + 2, 3 + chord.y / 5 + cursoreLine * 3 + 2);
-			SetConsoleTextAttribute(hC, 6);
-			cout << "   " << setting2_Base[cursoreLine];
+			system("cls");
 			break;
 		}
-		else if (tapp == 13 || tapp == 77)
+		else if (tapp == 13 && cursoreLine == 0)
 		{
-
+			ofstream link("Data/link.txt", ios::app);
+			link << product[num].login << " " << userSetting[userInSystem].login2 << " " << product[num].name << endl;
+			link.close();
+			setCursorPosition(chord.x / 5 + 28 + maxSize + 2, 3 + chord.y / 3 + 30);
+			SetConsoleTextAttribute(hC, lastColor);
+			cout << "Связь создана!";
+			_getch();
+			break;
 		}
 	}
 }
