@@ -227,6 +227,7 @@ void completeSetting();
 
 void readUserBase();
 void readProductBase();
+void readProductBase(string name);
 //--------------------------- main menu ---------------------------//
 void newSettings();
 //---------------------------objects-----------------------------//
@@ -249,7 +250,7 @@ void adminMenu();
 
 void userMenu();
 void myCab();
-void myJob();
+void myJob(int num);
 void job(int num);
 void thisProduct(int num);
 
