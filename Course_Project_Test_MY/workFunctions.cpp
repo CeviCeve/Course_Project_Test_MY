@@ -8,6 +8,9 @@ const HANDLE hhCon = GetStdHandle(STD_OUTPUT_HANDLE);
 
 void basikSettings()
 {
+
+    SetConsoleTitle(L"Work Wave by Pyt.Tech");
+
     system("mkdir Settings");
     system("mkdir Data");
 

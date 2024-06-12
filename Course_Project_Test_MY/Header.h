@@ -251,6 +251,6 @@ void userMenu();
 void myCab();
 void myJob();
 void job(int num);
-
+void thisProduct(int num);
 
 #endif
