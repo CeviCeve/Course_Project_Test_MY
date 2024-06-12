@@ -833,7 +833,7 @@ void thisProduct(int num)
 void myJob(int num)
 {
 	string line = "";
-	string fuck = "Номер вакансии для подробного просмотра: ";
+	string fuck = "! - добавить новую вакансию\nНомер вакансии для подробного просмотра: ";
 	while (1)
 	{
 		system("cls");
@@ -1027,6 +1027,10 @@ void myJob(int num)
 			if(stoi(line)>=0 && stoi(line)<=sizeProductBase)
 			thisProduct(stoi(line));
 		}
+		else if (a == '!')
+		{
+
+		}
 	}
 }
 void thisProduct2(int num)
@@ -1111,10 +1115,16 @@ void thisProduct2(int num)
 			{
 				rite << product[i].getall() << endl;
 			}
+			rite.close();
 		}
 		else if (tapp == '!')
 		{
-
+			ofstream rite("Users/" + userSetting[userInSystem].login2 + ".txt");
+			for (int i = 0; i < sizeProductBase; i++)
+			{
+				if (i != num)rite << product[i].getall();
+			}
+			break;
 		}
 	}
 }
