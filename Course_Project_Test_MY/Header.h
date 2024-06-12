@@ -172,6 +172,7 @@ struct PRODUCT
 
 	void setAll(string name,string from, string to, string adress, string salary, string type, string exp, string login, string professional, string contacts)
 	{
+		this->name = name;
 		this->from = from;
 		this->to = to;
 		this->adress = adress;

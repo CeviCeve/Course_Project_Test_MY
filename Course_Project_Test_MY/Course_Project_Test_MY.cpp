@@ -4,7 +4,7 @@ int main()
 {
 	//draw();
 	basikSettings();
-	job(0);
+	//job(0);
 	//writeBorder();
 
 	if (readSettings("Settings/settings.txt")) { myApp(); }

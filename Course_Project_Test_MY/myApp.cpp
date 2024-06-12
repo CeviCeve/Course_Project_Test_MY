@@ -1,4 +1,4 @@
-#include "Header.h"
+п»ї#include "Header.h"
 
 SETTINGS setting;
 CHORDS chord = getConsleChords();
@@ -31,7 +31,7 @@ void myApp()
 		SetConsoleTextAttribute(hC, lastColor);
 		ShowConsoleCursor(0);
 
-		string settingsInterface1[interface1Size] = { "1. Войти","2. Зарегестрироваться","3. Информация", "4. Выход"};
+		string settingsInterface1[interface1Size] = { "1. Р’РѕР№С‚Рё","2. Р—Р°СЂРµРіРµСЃС‚СЂРёСЂРѕРІР°С‚СЊСЃСЏ","3. РРЅС„РѕСЂРјР°С†РёСЏ", "4. Р’С‹С…РѕРґ"};
 
 		for (int i = 0; i < interface1Size; i++) maxSize = max(settingsInterface1[i].size(), maxSize);
 
@@ -90,7 +90,7 @@ void inf()
 
 	const int interface1Size = 6;
 	int maxSize = 0;
-	string settingsInterface1[interface1Size] = { "КОНТАКТЫ","    Название: ","    Почта:    ","", "Приложение основано на ПО \"Work Wave\"", "\tлицензия Pyt.Tech 2024-NOW" };
+	string settingsInterface1[interface1Size] = { "РљРћРќРўРђРљРўР«","    РќР°Р·РІР°РЅРёРµ: ","    РџРѕС‡С‚Р°:    ","", "РџСЂРёР»РѕР¶РµРЅРёРµ РѕСЃРЅРѕРІР°РЅРѕ РЅР° РџРћ \"Work Wave\"", "\tР»РёС†РµРЅР·РёСЏ Pyt.Tech 2024-NOW" };
 
 	for (int i = 0; i < interface1Size-2; i++) maxSize = max(settingsInterface1[i].size(), maxSize);
 	for (int i = 0; i < interface1Size; i++) {
@@ -114,7 +114,7 @@ void reg()
 	int lastCursore = 0;
 	int tapp;
 
-	string settingsInterface1[interface1Size] = { "Логин:        ", "Пароль:       ", "Специализация:", "Далее ->" };
+	string settingsInterface1[interface1Size] = { "Р›РѕРіРёРЅ:        ", "РџР°СЂРѕР»СЊ:       ", "РЎРїРµС†РёР°Р»РёР·Р°С†РёСЏ:", "Р”Р°Р»РµРµ ->" };
 	string newSettings[interface1Size] = { "","","" };
 
 
@@ -185,7 +185,7 @@ void reg()
 			{
 				setCursorPosition(chord.x - 20 + newSettings[cursoreLine].length() - 5, 3 + chord.y / 4 + 4 * 3 + 8);
 				SetConsoleTextAttribute(hC, lastColor);
-				cout << "ОШИБКА РЕГИСТРАЦИИ этап 1";
+				cout << "РћРЁРР‘РљРђ Р Р•Р“РРЎРўР РђР¦РР СЌС‚Р°Рї 1";
 			}
 			else
 			{
@@ -226,10 +226,10 @@ void reg2()
 	int tapp;
 	int numRole = 0;
 
-	string settingsInterface1[interface1Size] = { "Возраст:", "] Роль: ", "] Пол:  ", "Подтвердить" };
+	string settingsInterface1[interface1Size] = { "Р’РѕР·СЂР°СЃС‚:", "] Р РѕР»СЊ: ", "] РџРѕР»:  ", "РџРѕРґС‚РІРµСЂРґРёС‚СЊ" };
 	string newSettings[interface1Size] = { "","","" };
 	userSetting[900].role2 = setting.customizableChar[0];
-	userSetting[900].sex2 = "М";
+	userSetting[900].sex2 = "Рњ";
 	userSetting[900].theme2 = "1";
 
 
@@ -306,8 +306,8 @@ void reg2()
 		}
 		else if (cursoreLine == 2 && tapp == 77)
 		{
-			if (userSetting[900].sex2 == "М")userSetting[900].sex2 = "Ж";
-			else userSetting[900].sex2 = "М";
+			if (userSetting[900].sex2 == "Рњ")userSetting[900].sex2 = "Р–";
+			else userSetting[900].sex2 = "Рњ";
 		}
 		else if ((tapp == 13 && cursoreLine == 3) || tapp == 52)
 		{
@@ -346,8 +346,8 @@ void entrance()
 	int lastCursore = 0;
 	int tapp;
 
-	string settingsInterface1[interface1Size] = { "Логин:      ", "Пароль:     ", "Код доступа:", "Войти"};
-	string settingsInterface2[interface1Size] = { "", "", "", "Войти" };
+	string settingsInterface1[interface1Size] = { "Р›РѕРіРёРЅ:      ", "РџР°СЂРѕР»СЊ:     ", "РљРѕРґ РґРѕСЃС‚СѓРїР°:", "Р’РѕР№С‚Рё"};
+	string settingsInterface2[interface1Size] = { "", "", "", "Р’РѕР№С‚Рё" };
 	string newSettings[interface1Size] = { "","","" };
 
 	if (setting.login) { settingsInterface2[interface1Size2] = settingsInterface1[0]; interface1Size2++; }
@@ -414,9 +414,9 @@ void entrance()
 			int log=-1, code=-1, passord=-1;
 			for (int i = 0; i < 3; i++)
 			{
-				if (settingsInterface2[i] == "Логин:      ") log = i;
-				if (settingsInterface2[i] == "Пароль:     ") passord = i;
-				if (settingsInterface2[i] == "Код доступа:") code = i;
+				if (settingsInterface2[i] == "Р›РѕРіРёРЅ:      ") log = i;
+				if (settingsInterface2[i] == "РџР°СЂРѕР»СЊ:     ") passord = i;
+				if (settingsInterface2[i] == "РљРѕРґ РґРѕСЃС‚СѓРїР°:") code = i;
 			}
 			userInSystem = -1;
 			for (USER_SETTINGS a : userSetting)
@@ -455,7 +455,7 @@ void entrance()
 			{
 				setCursorPosition(chord.x - 20 + newSettings[cursoreLine].length() - 5, 3 + chord.y / 4 + 4 * 3 + 8);
 				SetConsoleTextAttribute(hC, lastColor);
-				cout << "ОШИБКА ВХОДА";
+				cout << "РћРЁРР‘РљРђ Р’РҐРћР”Рђ";
 			}
 			if(3==2) {
 			SYDA:
@@ -491,7 +491,7 @@ void userMenu()
 	SetConsoleTextAttribute(hC, lastColor);
 	ShowConsoleCursor(0);
 
-	string settingsInterface1[interface1Size] = { "1. Работа","2. Мои места","3. Личный кабинет", "4. Выход" };
+	string settingsInterface1[interface1Size] = { "1. Р Р°Р±РѕС‚Р°","2. РњРѕРё РјРµСЃС‚Р°","3. Р›РёС‡РЅС‹Р№ РєР°Р±РёРЅРµС‚", "4. Р’С‹С…РѕРґ" };
 
 	for (int i = 0; i < interface1Size; i++) maxSize = max(settingsInterface1[i].size(), maxSize);
 
@@ -499,6 +499,8 @@ void userMenu()
 
 	while (1)
 	{
+		nameController(setting.title);
+
 		SetConsoleTextAttribute(hC, lastColor);
 
 		for (int i = 0; i < interface1Size; i++) {
@@ -549,32 +551,33 @@ void userMenu()
 
 void job(int num)
 {
-	system("cls");
-	readProductBase();
-	if(sizeProductBase / 5 != 0) sizeProductBase++;
-	cout << sizeProductBase;
-	cout << endl << num;
-	PRODUCT mass[6];
+	while (1)
+	{
+		system("cls");
+		readProductBase();
+		if (sizeProductBase / 5 != 0) sizeProductBase++;
+		//cout << sizeProductBase;
+		//cout << endl << num;
 		if (sizeProductBase == 0) { cout << "net nichego"; }
 
 		if (num == 0) {
-			if (sizeProductBase < 5 ) {
+			if (sizeProductBase < 5) {
 				for (int i = 0; i < sizeProductBase + 1; i++) {
 
 					setCursorPosition(chord.x - 56, 3 + chord.y / 8 + 8 + 10 * i);
-					cout << "1_/==================================================\\_\n";
+					cout << "_/==================================================\\_\n";
 
 					setCursorPosition(chord.x - 56, 4 + chord.y / 8 + 8 + 10 * i);
 					cout << "| " << setw(16) << product[i].name << "| #" << setw(3) << i << setw(31) << "        |\n";
 
 					setCursorPosition(chord.x - 56, 5 + chord.y / 8 + 8 + 10 * i);
-					cout << "|                 |"<<"----------------------------------|\n";
+					cout << "|                 |" << "----------------------------------|\n";
 
 					setCursorPosition(chord.x - 56, 6 + chord.y / 8 + 8 + 10 * i);
-					cout << "| "<<setw(16)<<product[i].profession<<"| Адрес:"<<setw(26)<<product[i].adress<<" |\n";
+					cout << "| " << setw(16) << product[i].profession << "| РђРґСЂРµСЃ:" << setw(26) << product[i].adress << " |\n";
 
 					setCursorPosition(chord.x - 56, 7 + chord.y / 8 + 8 + 10 * i);
-					cout << "| " << setw(16) << product[i].salary << "| Опыт:" << setw(27) << product[i].exp << " |\n";
+					cout << "| " << setw(16) << product[i].salary << "| РћРїС‹С‚:" << setw(27) << product[i].exp << " |\n";
 
 					setCursorPosition(chord.x - 56, 8 + chord.y / 8 + 8 + 10 * i);
 					cout << "|_________________|__________________________________|\n";
@@ -583,13 +586,13 @@ void job(int num)
 
 
 			}
-		
+
 			else {
 				for (int i = 0; i < 5; i++) {
 
 
 					setCursorPosition(chord.x - 56, 3 + chord.y / 8 + 8 + 10 * i);
-					cout << "2_/==================================================\\_\n";
+					cout << "_/==================================================\\_\n";
 
 					setCursorPosition(chord.x - 56, 4 + chord.y / 8 + 8 + 10 * i);
 					cout << "| " << setw(16) << product[i].name << "| #" << setw(3) << i << setw(31) << "       |\n";
@@ -598,10 +601,10 @@ void job(int num)
 					cout << "|                 |" << "----------------------------------|\n";
 
 					setCursorPosition(chord.x - 56, 6 + chord.y / 8 + 8 + 10 * i);
-					cout << "| " << setw(16) << product[i].profession << "| Адрес:" << setw(26) << product[i].adress << " |\n";
+					cout << "| " << setw(16) << product[i].profession << "| РђРґСЂРµСЃ:" << setw(26) << product[i].adress << " |\n";
 
 					setCursorPosition(chord.x - 56, 7 + chord.y / 8 + 8 + 10 * i);
-					cout << "| " << setw(16) << product[i].salary << "| Опыт:" << setw(27) << product[i].exp << " |\n";
+					cout << "| " << setw(16) << product[i].salary << "| РћРїС‹С‚:" << setw(27) << product[i].exp << " |\n";
 
 					setCursorPosition(chord.x - 56, 8 + chord.y / 8 + 8 + 10 * i);
 					cout << "|_________________|__________________________________|\n";
@@ -610,17 +613,17 @@ void job(int num)
 			}
 		}
 		else {
-				int fulllist = sizeProductBase / 5;
-				int costrat = sizeProductBase - fulllist * 5;
-				int counter = 0;
-				if (costrat == 0) { costrat = 5; }
-				
-			if (sizeProductBase < (num+1) * 5) {
-			
-				for (int i = num * 5; counter < costrat ; i++) {
+			int fulllist = sizeProductBase / 5;
+			int costrat = sizeProductBase - fulllist * 5;
+			int counter = 0;
+			if (costrat == 0) { costrat = 5; }
+
+			if (sizeProductBase < (num + 1) * 5) {
+
+				for (int i = num * 5; counter < costrat; i++) {
 
 					setCursorPosition(chord.x - 56, 3 + chord.y / 8 + 8 + 10 * counter);
-					cout << "3_/==================================================\\_\n";
+					cout << "_/==================================================\\_\n";
 
 					setCursorPosition(chord.x - 56, 4 + chord.y / 8 + 8 + 10 * counter);
 					cout << "| " << setw(16) << product[i].name << "| #" << setw(3) << i << setw(31) << "       |\n";
@@ -629,10 +632,10 @@ void job(int num)
 					cout << "|                 |----------------------------------|\n";
 
 					setCursorPosition(chord.x - 56, 6 + chord.y / 8 + 8 + 10 * counter);
-					cout << "| " << setw(16) << product[i].profession << "| Адрес:" << setw(26) << product[i].adress << " |\n";
+					cout << "| " << setw(16) << product[i].profession << "| РђРґСЂРµСЃ:" << setw(26) << product[i].adress << " |\n";
 
 					setCursorPosition(chord.x - 56, 7 + chord.y / 8 + 8 + 10 * counter);
-					cout << "| " << setw(16) << product[i].salary << "| Опыт:" << setw(27) << product[i].exp << " |\n";
+					cout << "| " << setw(16) << product[i].salary << "| РћРїС‹С‚:" << setw(27) << product[i].exp << " |\n";
 
 					setCursorPosition(chord.x - 56, 8 + chord.y / 8 + 8 + 10 * counter);
 					cout << "|_________________|__________________________________|\n";
@@ -643,7 +646,7 @@ void job(int num)
 			else {
 				for (int i = num * 5; counter < 5; i++) {
 					setCursorPosition(chord.x - 56, 3 + chord.y / 8 + 8 + 10 * counter);
-					cout << "4_/==================================================\\_\n";
+					cout << "_/==================================================\\_\n";
 
 					setCursorPosition(chord.x - 56, 4 + chord.y / 8 + 8 + 10 * counter);
 					cout << "| " << setw(16) << product[i].name << "| #" << setw(3) << i << setw(31) << "       |\n";
@@ -652,11 +655,11 @@ void job(int num)
 					cout << "|                 |----------------------------------|\n";
 
 					setCursorPosition(chord.x - 56, 6 + chord.y / 8 + 8 + 10 * counter);
-					cout << "| " << setw(16) << product[i].profession << "| Адрес:" << setw(26) << product[i].adress << " |\n";
+					cout << "| " << setw(16) << product[i].profession << "| РђРґСЂРµСЃ:" << setw(26) << product[i].adress << " |\n";
 					;
 
 					setCursorPosition(chord.x - 56, 7 + chord.y / 8 + 8 + 10 * counter);
-					cout << "| " << setw(16) << product[i].salary << "| Опыт:" << setw(27) << product[i].exp << " |\n";
+					cout << "| " << setw(16) << product[i].salary << "| РћРїС‹С‚:" << setw(27) << product[i].exp << " |\n";
 
 
 					setCursorPosition(chord.x - 56, 8 + chord.y / 8 + 8 + 10 * counter);
@@ -666,18 +669,67 @@ void job(int num)
 
 			}
 		}
-			int a=_getch();
-			if (a == 49) {
-				num--;
-				if (num < 0)num++;
-				job(num);
-			}
-			if (a == 50) {
-				num++;
-				//if (num > (sizeProductBase+4)/5 -1)num--;
-				if (num * 5 > sizeProductBase)num--;
-				job(num);
-			}
+
+		setlocale(LC_ALL, "en_US.UTF-8");
+		//SetConsoleOutputCP(CP_UTF8);
+		//SetConsoleCP(CP_UTF8);
+		if (num != 0)
+		{
+			setCursorPosition(3, chord.y-1);
+			cout << u8" в—ўв–€в–€";
+			setCursorPosition(3, chord.y);
+			cout << u8"в—ЂпёЏв–€в–€в–€в–€в–€в–€в–€в–€в–€в–€в–€в–€";
+			setCursorPosition(3, chord.y+1);
+			cout << u8" в—Ґв–€в–€";
+
+
+		}
+		else
+		{
+			setCursorPosition(3, chord.y);
+			cout << "          ";
+		}
+		if (num != sizeProductBase/5)
+		{
+			setCursorPosition(chord.x * 1.6, chord.y - 1);
+			cout << "      \\";
+			setCursorPosition(chord.x *1.6, chord.y);
+			cout << "------->";
+			setCursorPosition(chord.x * 1.6, chord.y + 1);
+			cout << "      /";
+		}
+		else
+		{
+			setCursorPosition(chord.x *1.6, chord.y / 2);
+			cout << "              ";
+			setCursorPosition(chord.x * 1.6, chord.y / 2);
+			cout << "              ";
+			setCursorPosition(chord.x * 1.6, chord.y / 2);
+			cout << "              ";
+
+		}
+
+
+		int a = _getch();
+		if (a == 75) {
+			num--;
+			if (num < 0)num++;
+			job(num);
+		}
+		if (a == 77) {
+			num++;
+			//if (num > (sizeProductBase+4)/5 -1)num--;
+			if (num * 5 > sizeProductBase)num--;
+			job(num);
+		}
+		if (a == 27)
+		{
+			system("cls");
+			break;
+		}
+
+
+	}
 	
 }
 void myJob()
@@ -703,7 +755,7 @@ void adminMenu()
 	SetConsoleTextAttribute(hC, lastColor);
 	ShowConsoleCursor(0);
 
-	string settingsInterface1[interface1Size] = { "1. Работа","2. Мои места","3. Личный кабинет", "4. Выход" };
+	string settingsInterface1[interface1Size] = { "1. Р Р°Р±РѕС‚Р°","2. РњРѕРё РјРµСЃС‚Р°","3. Р›РёС‡РЅС‹Р№ РєР°Р±РёРЅРµС‚", "4. Р’С‹С…РѕРґ" };
 
 	for (int i = 0; i < interface1Size; i++) maxSize = max(settingsInterface1[i].size(), maxSize);
 
