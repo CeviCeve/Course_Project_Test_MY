@@ -539,11 +539,11 @@ void userMenu()
 		else if (tapp == 13)
 		{
 			if (cursoreLine == 0) { job(0); }
-			if (cursoreLine == 1) { myJob(); }
+			if (cursoreLine == 1) { myJob(0); }
 			if (cursoreLine == 2) { myCab(); }
 		}
 		else if (tapp == 49)job(0);
-		else if (tapp == 50)myJob();
+		else if (tapp == 50)myJob(0);
 		else if (tapp == 51)myCab();
 
 	}
@@ -766,30 +766,14 @@ void thisProduct(int num)
 	for (int i = 0; i < sizeBase; i++) maxSize = max(setting2_Base[i].size(), maxSize);
 
 
-	setCursorPosition(chord.x / 5 + 28 + maxSize + 2, 3 + chord.y / 3 +5);
-	cout << "Тип занятости: " << product[num].type;
-	setCursorPosition(chord.x / 5 + 28 + maxSize + 2, 3 + chord.y / 3 + 8);
-
-	cout << "Спеиальность:  " << product[num].profession;
-	setCursorPosition(chord.x / 5 + 28 + maxSize + 2, 3 + chord.y / 3 + 11);
-
-	cout << "Опыт:          " << product[num].exp;
-	setCursorPosition(chord.x / 5 + 28 + maxSize + 2, 3 + chord.y / 3 + 14);
-
-	cout << "Время работы:  " << product[num].from<<" - "<< product[num].to;
-	setCursorPosition(chord.x / 5 + 28 + maxSize + 2, 3 + chord.y / 3 + 17);
-
-	cout << "Адрес:         " << product[num].adress;
-	setCursorPosition(chord.x / 5 + 28 + maxSize + 2, 3 + chord.y / 3 + 20);
-
-	cout << "Зарплата:      " << product[num].salary;
-	setCursorPosition(chord.x / 5 + 28 + maxSize + 2, 3 + chord.y / 3 + 25);
-
-
-	cout << "Вакансию создал: " << product[num].login;
-	setCursorPosition(chord.x / 5 + 28 + maxSize + 2, 3 + chord.y / 3 + 27);
-
-	cout << "Номер для связи: " << product[num].contacts;
+	setCursorPosition(chord.x / 5 + 28 + maxSize + 2, 3 + chord.y / 3 +5);  cout << "Тип занятости: " << product[num].type;
+	setCursorPosition(chord.x / 5 + 28 + maxSize + 2, 3 + chord.y / 3 + 8); cout << "Спеиальность:  " << product[num].profession;
+	setCursorPosition(chord.x / 5 + 28 + maxSize + 2, 3 + chord.y / 3 + 11);cout << "Опыт:          " << product[num].exp;
+	setCursorPosition(chord.x / 5 + 28 + maxSize + 2, 3 + chord.y / 3 + 14);cout << "Время работы:  " << product[num].from<<" - "<< product[num].to;
+	setCursorPosition(chord.x / 5 + 28 + maxSize + 2, 3 + chord.y / 3 + 17);cout << "Адрес:         " << product[num].adress;
+	setCursorPosition(chord.x / 5 + 28 + maxSize + 2, 3 + chord.y / 3 + 20);cout << "Зарплата:      " << product[num].salary;
+	setCursorPosition(chord.x / 5 + 28 + maxSize + 2, 3 + chord.y / 3 + 25);cout << "Вакансию создал: " << product[num].login;
+	setCursorPosition(chord.x / 5 + 28 + maxSize + 2, 3 + chord.y / 3 + 27);cout << "Номер для связи: " << product[num].contacts;
 
 	for (int i = 0; i < sizeBase; i++)
 	{
@@ -1042,6 +1026,95 @@ void myJob(int num)
 		{
 			if(stoi(line)>=0 && stoi(line)<=sizeProductBase)
 			thisProduct(stoi(line));
+		}
+	}
+}
+void thisProduct2(int num)
+{
+	int tapp = 0;
+	int lastCursore = 0;
+	int cursoreLine = 0;
+	int maxSize = 0;
+	const int sizeBase = 3;
+
+	string allname[8] = { "Тип занятости:   " ,"Спеиальность:    " ,"Опыт:            " ,"Время от:        ","Время до:        ","Адрес:           " ,"Зарплата:        " ,"Номер для связи: " };
+	string allFunc[8] = { product[num].type ,product[num].profession,product[num].exp,product[num].from,product[num].to ,product[num].adress, product[num].salary, product[num].contacts };
+
+	system("cls");
+
+
+	string setting2_Base[sizeBase] = { "!. Удалить", "%. Назад" };
+	for (int i = 0; i < sizeBase; i++) maxSize = max(setting2_Base[i].size(), maxSize);
+	for (int i = 0; i < sizeBase; i++)
+	{
+		SetConsoleTextAttribute(hC, lastColor);
+		setCursorPosition(chord.x / 5 + 28 + maxSize + 2, 3 + chord.y / 5 + i * 3 + 2);
+		cout << setting2_Base[i];
+	}
+
+
+
+	nameController(product[num].name);
+	while (1)
+	{
+		setCursorPosition(chord.x / 5 + 28 + maxSize + 2-3, 3 + chord.y / 3 + lastCursore *3);
+		SetConsoleTextAttribute(hC, 6);
+		cout << "   " << allname[lastCursore]<<allFunc[lastCursore];
+
+		setCursorPosition(chord.x / 5 + 28 + maxSize + 2-3, 3 + chord.y / 3 + cursoreLine *3);
+		SetConsoleTextAttribute(hC, 14);
+		cout << ">> " << allname[cursoreLine] << allFunc[cursoreLine];
+
+		setCursorPosition(chord.x / 5 + 28 + maxSize + 2 + allFunc[cursoreLine].size() , 3 + chord.y / 3 + cursoreLine * 3);
+
+		tapp = _getch();
+
+		if (tapp == 80 || tapp == 72)
+		{
+			lastCursore = cursoreLine;
+			cursoreLine = gotoThisLine(sizeBase, cursoreLine, tapp);
+		}
+		else if (tapp == 8 && allFunc[cursoreLine] !="")
+		{
+			allFunc[cursoreLine].pop_back();
+			setCursorPosition(chord.x / 5 + 28 + maxSize + 2 - 3, 3 + chord.y / 5 + cursoreLine * 3 + 2);
+			cout << "                                                           ";
+			setCursorPosition(chord.x / 5 + 28 + maxSize + 2 - 3, 3 + chord.y / 5 + cursoreLine * 3 + 2);
+			cout<< allname[cursoreLine] << allFunc[cursoreLine];
+
+		}
+		else if (tapp == 27 || (cursoreLine == 1 && tapp == 13))
+		{
+			system("cls");
+			break;
+		}
+		else if (((tapp >= 65 && tapp <= 122 && cursoreLine != 4) || (tapp >= 48 && tapp <= 57) || tapp == 64 || tapp == 46) && cursoreLine != 4)
+		{
+
+			allFunc[cursoreLine] = allFunc[cursoreLine] + static_cast<char>(tapp);
+			cout << static_cast<char>(tapp);
+		}
+		else if (tapp == '%')
+		{
+			product[num].type = allFunc[0];
+			product[num].profession = allFunc[1];
+			product[num].exp = allFunc[2];
+			product[num].from = allFunc[3];
+			product[num].to = allFunc[4];
+			product[num].adress = allFunc[5];
+			product[num].salary = allFunc[6];
+			product[num].login = allFunc[7];
+			product[num].contacts = allFunc[8];
+
+			ofstream rite("Users/" + userSetting[userInSystem].login2 + ".txt");
+			for (int i = 0; i < sizeProductBase; i++)
+			{
+				rite << product[i].getall() << endl;
+			}
+		}
+		else if (tapp == '!')
+		{
+
 		}
 	}
 }
