@@ -671,56 +671,51 @@ void job(int num)
 		}
 
 		setlocale(LC_ALL, "en_US.UTF-8");
-		//SetConsoleOutputCP(CP_UTF8);
-		//SetConsoleCP(CP_UTF8);
+		SetConsoleOutputCP(CP_UTF8);
+		SetConsoleCP(CP_UTF8);
 		if (num != 0)
 		{
-			setCursorPosition(3, chord.y-1);
-			cout << u8" ◢██";
+			setCursorPosition(3, chord.y-2);
+				cout << u8"░░██╗";
+			setCursorPosition(3, chord.y - 1);
+				cout << u8"░██╔╝";
 			setCursorPosition(3, chord.y);
-			cout << u8"◀️████████████";
-			setCursorPosition(3, chord.y+1);
-			cout << u8" ◥██";
-
-
-		}
-		else
-		{
-			setCursorPosition(3, chord.y);
-			cout << "          ";
+				cout << u8"██╔╝░";
+			setCursorPosition(3, chord.y+1 );
+				cout << u8"╚██╗░";
+			setCursorPosition(3, chord.y + 2);
+				cout << u8"░╚██╗";
+			setCursorPosition(3, chord.y + 3);
+				cout << u8"░░╚═╝";
 		}
 		if (num != sizeProductBase/5)
 		{
-			setCursorPosition(chord.x * 1.6, chord.y - 1);
-			cout << "      \\";
-			setCursorPosition(chord.x *1.6, chord.y);
-			cout << "------->";
 			setCursorPosition(chord.x * 1.6, chord.y + 1);
-			cout << "      /";
+			cout << u8"██╗░░";
+			setCursorPosition(chord.x * 1.6, chord.y + 1);
+			cout << u8"╚██╗░";
+			setCursorPosition(chord.x * 1.6, chord.y + 1);
+			cout << u8"░╚██╗";
+			setCursorPosition(chord.x * 1.6, chord.y + 1);
+			cout << u8"░██╔╝";
+			setCursorPosition(chord.x * 1.6, chord.y + 1);
+			cout << u8"██╔╝░";
+			setCursorPosition(chord.x * 1.6, chord.y + 1);
+			cout << u8"╚═╝░░";
 		}
-		else
-		{
-			setCursorPosition(chord.x *1.6, chord.y / 2);
-			cout << "              ";
-			setCursorPosition(chord.x * 1.6, chord.y / 2);
-			cout << "              ";
-			setCursorPosition(chord.x * 1.6, chord.y / 2);
-			cout << "              ";
-
-		}
-
+		setlocale(0, "");
+		SetConsoleCP(1251);
+		SetConsoleOutputCP(1251);
 
 		int a = _getch();
 		if (a == 75) {
 			num--;
 			if (num < 0)num++;
-			job(num);
 		}
 		if (a == 77) {
 			num++;
 			//if (num > (sizeProductBase+4)/5 -1)num--;
 			if (num * 5 > sizeProductBase)num--;
-			job(num);
 		}
 		if (a == 27)
 		{
