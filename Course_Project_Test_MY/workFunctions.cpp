@@ -170,3 +170,9 @@ string generateRandomString(int size) {
 
     return result;
 }
+
+string inOneLine(string str)
+{
+    replace(str.begin(), str.end(), ' ', '_');
+    return str;
+}

@@ -2,6 +2,9 @@
 
 int main()
 {
+	job();
+	_getch;
+	_getch();
 	//draw();
 	basikSettings();
 	//writeBorder();

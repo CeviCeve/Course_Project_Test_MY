@@ -7,6 +7,8 @@ HANDLE hC = GetStdHandle(STD_OUTPUT_HANDLE);
 USER_SETTINGS userSetting[10000];
 int sizeUserSettings = 0;
 
+PRODUCT product[10000];
+int sizeProductBase = 0;
 int activeColor;
 int lastColor;
 
@@ -88,7 +90,7 @@ void inf()
 
 	const int interface1Size = 6;
 	int maxSize = 0;
-	string settingsInterface1[interface1Size] = { "КОНТАКТЫ","    Название: ","    Почта:    ","", "Приложение основано на ПО \"Job Easy\"", "\tлицензия Pyt.Tech 2024-NOW" };
+	string settingsInterface1[interface1Size] = { "КОНТАКТЫ","    Название: ","    Почта:    ","", "Приложение основано на ПО \"Work Wave\"", "\tлицензия Pyt.Tech 2024-NOW" };
 
 	for (int i = 0; i < interface1Size-2; i++) maxSize = max(settingsInterface1[i].size(), maxSize);
 	for (int i = 0; i < interface1Size; i++) {
@@ -422,14 +424,6 @@ void entrance()
 			for (USER_SETTINGS a : userSetting)
 			{
 				userInSystem++;
-				if(log!=-1)
-					if(newSettings[log] == a.login2 && a.login2!="")
-						if (newSettings[passord] == a.password2 || newSettings[code] == a.codeIn2)
-						{
-							if (a.role2 == "Admin") adminMenu();
-							else userMenu();
-							goto SYDA;
-						}
 				if(code!=-1)
 					if (newSettings[code] == a.codeIn2 && a.codeIn2 != "")
 					{
@@ -437,6 +431,26 @@ void entrance()
 						else userMenu();
 						goto SYDA;
 					}
+				if (log != -1)
+				{
+					if (newSettings[log] == a.login2 && a.login2 != "")
+						if (newSettings[passord] == a.password2 || newSettings[code] == a.codeIn2)
+						{
+							if (a.role2 == "Admin") adminMenu();
+							else userMenu();
+							goto SYDA;
+
+
+						}
+					if (newSettings[code] == a.codeIn2 && a.codeIn2 != "")
+					{
+						if (a.role2 == "Admin") adminMenu();
+						else userMenu();
+						goto SYDA;
+
+					}
+				}
+				
 			}
 
 			if (userInSystem > sizeUserSettings)
@@ -445,8 +459,10 @@ void entrance()
 				SetConsoleTextAttribute(hC, lastColor);
 				cout << "ОШИБКА ВХОДА";
 			}
-		SYDA:
-			Sleep(1);
+			if(3==2) {
+			SYDA:
+				break;
+			}
 		}
 		else if (tapp == 27)
 		{
@@ -477,7 +493,7 @@ void userMenu()
 	SetConsoleTextAttribute(hC, lastColor);
 	ShowConsoleCursor(0);
 
-	string settingsInterface1[interface1Size] = { "1. Войти","2. Зарегестрироваться","3. Информация", "4. Выход" };
+	string settingsInterface1[interface1Size] = { "1. Работа","2. Мои места","3. Личный кабинет", "4. Выход" };
 
 	for (int i = 0; i < interface1Size; i++) maxSize = max(settingsInterface1[i].size(), maxSize);
 
@@ -511,7 +527,102 @@ void userMenu()
 		}
 		else if (tapp == 27 || tapp == 52 || (cursoreLine == interface1Size - 1 && tapp == 13))
 		{
-			leave();
+			ShowConsoleCursor(0);
+			SetConsoleTextAttribute(hC, lastColor);
+
+			for (int i = 0; i < interface1Size + 1; i++) {
+				setCursorPosition(chord.x - maxSize - 25, 3 + chord.y / 4 + i * 3 + 8);
+				cout << "                                                ";
+			}
+			break;
+		}
+		else if (tapp == 13)
+		{
+			if (cursoreLine == 0) {  job(); }
+			if (cursoreLine == 1) { myJob(); }
+			if (cursoreLine == 2) { myCab(); }
+		}
+		else if (tapp == 49)job();
+		else if (tapp == 50)myJob();
+		else if (tapp == 51)myCab();
+
+	}
+}
+
+void job()
+{
+	cout << "_/==================================================\\_\n"
+		"| game-card       |                   Alishv I.I.    |\n"
+		"| market          |----------------------------------|\n"
+		"| 9:00 - 18:00    |        adres: Minsk.Lenina.25    |\n"
+		"| salary: 2000$   |          exp:         5 years    |\n"
+		"|_________________|__________________________________|\n";
+}
+void myJob()
+{
+
+}
+void myCab()
+{
+
+}
+
+void adminMenu()
+{
+	system("cls");
+	newSettings();
+
+	const int interface1Size = 4;
+	int maxSize = 0;
+	int cursoreLine = 0;
+	int lastCursore = 0;
+	int tapp;
+
+	SetConsoleTextAttribute(hC, lastColor);
+	ShowConsoleCursor(0);
+
+	string settingsInterface1[interface1Size] = { "1. Работа","2. Мои места","3. Личный кабинет", "4. Выход" };
+
+	for (int i = 0; i < interface1Size; i++) maxSize = max(settingsInterface1[i].size(), maxSize);
+
+
+
+	while (1)
+	{
+		SetConsoleTextAttribute(hC, lastColor);
+
+		for (int i = 0; i < interface1Size; i++) {
+			setCursorPosition(chord.x - settingsInterface1[i].size() / 2 - 22, 3 + chord.y / 4 + i * 3 + 8);
+			cout << settingsInterface1[i];
+		}
+
+		setCursorPosition(chord.x - settingsInterface1[lastCursore].size() / 2 - 25, 3 + chord.y / 4 + lastCursore * 3 + 8);
+		SetConsoleTextAttribute(hC, lastColor);
+		cout << "   " << settingsInterface1[lastCursore];
+
+		setCursorPosition(chord.x - settingsInterface1[cursoreLine].size() / 2 - 25, 3 + chord.y / 4 + cursoreLine * 3 + 8);
+		SetConsoleTextAttribute(hC, activeColor);
+		cout << ">> " << settingsInterface1[cursoreLine];
+
+
+		setCursorPosition(chord.x / 4 + (maxSize + 3), 3 + chord.y / 4 + cursoreLine * 3);
+		tapp = _getch();
+
+		if (tapp == 80 || tapp == 72)
+		{
+			lastCursore = cursoreLine;
+			cursoreLine = gotoThisLine(interface1Size, cursoreLine, tapp);
+		}
+		else if (tapp == 27 || tapp == 52 || (cursoreLine == interface1Size - 1 && tapp == 13))
+		{
+			ShowConsoleCursor(0);
+			SetConsoleTextAttribute(hC, lastColor);
+
+			for (int i = 0; i < interface1Size + 1; i++) {
+				setCursorPosition(chord.x - maxSize - 25, 3 + chord.y / 4 + i * 3 + 8);
+				cout << "                                                ";
+			}
+			break;
 		}
 		else if (tapp == 13)
 		{
@@ -524,10 +635,6 @@ void userMenu()
 		else if (tapp == 51)inf();
 
 	}
-}
-void adminMenu()
-{
-
 }
 
 void newSettings()
@@ -572,6 +679,7 @@ void readUserBase()
 	string customizableChar[5];
 
 	int card;
+	sizeUserSettings = 0;
 
 	while (!read2.eof())
 	{
@@ -583,4 +691,29 @@ void readUserBase()
 		userSetting[sizeUserSettings].setAll(theme2, login2, password2, codeIn2, role2, age2, specialization2, sex2, personalChar2, customizableChar,card);
 		sizeUserSettings++;
 	}
+	sizeUserSettings--;
+}
+void reaadProductBase()
+{
+	ofstream read1("Data/products.txt", ios::app);
+	read1.close();
+
+	ifstream read2("Data/products.txt");
+	string from;
+	string to;
+	string adress;
+	string salary;
+	string type;
+	string exp;
+	string login;
+	string name;
+
+	sizeProductBase = 0;
+	while (!read2.eof())
+	{
+		read2 >>name>> from >> to >> adress >> salary >> type >> exp >> login;
+		product[sizeProductBase].setAll(name, from, to, adress, salary, type, exp, login);
+		sizeProductBase++;
+	}
+	sizeProductBase--;
 }

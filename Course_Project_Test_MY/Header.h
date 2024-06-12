@@ -156,6 +156,34 @@ struct USER_SETTINGS
 			+ " " + retStr() + to_string(card);
 	}
 };
+struct PRODUCT
+{
+	string name;
+	string from;
+	string to;
+	string adress;
+	string salary;
+	string type;
+	string exp;
+
+	string login;
+
+	void setAll(string name,string from, string to, string adress, string salary, string type, string exp, string login)
+	{
+		this->from = from;
+		this->to = to;
+		this->adress = adress;
+		this->salary = salary;
+		this->type = type;
+		this->exp = exp;
+		this->login = login;
+	}
+
+	string getall()
+	{
+		return name+ " "+from + " " + to + " " + adress + " " + salary + " " + type + " " + exp + " " + login;
+	}
+};
 
 //--------------------------basic settings--------------------------//
 //----------workFunctions.cpp----------//
@@ -166,6 +194,7 @@ static void UnwrapScreen();
 CHORDS getConsleChords();
 void ShowConsoleCursor(bool showFlag);
 string generateRandomString(int size);
+string inOneLine(string str);
 
 void draw();
 void writeBorder();
@@ -210,7 +239,12 @@ void reg2();
 void inf();
 
 void adminMenu();
+
+
 void userMenu();
+void myCab();
+void myJob();
+void job();
 
 
 #endif
