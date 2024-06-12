@@ -559,13 +559,13 @@ void job(int num)
 		readProductBase();
 		if (sizeProductBase / 5 != 0) sizeProductBase++;
 
-		setCursorPosition(chord.x - 56, 3 + chord.y / 4 + 17);
+		setCursorPosition(chord.x - 56, 15);
 		cout << fuck << line;
-		setCursorPosition(chord.x - 56 + line.size(), 3 + chord.y / 4 + 17);
+		setCursorPosition(chord.x - 56 + line.size(), 15);
 
 		//cout << sizeProductBase;
 		//cout << endl << num;
-		if (sizeProductBase == 0) { cout << "net nichego"; }
+		if (sizeProductBase == 0) { cout << "Вакансии отсутствуют"; }
 
 		if (num == 0) {
 			if (sizeProductBase < 5) {
@@ -719,22 +719,100 @@ void job(int num)
 			num--;
 			if (num < 0)num++;
 		}
-		if (a == 77) {
+		else if (a == 77) {
 			num++;
 			//if (num > (sizeProductBase+4)/5 -1)num--;
 			if (num * 5 > sizeProductBase)num--;
 		}
-		if (a == 27)
+		else if (a == 27)
 		{
 			system("cls");
 			setting = readSettingsFile();
 			break;
 		}
+		else if (a >= 48 && a <= 57)
+		{
+			line = line + static_cast<char>(a);
+			cout << static_cast<char>(a);	
+		}
+		else if (a == 8 && line != "")
+		{
+			line.pop_back();
+			setCursorPosition(chord.x - 56 + line.size(), 3 + chord.y / 4 + 17);
+			cout << " ";
+		}
+		else if (a == 13 && line != "")
+		{
 
-
+		}
 	}
 
 }
+
+void thisProduct(int num)
+{
+	int tapp = 0;
+	int lastCursore = 0;
+	int cursoreLine = 0;
+	int maxSize = 0;
+	const int sizeBase = 2;
+
+	int num = 1;
+
+	string setting2_Base[sizeBase] = { "1. Откликнуться", "2. Назад" };
+
+
+	for (int i = 0; i < sizeBase; i++) maxSize = max(setting2_Base[i].size(), maxSize);
+
+	for (int i = 0; i < sizeBase; i++)
+	{
+		SetConsoleTextAttribute(hC, lastColor);
+		setCursorPosition(chord.x / 5 + 28 + maxSize + 2, 3 + chord.y / 5 + i * 3 + 2);
+		cout << setting2_Base[i];
+	}
+
+
+	while (1)
+	{
+
+		for (int i = 0; i < sizeBase; i++)
+		{
+			SetConsoleTextAttribute(hC, activeColor);
+			setCursorPosition(chord.x / 5 + 44 + maxSize + 7, 3 + chord.y / 5 + i * 3 + 2);
+
+		}
+		setCursorPosition(chord.x / 5 + 28 + maxSize + 2 - 3, 3 + chord.y / 5 + lastCursore * 3 + 2);
+		SetConsoleTextAttribute(hC, 6);
+		cout << "   " << setting2_Base[lastCursore];
+
+		setCursorPosition(chord.x / 5 + 28 + maxSize + 2 - 3, 3 + chord.y / 5 + cursoreLine * 3 + 2);
+		SetConsoleTextAttribute(hC, 14);
+		cout << ">> " << setting2_Base[cursoreLine];
+
+		//setCursorPosition(chords.x / 5 + (maxSize + 3), 3 + chords.y / 5 + cursoreLine * 3 + 1);
+
+
+		tapp = _getch();
+
+		if (tapp == 80 || tapp == 72)
+		{
+			lastCursore = cursoreLine;
+			cursoreLine = gotoThisLine(sizeBase, cursoreLine, tapp);
+		}
+		else if (tapp == 75)
+		{
+			setCursorPosition(chord.x / 5 - 3 + 28 + maxSize + 2, 3 + chord.y / 5 + cursoreLine * 3 + 2);
+			SetConsoleTextAttribute(hC, 6);
+			cout << "   " << setting2_Base[cursoreLine];
+			break;
+		}
+		else if (tapp == 13 || tapp == 77)
+		{
+
+		}
+	}
+}
+
 void myJob()
 {
 
