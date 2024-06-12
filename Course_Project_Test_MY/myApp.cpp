@@ -551,29 +551,30 @@ void job(int num)
 {
 	system("cls");
 	readProductBase();
+	if(sizeProductBase / 5 != 0) sizeProductBase++;
 	cout << sizeProductBase;
 	cout << endl << num;
 	PRODUCT mass[6];
-	
+		if (sizeProductBase == 0) { cout << "net nichego"; }
 
 		if (num == 0) {
 			if (sizeProductBase < 5 ) {
 				for (int i = 0; i < sizeProductBase + 1; i++) {
 
 					setCursorPosition(chord.x - 56, 3 + chord.y / 8 + 8 + 10 * i);
-					cout << "l_/==================================================\\_\n";
+					cout << "1_/==================================================\\_\n";
 
 					setCursorPosition(chord.x - 56, 4 + chord.y / 8 + 8 + 10 * i);
-					cout << "| game-card       |  #ID              Alishv I.I.    |\n";
+					cout << "| " << setw(16) << product[i].name << "| #" << setw(3) << i << setw(31) << "        |\n";
 
 					setCursorPosition(chord.x - 56, 5 + chord.y / 8 + 8 + 10 * i);
-					cout << "|                 |----------------------------------|\n";
+					cout << "|                 |"<<"----------------------------------|\n";
 
 					setCursorPosition(chord.x - 56, 6 + chord.y / 8 + 8 + 10 * i);
-					cout << "| market-man      |        adres: Minsk.Lenina.25    |\n";
+					cout << "| "<<setw(16)<<product[i].profession<<"| Адрес:"<<setw(26)<<product[i].adress<<" |\n";
 
 					setCursorPosition(chord.x - 56, 7 + chord.y / 8 + 8 + 10 * i);
-					cout << "| salary: 2000$   |          exp:         5 years    |\n";
+					cout << "| " << setw(16) << product[i].salary << "| Опыт:" << setw(27) << product[i].exp << " |\n";
 
 					setCursorPosition(chord.x - 56, 8 + chord.y / 8 + 8 + 10 * i);
 					cout << "|_________________|__________________________________|\n";
@@ -582,24 +583,25 @@ void job(int num)
 
 
 			}
-			if (sizeProductBase == 0) { cout << "net nichego"; }
+		
 			else {
 				for (int i = 0; i < 5; i++) {
 
+
 					setCursorPosition(chord.x - 56, 3 + chord.y / 8 + 8 + 10 * i);
-					cout << "_/==================================================\\_\n";
+					cout << "2_/==================================================\\_\n";
 
 					setCursorPosition(chord.x - 56, 4 + chord.y / 8 + 8 + 10 * i);
-					cout << "| game-card       |  #ID              Alishv I.I.    |\n";
+					cout << "| " << setw(16) << product[i].name << "| #" << setw(3) << i << setw(31) << "       |\n";
 
 					setCursorPosition(chord.x - 56, 5 + chord.y / 8 + 8 + 10 * i);
-					cout << "|                 |----------------------------------|\n";
+					cout << "|                 |" << "----------------------------------|\n";
 
 					setCursorPosition(chord.x - 56, 6 + chord.y / 8 + 8 + 10 * i);
-					cout << "| market-man      |        adres: Minsk.Lenina.25    |\n";
+					cout << "| " << setw(16) << product[i].profession << "| Адрес:" << setw(26) << product[i].adress << " |\n";
 
 					setCursorPosition(chord.x - 56, 7 + chord.y / 8 + 8 + 10 * i);
-					cout << "| salary: 2000$   |          exp:         5 years    |\n";
+					cout << "| " << setw(16) << product[i].salary << "| Опыт:" << setw(27) << product[i].exp << " |\n";
 
 					setCursorPosition(chord.x - 56, 8 + chord.y / 8 + 8 + 10 * i);
 					cout << "|_________________|__________________________________|\n";
@@ -613,24 +615,24 @@ void job(int num)
 				int counter = 0;
 				if (costrat == 0) { costrat = 5; }
 				
-			if (sizeProductBase < (num) * 5) {
+			if (sizeProductBase < (num+1) * 5) {
 			
 				for (int i = num * 5; counter < costrat ; i++) {
 
 					setCursorPosition(chord.x - 56, 3 + chord.y / 8 + 8 + 10 * counter);
-					cout << "_/==================================================\\_\n";
+					cout << "3_/==================================================\\_\n";
 
 					setCursorPosition(chord.x - 56, 4 + chord.y / 8 + 8 + 10 * counter);
-					cout << "| game-card       |  #ID              Alishv I.I.    |\n";
+					cout << "| " << setw(16) << product[i].name << "| #" << setw(3) << i << setw(31) << "       |\n";
 
 					setCursorPosition(chord.x - 56, 5 + chord.y / 8 + 8 + 10 * counter);
 					cout << "|                 |----------------------------------|\n";
 
 					setCursorPosition(chord.x - 56, 6 + chord.y / 8 + 8 + 10 * counter);
-					cout << "| market-man      |        adres: Minsk.Lenina.25    |\n";
+					cout << "| " << setw(16) << product[i].profession << "| Адрес:" << setw(26) << product[i].adress << " |\n";
 
 					setCursorPosition(chord.x - 56, 7 + chord.y / 8 + 8 + 10 * counter);
-					cout << "| salary: 2000$   |          exp:         5 years    |\n";
+					cout << "| " << setw(16) << product[i].salary << "| Опыт:" << setw(27) << product[i].exp << " |\n";
 
 					setCursorPosition(chord.x - 56, 8 + chord.y / 8 + 8 + 10 * counter);
 					cout << "|_________________|__________________________________|\n";
@@ -641,19 +643,21 @@ void job(int num)
 			else {
 				for (int i = num * 5; counter < 5; i++) {
 					setCursorPosition(chord.x - 56, 3 + chord.y / 8 + 8 + 10 * counter);
-					cout << "_/==================================================\\_\n";
+					cout << "4_/==================================================\\_\n";
 
 					setCursorPosition(chord.x - 56, 4 + chord.y / 8 + 8 + 10 * counter);
-					cout << "| game-card       |  #ID              Alishv I.I.    |\n";
+					cout << "| " << setw(16) << product[i].name << "| #" << setw(3) << i << setw(31) << "       |\n";
 
 					setCursorPosition(chord.x - 56, 5 + chord.y / 8 + 8 + 10 * counter);
 					cout << "|                 |----------------------------------|\n";
 
 					setCursorPosition(chord.x - 56, 6 + chord.y / 8 + 8 + 10 * counter);
-					cout << "| market-man      |        adres: Minsk.Lenina.25    |\n";
+					cout << "| " << setw(16) << product[i].profession << "| Адрес:" << setw(26) << product[i].adress << " |\n";
+					;
 
 					setCursorPosition(chord.x - 56, 7 + chord.y / 8 + 8 + 10 * counter);
-					cout << "| salary: 2000$   |          exp:         5 years    |\n";
+					cout << "| " << setw(16) << product[i].salary << "| Опыт:" << setw(27) << product[i].exp << " |\n";
+
 
 					setCursorPosition(chord.x - 56, 8 + chord.y / 8 + 8 + 10 * counter);
 					cout << "|_________________|__________________________________|\n";
@@ -670,7 +674,8 @@ void job(int num)
 			}
 			if (a == 50) {
 				num++;
-				if (num > (sizeProductBase+4)/5)num--;
+				//if (num > (sizeProductBase+4)/5 -1)num--;
+				if (num * 5 > sizeProductBase)num--;
 				job(num);
 			}
 	
@@ -825,11 +830,14 @@ void readProductBase()
 	string login;
 	string name;
 
+	string profession;
+	string contacts;
+
 	sizeProductBase = 0;
 	while (!read2.eof())
 	{
-		read2 >>name>> from >> to >> adress >> salary >> type >> exp >> login;
-		product[sizeProductBase].setAll(name, from, to, adress, salary, type, exp, login);
+		read2 >> name >> from >> to >> adress >> salary >> type >> exp >> login >> profession >> contacts;
+		product[sizeProductBase].setAll(name, from, to, adress, salary, type, exp, login, profession, contacts);
 		sizeProductBase++;
 	}
 	sizeProductBase--;

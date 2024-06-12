@@ -170,7 +170,7 @@ struct PRODUCT
 	string profession;
 	string contacts;
 
-	void setAll(string name,string from, string to, string adress, string salary, string type, string exp, string login)
+	void setAll(string name,string from, string to, string adress, string salary, string type, string exp, string login, string professional, string contacts)
 	{
 		this->from = from;
 		this->to = to;
@@ -179,11 +179,13 @@ struct PRODUCT
 		this->type = type;
 		this->exp = exp;
 		this->login = login;
+		this->profession = professional;
+		this->contacts = contacts;
 	}
 
 	string getall()
 	{
-		return name+ " "+from + " " + to + " " + adress + " " + salary + " " + type + " " + exp + " " + login;
+		return name + " " + from + " " + to + " " + adress + " " + salary + " " + type + " " + exp + " " + login + " " + profession + " " + contacts;
 	}
 };
 
