@@ -552,7 +552,7 @@ void userMenu()
 void job()
 {
 	cout << "_/==================================================\\_\n"
-		"| game-card       |                   Alishv I.I.    |\n"
+		"| game-card       |  #ID              Alishv I.I.    |\n"
 		"| market          |----------------------------------|\n"
 		"| 9:00 - 18:00    |        adres: Minsk.Lenina.25    |\n"
 		"| salary: 2000$   |          exp:         5 years    |\n"
