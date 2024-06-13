@@ -559,9 +559,9 @@ void job(int num)
 		readProductBase();
 		if (sizeProductBase / 5 != 0) sizeProductBase++;
 
-		setCursorPosition(chord.x - 56, 15);
+		setCursorPosition(chord.x - 56, 5);
 		cout << fuck << line;
-		setCursorPosition(chord.x - 56 + line.size(), 15);
+		setCursorPosition(chord.x - 56 + line.size() + fuck.size(), 5);
 
 		//cout << sizeProductBase;
 		//cout << endl << num;
@@ -589,9 +589,6 @@ void job(int num)
 					setCursorPosition(chord.x - 56, 8 + chord.y / 8 + 8 + 10 * i);
 					cout << "|_________________|__________________________________|\n";
 				}
-
-
-
 			}
 
 			else {
@@ -732,13 +729,14 @@ void job(int num)
 		}
 		else if (a >= 48 && a <= 57)
 		{
+			setCursorPosition(chord.x - 56 + line.size() + fuck.size(), 15);
 			line = line + static_cast<char>(a);
 			cout << static_cast<char>(a);	
 		}
 		else if (a == 8 && line != "")
 		{
 			line.pop_back();
-			setCursorPosition(chord.x - 56 + line.size(), 3 + chord.y / 4 + 17);
+			setCursorPosition(chord.x - 56 + line.size(), 5);
 			cout << " ";
 		}
 		else if (a == 13 && line != "")
@@ -747,7 +745,6 @@ void job(int num)
 			thisProduct(stoi(line));
 		}
 	}
-
 }
 
 void thisProduct(int num)
@@ -810,12 +807,12 @@ void thisProduct(int num)
 			lastCursore = cursoreLine;
 			cursoreLine = gotoThisLine(sizeBase, cursoreLine, tapp);
 		}
-		else if (tapp == 27 || (cursoreLine == 1 && tapp==13))
+		else if (tapp == 27 || (cursoreLine == 1 && tapp==13) ||(tapp == 50))
 		{
 			system("cls");
 			break;
 		}
-		else if (tapp == 13 && cursoreLine == 0)
+		else if ((tapp == 13 && cursoreLine == 0) || (tapp == 49))
 		{
 			ofstream link("Data/link.txt", ios::app);
 			link << product[num].login << " " << userSetting[userInSystem].login2 << " " << product[num].name << endl;
@@ -833,13 +830,16 @@ void thisProduct(int num)
 void myJob(int num)
 {
 	string line = "";
-	string fuck = "! - добавить новую вакансию\nНомер вакансии для подробного просмотра: ";
+	string fuck = "Номер вакансии для подробного просмотра : ";
+	string text ="! - добавить новую вакансию\n" ;
 	while (1)
 	{
 		system("cls");
 		readProductBase(userSetting[userInSystem].login2);
 		if (sizeProductBase / 5 != 0) sizeProductBase++;
 
+		setCursorPosition(chord.x - 56, 3);
+		cout << text;
 		setCursorPosition(chord.x - 56, 5);
 		cout << fuck << line;
 		setCursorPosition(chord.x - 56 + line.size() + fuck.size(), 5);
@@ -1027,9 +1027,9 @@ void myJob(int num)
 			if(stoi(line)>=0 && stoi(line)<=sizeProductBase)
 			thisProduct2(stoi(line));
 		}
-		else if (a == '!')
+		else if (a == 33)
 		{
-
+			newJob(sizeProductBase + 1);
 		}
 	}
 }
@@ -1068,11 +1068,11 @@ void thisProduct2(int num)
 	{
 		setCursorPosition(chord.x / 5 + 28 + maxSize + 2-3, 3 + chord.y / 3 + lastCursore *3);
 		SetConsoleTextAttribute(hC, lastColor);
-		cout << "   " << allname[lastCursore]<<allFunc[lastCursore];
+		cout << "   " << allname[lastCursore]<<" " << allFunc[lastCursore];
 
 		setCursorPosition(chord.x / 5 + 28 + maxSize + 2-3, 3 + chord.y / 3 + cursoreLine *3);
 		SetConsoleTextAttribute(hC, activeColor);
-		cout << ">> " << allname[cursoreLine] << allFunc[cursoreLine];
+		cout << ">> " << allname[cursoreLine] <<" " << allFunc[cursoreLine];
 
 		setCursorPosition(chord.x / 5 + 28 + maxSize + 2 + allFunc[cursoreLine].size() , 3 + chord.y / 3 + cursoreLine * 3);
 
@@ -1133,9 +1133,190 @@ void thisProduct2(int num)
 	}
 }
 
+void newJob(int num)
+{
+	int tapp = 0;
+	int lastCursore = 0;
+	int cursoreLine = 0;
+	int maxSize = 0;
+	const int sizeBase = 9;
+
+	string allname[sizeBase] = { "Название:            ","Тип занятости:   " ,"Спеиальность:    " ,"Опыт:            " ,"Время от:        ","Время до:        ","Адрес:           " ,"Зарплата:        " ,"Номер для связи: " };
+	string allFunc[sizeBase] = {product[num].name, product[num].type ,product[num].profession,product[num].exp,product[num].from,product[num].to ,product[num].adress, product[num].salary, product[num].contacts};
+
+	system("cls");
+
+	string setting2_Base[sizeBase] = { "", "%. Назад" };
+	for (int i = 0; i < sizeBase; i++) maxSize = max(setting2_Base[i].size(), maxSize);
+	for (int i = 0; i < 2; i++)
+	{
+		SetConsoleTextAttribute(hC, lastColor);
+		setCursorPosition(chord.x / 5 + 28 + maxSize + 2, 5);
+		cout << setting2_Base[i];
+	}
+
+	for (int i = 0; i < sizeBase; i++)
+	{
+		SetConsoleTextAttribute(hC, lastColor);
+		setCursorPosition(chord.x / 5 + 28 + maxSize + 2, 3 + chord.y / 3 + i * 3 + 5);
+		cout << allname[i] << " " << allFunc[i];
+	}
+
+
+	nameController(product[num].name);
+	while (1)
+	{
+		setCursorPosition(chord.x / 5 + 28 + maxSize + 2 - 3, 3 + chord.y / 3 + lastCursore * 3 +5);
+		SetConsoleTextAttribute(hC, lastColor);
+		cout << "   " << allname[lastCursore] << " " << allFunc[lastCursore];
+
+		setCursorPosition(chord.x / 5 + 28 + maxSize + 2 - 3, 3 + chord.y / 3 + cursoreLine * 3 +5);
+		SetConsoleTextAttribute(hC, activeColor);
+		cout << ">> " << allname[cursoreLine] << " " << allFunc[cursoreLine];
+
+		setCursorPosition(chord.x / 5 + 28 + maxSize + 2 + allFunc[cursoreLine].size(), 3 + chord.y / 3 + cursoreLine * 3+5);
+
+		tapp = _getch();
+
+		if (tapp == 80 || tapp == 72)
+		{
+			lastCursore = cursoreLine;
+			cursoreLine = gotoThisLine(sizeBase, cursoreLine, tapp);
+		}
+		else if (tapp == 8 && allFunc[cursoreLine] != "")
+		{
+			allFunc[cursoreLine].pop_back();
+			setCursorPosition(chord.x / 5 + 28 + maxSize + 2 - 3, 3 + chord.y / 3 + cursoreLine * 3+5);
+			cout << "                                                           ";
+			setCursorPosition(chord.x / 5 + 28 + maxSize + 2 - 3, 3 + chord.y / 3 + cursoreLine * 3+5);
+			cout << ">> " << allname[cursoreLine] << " " << allFunc[cursoreLine];
+		}
+		else if (((tapp >= 65 && tapp <= 122) || (tapp >= 48 && tapp <= 57) || tapp == 64 || tapp == 46))
+		{
+
+			allFunc[cursoreLine] = allFunc[cursoreLine] + static_cast<char>(tapp);
+			cout << static_cast<char>(tapp);
+		}
+		else if (tapp == 37 || tapp == 27)
+		{
+			product[num].name = allFunc[0];
+			product[num].type = allFunc[1];
+			product[num].profession = allFunc[2];
+			product[num].exp = allFunc[3];
+			product[num].from = allFunc[4];
+			product[num].to = allFunc[5];
+			product[num].adress = allFunc[6];
+			product[num].salary = allFunc[7];
+			product[num].contacts = allFunc[8];
+			product[num].login = userSetting[userInSystem].login2;
+			product[num].setAll(product[num]);
+			ofstream rite("Users/" + userSetting[userInSystem].login2 + ".txt");
+			for (int i = 0; i < sizeProductBase+1; i++)
+			{
+				rite << product[i].getall() << endl;
+			}
+			rite.close();
+		}
+	}
+}
 void myCab()
 {
+	int tapp = 0;
+	int lastCursore = 0;
+	int cursoreLine = 0;
+	int maxSize = 0;
+	const int sizeBase = 8;
 
+	string allname[sizeBase] = { "Тип занятости:   " ,"Спеиальность:    " ,"Опыт:            " ,"Время от:        ","Время до:        ","Адрес:           " ,"Зарплата:        " ,"Номер для связи: " };
+	string allFunc[sizeBase] = { product[num].type ,product[num].profession,product[num].exp,product[num].from,product[num].to ,product[num].adress, product[num].salary, product[num].contacts };
+
+	system("cls");
+
+	string setting2_Base[sizeBase] = { "!. Удалить", "%. Назад" };
+	for (int i = 0; i < sizeBase; i++) maxSize = max(setting2_Base[i].size(), maxSize);
+	for (int i = 0; i < 2; i++)
+	{
+		SetConsoleTextAttribute(hC, lastColor);
+		setCursorPosition(chord.x / 5 + 28 + maxSize + 2, 3 + chord.y / 5 + i * 3 + 2);
+		cout << setting2_Base[i];
+	}
+
+	for (int i = 0; i < sizeBase; i++)
+	{
+		SetConsoleTextAttribute(hC, lastColor);
+		setCursorPosition(chord.x / 5 + 28 + maxSize + 2, 3 + chord.y / 3 + i * 3);
+		cout << allname[i] << " " << allFunc[i];
+	}
+
+
+	nameController(product[num].name);
+	while (1)
+	{
+		setCursorPosition(chord.x / 5 + 28 + maxSize + 2 - 3, 3 + chord.y / 3 + lastCursore * 3);
+		SetConsoleTextAttribute(hC, lastColor);
+		cout << "   " << allname[lastCursore] << " " << allFunc[lastCursore];
+
+		setCursorPosition(chord.x / 5 + 28 + maxSize + 2 - 3, 3 + chord.y / 3 + cursoreLine * 3);
+		SetConsoleTextAttribute(hC, activeColor);
+		cout << ">> " << allname[cursoreLine] << " " << allFunc[cursoreLine];
+
+		setCursorPosition(chord.x / 5 + 28 + maxSize + 2 + allFunc[cursoreLine].size(), 3 + chord.y / 3 + cursoreLine * 3);
+
+		tapp = _getch();
+
+		if (tapp == 80 || tapp == 72)
+		{
+			lastCursore = cursoreLine;
+			cursoreLine = gotoThisLine(sizeBase, cursoreLine, tapp);
+		}
+		else if (tapp == 8 && allFunc[cursoreLine] != "")
+		{
+			allFunc[cursoreLine].pop_back();
+			setCursorPosition(chord.x / 5 + 28 + maxSize + 2 - 3, 3 + chord.y / 3 + cursoreLine * 3);
+			cout << "                                                           ";
+			setCursorPosition(chord.x / 5 + 28 + maxSize + 2 - 3, 3 + chord.y / 3 + cursoreLine * 3);
+			cout << ">> " << allname[cursoreLine] << " " << allFunc[cursoreLine];
+
+		}
+		else if (tapp == 27 || (cursoreLine == 1 && tapp == 13))
+		{
+			system("cls");
+			break;
+		}
+		else if (((tapp >= 65 && tapp <= 122) || (tapp >= 48 && tapp <= 57) || tapp == 64 || tapp == 46))
+		{
+
+			allFunc[cursoreLine] = allFunc[cursoreLine] + static_cast<char>(tapp);
+			cout << static_cast<char>(tapp);
+		}
+		else if (tapp == 37)
+		{
+			product[num].type = allFunc[0];
+			product[num].profession = allFunc[1];
+			product[num].exp = allFunc[2];
+			product[num].from = allFunc[3];
+			product[num].to = allFunc[4];
+			product[num].adress = allFunc[5];
+			product[num].salary = allFunc[6];
+			product[num].contacts = allFunc[7];
+
+			ofstream rite("Users/" + userSetting[userInSystem].login2 + ".txt");
+			for (int i = 0; i < sizeProductBase; i++)
+			{
+				rite << product[i].getall() << endl;
+			}
+			rite.close();
+		}
+		else if (tapp == 33)
+		{
+			ofstream rite("Users/" + userSetting[userInSystem].login2 + ".txt");
+			for (int i = 0; i < sizeProductBase; i++)
+			{
+				if (i != num)rite << product[i].getall();
+			}
+			break;
+		}
+	}
 }
 
 void adminMenu()
