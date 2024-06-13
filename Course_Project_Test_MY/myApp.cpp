@@ -1219,7 +1219,7 @@ void newJob(int num)
 		}
 	}
 }
-void myCab(int code)
+void myCab(int t)
 {
 	const int interface1Size = 8;
 	int interface1Size2 = 0;
@@ -1258,13 +1258,13 @@ void myCab(int code)
 
 	for (int i = 0; i < interface1Size2; i++)
 	{
-		if (log = != -1) log = i;
-		if (passord = != -1) passord = i;
-		if (code != -1) code = i;
-		if (role != -1) role = i;
-		if (age != -1) age = i;
-		if (specialization != -1) specialization = i;
-		if (sex !=-1) sex = i;
+		if (log != -1) newSettings[log] = userSetting[userInSystem].login2;
+		if (passord != -1)  newSettings[passord] = userSetting[userInSystem].password2;
+		if (code != -1) newSettings[code] = userSetting[userInSystem].codeIn2;
+		if (role != -1) newSettings[role] = userSetting[userInSystem].role2;
+		if (age != -1)  newSettings[age] = userSetting[userInSystem].age2;
+		if (specialization != -1) newSettings[userInSystem] = userSetting[userInSystem].specialization2;
+		if (sex != -1) newSettings[sex] = userSetting[userInSystem].sex2;
 	}
 	settingsInterface2[interface1Size2] = settingsInterface1[7]; interface1Size2++;
 
@@ -1277,15 +1277,12 @@ void myCab(int code)
 		cout << settingsInterface2[i];
 		if (settingsInterface2[i] == "Роль:          ") cout << " " << setting.customizableChar[numRole];
 		else if (settingsInterface2[i] == "Пол:           ") cout << " " << userSetting[userInSystem].sex2;
-		else 
+		else cout <<" " << newSettings[i];
 
 	}
 
 	while (1)
 	{
-
-		
-
 		SetConsoleTextAttribute(hC, activeColor);
 
 		if (cursoreLine != interface1Size2 - 1)ShowConsoleCursor(1);
@@ -1342,10 +1339,34 @@ void myCab(int code)
 				userSetting[900].role2 = setting.customizableChar[numRole];
 			}
 
-		}
-		else if ((tapp == 13 && cursoreLine == 7) || tapp == 55)
-		{
+			if (cursoreLine == sex)
+				if (userSetting[userInSystem].sex2 == "М")userSetting[userInSystem].sex2 = "Ж";
+				else userSetting[userInSystem].sex2 = "М";
 
+		}
+		else if (tapp == 27)
+		{
+			if (setting.password)       userSetting[userInSystem].password2 = newSettings[passord];
+			if (setting.codeIn)         userSetting[userInSystem].codeIn2 = newSettings[code];
+			if (setting.role)           userSetting[userInSystem].role2 = newSettings[role];
+			if (setting.age)            userSetting[userInSystem].age2 = newSettings[age];
+			if (setting.specialization) userSetting[userInSystem].specialization2 = newSettings[specialization];
+			if (setting.sex)            userSetting[userInSystem].sex2 = newSettings[sex];
+			
+			ofstream oooouuutttt("Data/users.txt");
+			for (int i = 0; i < sizeUserSettings; i++) oooouuutttt << userSetting[i].getAll() << endl;
+
+			break;
+		}
+		else if (tapp == 55 || (cursoreLine == 7 && tapp == 13))
+		{
+			if (setting.password)       userSetting[userInSystem].password2 = newSettings[passord];
+				if (setting.codeIn)         userSetting[userInSystem].codeIn2 = newSettings[code];
+				if (setting.role)           userSetting[userInSystem].role2 = newSettings[role];
+				if (setting.age)            userSetting[userInSystem].age2 = newSettings[age];
+				if (setting.specialization) userSetting[userInSystem].specialization2 = newSettings[specialization];
+				if (setting.sex)            userSetting[userInSystem].sex2 = newSettings[sex];
+				myCab_Continuation();
 		}
 		else if (tapp == 27)
 		{
@@ -1355,6 +1376,88 @@ void myCab(int code)
 			for (int i = 0; i < interface1Size2 + 1; i++) {
 				setCursorPosition(chord.x - maxSize - 25, 3 + chord.y / 4 + i * 3 + 8);
 				cout << "                                                ";
+			}
+			break;
+		}
+	}
+}
+void myCab_Continuation()
+{
+	const int interface1Size = 6;
+	int maxSize = 0;
+	int cursoreLine = 0;
+	int lastCursore = 0;
+	int tapp;
+
+	string settingsInterface1[interface1Size] = { "1. ", "2. ","3. ","4. ", "5. " , "Подтвердить"};
+	string newSettings[interface1Size] = { "","","","",""};
+	for (int i = 0; i < interface1Size - 1; i++) newSettings[i] = userSetting[userInSystem].customizableChar[i];
+
+	for (int i = 0; i < interface1Size; i++)maxSize = max(settingsInterface1[i].size(), maxSize);
+
+	for (int i = 0; i < interface1Size; i++) {
+		setCursorPosition(chord.x - maxSize - 22, 3 + chord.y / 4 + i * 3 + 8);
+		cout << "                                 ";
+		setCursorPosition(chord.x - maxSize - 22, 3 + chord.y / 4 + i * 3 + 8);
+		cout << settingsInterface1[i] << newSettings[i];
+	}
+
+	while (1)
+	{
+
+		SetConsoleTextAttribute(hC, activeColor);
+
+		if (cursoreLine != interface1Size - 1)ShowConsoleCursor(1);
+		else ShowConsoleCursor(0);
+
+		setCursorPosition(chord.x - maxSize - 25, 3 + chord.y / 4 + lastCursore * 3 + 8);
+		cout << "   " << settingsInterface1[lastCursore];
+
+		setCursorPosition(chord.x - maxSize - 25, 3 + chord.y / 4 + cursoreLine * 3 + 8);
+		cout << ">> ";
+		cout << settingsInterface1[cursoreLine];
+
+		setCursorPosition(chord.x - 20 + newSettings[cursoreLine].length(), 3 + chord.y / 4 + cursoreLine * 3 + 8);
+		tapp = _getch();
+
+		setCursorPosition(chord.x - 20 + newSettings[cursoreLine].length() - 5, 3 + chord.y / 4 + 4 * 3 + 8);
+		cout << "                                                 ";
+		setCursorPosition(chord.x - 20 + newSettings[cursoreLine].length(), 3 + chord.y / 4 + cursoreLine * 3 + 8);
+
+
+		if (tapp == 80 || tapp == 72)
+		{
+			lastCursore = cursoreLine;
+			cursoreLine = gotoThisLine(interface1Size, cursoreLine, tapp);
+		}
+		else if (((tapp >= 65 && tapp <= 122 && cursoreLine != interface1Size - 1) || (tapp >= 48 && tapp <= 57) || tapp == 64 || tapp == 46) && cursoreLine != interface1Size - 1)
+		{
+			newSettings[cursoreLine] = newSettings[cursoreLine] + static_cast<char>(tapp);
+			cout << static_cast<char>(tapp);
+		}
+		else if (tapp == 8 && newSettings[cursoreLine] != "" && cursoreLine != 5)
+		{
+			newSettings[cursoreLine].pop_back();
+			setCursorPosition(chord.x - 20 + newSettings[cursoreLine].length(), 3 + chord.y / 4 + cursoreLine * 3 + 8);
+			cout << " ";
+		}
+		else if (tapp == 41)
+		{
+			setCursorPosition(1, 1);
+			cout << newSettings[cursoreLine] << endl;
+		}
+		else if ((tapp == 13 && cursoreLine == 3) || tapp == 52)
+		{
+			for (int i = 0; i < interface1Size - 1; i++) userSetting[userInSystem].customizableChar[i] = newSettings[i];
+		}
+		else if (tapp == 27)
+		{
+			ShowConsoleCursor(0);
+			SetConsoleTextAttribute(hC, lastColor);
+
+			for (int i = 0; i < interface1Size + 1; i++) {
+				setCursorPosition(chord.x / 2, 3 + chord.y / 4 + i * 3 + 8);
+				cout << "                                                                                                        ";
 			}
 			break;
 		}

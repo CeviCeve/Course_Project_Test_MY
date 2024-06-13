@@ -263,6 +263,7 @@ void adminMenu();
 
 void userMenu();
 void myCab(int num);
+void myCab_Continuation();
 void myJob(int num);
 void job(int num);
 void thisProduct(int num);
