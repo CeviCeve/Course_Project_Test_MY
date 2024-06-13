@@ -540,11 +540,11 @@ void userMenu()
 		{
 			if (cursoreLine == 0) { job(0); }
 			if (cursoreLine == 1) { myJob(0); }
-			if (cursoreLine == 2) { myCab(); }
+			if (cursoreLine == 2) { myCab(0); }
 		}
 		else if (tapp == 49)job(0);
 		else if (tapp == 50)myJob(0);
-		else if (tapp == 51)myCab();
+		else if (tapp == 51)myCab(0);
 
 	}
 }
@@ -1219,100 +1219,142 @@ void newJob(int num)
 		}
 	}
 }
-void myCab()
+void myCab(int code)
 {
-	int tapp = 0;
-	int lastCursore = 0;
-	int cursoreLine = 0;
+	const int interface1Size = 8;
+	int interface1Size2 = 0;
 	int maxSize = 0;
-	const int sizeBase = 8;
+	int cursoreLine = 0;
+	int lastCursore = 0;
+	int tapp;
+	int numRole = 0;
 
-	string allname[sizeBase] = { "Тип занятости:   " ,"Спеиальность:    " ,"Опыт:            " ,"Время от:        ","Время до:        ","Адрес:           " ,"Зарплата:        " ,"Номер для связи: " };
-	string allFunc[sizeBase] = { product[num].type ,product[num].profession,product[num].exp,product[num].from,product[num].to ,product[num].adress, product[num].salary, product[num].contacts };
+	string settingsInterface1[interface1Size] = {"Логин:         ", "Пароль:        ","Код доступа:   ", "Роль:          "
+		, "Возраст:       ","Специализация: ",  "Пол:           " , "Личные параметры ->"};
+	string settingsInterface2[interface1Size] = { "", "", "", "","","","" };
+	string newSettings[interface1Size] = { "","","","","","",""};
+	string sexMass[2] = { "М","Ж" };
 
-	system("cls");
+	if (setting.login) { settingsInterface2[interface1Size2] = settingsInterface1[0]; interface1Size2++; }
+	if (setting.password) { settingsInterface2[interface1Size2] = settingsInterface1[1]; interface1Size2++; }
+	if (setting.codeIn) { settingsInterface2[interface1Size2] = settingsInterface1[2]; interface1Size2++; }
 
-	string setting2_Base[sizeBase] = { "!. Удалить", "%. Назад" };
-	for (int i = 0; i < sizeBase; i++) maxSize = max(setting2_Base[i].size(), maxSize);
-	for (int i = 0; i < 2; i++)
+	if (setting.role) { settingsInterface2[interface1Size2] = settingsInterface1[3]; interface1Size2++; }
+	if (setting.age) { settingsInterface2[interface1Size2] = settingsInterface1[4]; interface1Size2++; }
+	if (setting.specialization) { settingsInterface2[interface1Size2] = settingsInterface1[5]; interface1Size2++; }
+	if (setting.sex) { settingsInterface2[interface1Size2] = settingsInterface1[6]; interface1Size2++; }
+
+	int log = -1, code = -1, passord = -1, role = -1, age = -1, specialization = -1, sex = -1;
+	for (int i = 0; i < 8; i++)
 	{
-		SetConsoleTextAttribute(hC, lastColor);
-		setCursorPosition(chord.x / 5 + 28 + maxSize + 2, 3 + chord.y / 5 + i * 3 + 2);
-		cout << setting2_Base[i];
+		if (settingsInterface2[i] == "Логин:         ") log = i;
+		if (settingsInterface2[i] == "Пароль:        ") passord = i;
+		if (settingsInterface2[i] == "Код доступа:   ") code = i;
+		if (settingsInterface2[i] == "Роль:          ") role = i;
+		if (settingsInterface2[i] == "Возраст:       ") age = i;
+		if (settingsInterface2[i] == "Специализация: ") specialization = i;
+		if (settingsInterface2[i] == "Пол:           ") sex = i;
 	}
 
-	for (int i = 0; i < sizeBase; i++)
+	for (int i = 0; i < interface1Size2; i++)
 	{
-		SetConsoleTextAttribute(hC, lastColor);
-		setCursorPosition(chord.x / 5 + 28 + maxSize + 2, 3 + chord.y / 3 + i * 3);
-		cout << allname[i] << " " << allFunc[i];
+		if (log = != -1) log = i;
+		if (passord = != -1) passord = i;
+		if (code != -1) code = i;
+		if (role != -1) role = i;
+		if (age != -1) age = i;
+		if (specialization != -1) specialization = i;
+		if (sex !=-1) sex = i;
+	}
+	settingsInterface2[interface1Size2] = settingsInterface1[7]; interface1Size2++;
+
+	for (int i = 0; i < interface1Size2; i++)maxSize = max(settingsInterface2[i].size(), maxSize);
+
+	for (int i = 0; i < interface1Size2; i++) {
+		setCursorPosition(chord.x - maxSize - 22, 3 + chord.y / 4 + i * 3 + 8);
+		cout << "                                 ";
+		setCursorPosition(chord.x - maxSize - 22, 3 + chord.y / 4 + i * 3 + 8);
+		cout << settingsInterface2[i];
+		if (settingsInterface2[i] == "Роль:          ") cout << " " << setting.customizableChar[numRole];
+		else if (settingsInterface2[i] == "Пол:           ") cout << " " << userSetting[userInSystem].sex2;
+		else 
+
 	}
 
-
-	nameController(product[num].name);
 	while (1)
 	{
-		setCursorPosition(chord.x / 5 + 28 + maxSize + 2 - 3, 3 + chord.y / 3 + lastCursore * 3);
-		SetConsoleTextAttribute(hC, lastColor);
-		cout << "   " << allname[lastCursore] << " " << allFunc[lastCursore];
 
-		setCursorPosition(chord.x / 5 + 28 + maxSize + 2 - 3, 3 + chord.y / 3 + cursoreLine * 3);
+		
+
 		SetConsoleTextAttribute(hC, activeColor);
-		cout << ">> " << allname[cursoreLine] << " " << allFunc[cursoreLine];
 
-		setCursorPosition(chord.x / 5 + 28 + maxSize + 2 + allFunc[cursoreLine].size(), 3 + chord.y / 3 + cursoreLine * 3);
+		if (cursoreLine != interface1Size2 - 1)ShowConsoleCursor(1);
+		else ShowConsoleCursor(0);
 
+		setCursorPosition(chord.x - maxSize - 25, 3 + chord.y / 4 + lastCursore * 3 + 8);
+		cout << "   " << settingsInterface2[lastCursore];
+		if (settingsInterface2[lastCursore] == "Роль:          ") cout << " " << setting.customizableChar[numRole];
+		if (settingsInterface2[lastCursore] == "Пол:           ") cout << " " << userSetting[userInSystem].sex2;
+
+
+		setCursorPosition(chord.x - maxSize - 25, 3 + chord.y / 4 + cursoreLine * 3 + 8);
+		cout << ">> ";
+		cout << settingsInterface2[cursoreLine];
+		if (settingsInterface2[cursoreLine] == "Роль:          ") cout << " " << setting.customizableChar[numRole];
+		if (settingsInterface2[cursoreLine] == "Пол:           ") cout << " " << userSetting[userInSystem].sex2;
+
+
+		setCursorPosition(chord.x - 20 + newSettings[cursoreLine].length(), 3 + chord.y / 4 + cursoreLine * 3 + 8);
 		tapp = _getch();
+
+		setCursorPosition(chord.x - 20 + newSettings[cursoreLine].length() - 5, 3 + chord.y / 4 + 4 * 3 + 8);
+		cout << "                                                 ";
+		setCursorPosition(chord.x - 20 + newSettings[cursoreLine].length(), 3 + chord.y / 4 + cursoreLine * 3 + 8);
+
 
 		if (tapp == 80 || tapp == 72)
 		{
 			lastCursore = cursoreLine;
-			cursoreLine = gotoThisLine(sizeBase, cursoreLine, tapp);
+			cursoreLine = gotoThisLine(interface1Size2, cursoreLine, tapp);
 		}
-		else if (tapp == 8 && allFunc[cursoreLine] != "")
+		else if ((((tapp >= 65 && tapp <= 122 && cursoreLine != interface1Size2 - 1) || (tapp >= 48 && tapp <= 57) || tapp == 64 || tapp == 46)) && cursoreLine != code && cursoreLine != log && cursoreLine != role && cursoreLine != sex)
 		{
-			allFunc[cursoreLine].pop_back();
-			setCursorPosition(chord.x / 5 + 28 + maxSize + 2 - 3, 3 + chord.y / 3 + cursoreLine * 3);
-			cout << "                                                           ";
-			setCursorPosition(chord.x / 5 + 28 + maxSize + 2 - 3, 3 + chord.y / 3 + cursoreLine * 3);
-			cout << ">> " << allname[cursoreLine] << " " << allFunc[cursoreLine];
-
-		}
-		else if (tapp == 27 || (cursoreLine == 1 && tapp == 13))
-		{
-			system("cls");
-			break;
-		}
-		else if (((tapp >= 65 && tapp <= 122) || (tapp >= 48 && tapp <= 57) || tapp == 64 || tapp == 46))
-		{
-
-			allFunc[cursoreLine] = allFunc[cursoreLine] + static_cast<char>(tapp);
+			newSettings[cursoreLine] = newSettings[cursoreLine] + static_cast<char>(tapp);
 			cout << static_cast<char>(tapp);
 		}
-		else if (tapp == 37)
+		else if (tapp == 8 && newSettings[cursoreLine] != "" && cursoreLine != code && cursoreLine != log && cursoreLine != role && cursoreLine != sex)
 		{
-			product[num].type = allFunc[0];
-			product[num].profession = allFunc[1];
-			product[num].exp = allFunc[2];
-			product[num].from = allFunc[3];
-			product[num].to = allFunc[4];
-			product[num].adress = allFunc[5];
-			product[num].salary = allFunc[6];
-			product[num].contacts = allFunc[7];
-
-			ofstream rite("Users/" + userSetting[userInSystem].login2 + ".txt");
-			for (int i = 0; i < sizeProductBase; i++)
-			{
-				rite << product[i].getall() << endl;
-			}
-			rite.close();
+			newSettings[cursoreLine].pop_back();
+			setCursorPosition(chord.x - 20 + newSettings[cursoreLine].length(), 3 + chord.y / 4 + cursoreLine * 3 + 8);
+			cout << " ";
 		}
-		else if (tapp == 33)
+		else if (tapp == 41)
 		{
-			ofstream rite("Users/" + userSetting[userInSystem].login2 + ".txt");
-			for (int i = 0; i < sizeProductBase; i++)
+			setCursorPosition(1, 1);
+			cout << newSettings[cursoreLine] << endl;
+		}
+		else if ((tapp == 13 || tapp == 77) && (cursoreLine == role || cursoreLine == sex))
+		{
+			if (cursoreLine == role)
 			{
-				if (i != num)rite << product[i].getall();
+				numRole++;
+				if (numRole == setting.sizeCustomizable) numRole = 0;
+				userSetting[900].role2 = setting.customizableChar[numRole];
+			}
+
+		}
+		else if ((tapp == 13 && cursoreLine == 7) || tapp == 55)
+		{
+
+		}
+		else if (tapp == 27)
+		{
+			ShowConsoleCursor(0);
+			SetConsoleTextAttribute(hC, lastColor);
+
+			for (int i = 0; i < interface1Size2 + 1; i++) {
+				setCursorPosition(chord.x - maxSize - 25, 3 + chord.y / 4 + i * 3 + 8);
+				cout << "                                                ";
 			}
 			break;
 		}

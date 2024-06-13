@@ -184,6 +184,20 @@ struct PRODUCT
 		this->contacts = contacts;
 	}
 
+	void setAll(PRODUCT product)
+	{
+		this->name = product.name;
+		this->from = product.from;
+		this->to = product.to;
+		this->adress = product.adress;
+		this->salary = product.salary;
+		this->type = product.type;
+		this->exp = product.exp;
+		this->login = product.login;
+		this->profession = product.profession;
+		this->contacts = product.contacts;
+	}
+
 	string getall()
 	{
 		return name + " " + from + " " + to + " " + adress + " " + salary + " " + type + " " + exp + " " + login + " " + profession + " " + contacts;
@@ -248,7 +262,7 @@ void inf();
 void adminMenu();
 
 void userMenu();
-void myCab();
+void myCab(int num);
 void myJob(int num);
 void job(int num);
 void thisProduct(int num);
