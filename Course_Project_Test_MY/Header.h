@@ -253,5 +253,6 @@ void myCab();
 void myJob(int num);
 void job(int num);
 void thisProduct(int num);
+void thisProduct2(int num);
 
 #endif
