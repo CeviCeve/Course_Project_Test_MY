@@ -1315,6 +1315,153 @@ void myCab(int t)
 		}
 	}
 }
+void myCab_part1()
+{
+	system("cls");
+
+	const int sizeMain = 3;
+
+	int tapp = 0;
+	int lastCursore = 0;
+	int cursoreLine = 0;
+	int maxSize = 0;
+
+
+	string setting2_Main[sizeMain] = { "Унифицированное","Личное","Назад" };
+
+
+
+	for (int i = 0; i < sizeMain; i++) {
+		setCursorPosition(chord.x / 5, 3 + chord.y / 5 + i * 3);
+		cout << setting2_Main[i];
+	}
+
+	for (int i = 0; i < sizeMain; i++) maxSize = max(setting2_Main[i].size(), maxSize);
+
+
+
+	while (1)
+	{
+		setCursorPosition(chord.x / 5 - 3, 3 + chord.y / 5 + lastCursore * 3);
+		SetConsoleTextAttribute(hC, lastColor);
+		cout << "   " << setting2_Main[lastCursore];
+
+		setCursorPosition(chord.x / 5 - 3, 3 + chord.y / 5 + cursoreLine * 3);
+		SetConsoleTextAttribute(hC, activeColor);
+		cout << ">> " << setting2_Main[cursoreLine];
+
+		setCursorPosition(chord.x / 5 + (maxSize + 3), 3 + chord.y / 5 + cursoreLine * 3);
+
+		SetConsoleTextAttribute(hC, lastColor);
+		if (cursoreLine == 0) { settings1(tapp); }
+		else if (cursoreLine == 1) {  drawAdmin(tapp); }
+		else if (cursoreLine == 2 && tapp == 13) { break; }
+
+		tapp = _getch();
+
+		if (tapp == 80 || tapp == 72)
+		{
+			lastCursore = cursoreLine;
+			cursoreLine = gotoThisLine(sizeMain, cursoreLine, tapp);
+		}
+		else if (tapp == 27 || (cursoreLine == 2 && tapp == 13))
+		{
+			break;
+		}
+	}
+}
+
+void settings1(int code)
+{
+	int tapp = 0;
+	int themeNum = stoi(userSetting[userInSystem].theme2);
+	int roleNum =0;
+	int lastCursore = 0;
+	int cursoreLine = 0;
+	int maxSize = 0;
+
+	const int sizeTempl = 3;
+	string setting2_Templates[sizeTempl] = { "] Пол", "] Тема анкеты", "] Роль"};
+	for (int i = 0; i < 5; i++) if (setting.customizableChar[i] == userSetting[i].role2)roleNum == i;
+
+	for (int i = 0; i < sizeTempl; i++) maxSize = max(setting2_Templates[i].size(), maxSize);
+
+	for (int i = 0; i < sizeTempl; i++) {
+		SetConsoleTextAttribute(hC, lastColor);
+		setCursorPosition(chord.x / 5 + 49 + maxSize + 7, 3 + chord.y / 5 + i * 3 + 2);
+		
+	}
+
+	for (int i = 0; i < sizeTempl; i++)
+	{
+		setCursorPosition(chord.x / 5 + 33 + maxSize, 3 + chord.y / 5 + i * 3 + 2);
+		cout << setting2_Templates[i];
+	}
+
+	if (code == 77)
+		while (1)
+		{
+
+			setCursorPosition(chord.x / 5 + 33 + maxSize - 3, 3 + chord.y / 5 + lastCursore * 3 + 2);
+			SetConsoleTextAttribute(hC, lastColor);
+			cout << "   " << setting2_Templates[lastCursore];
+
+			setCursorPosition(chord.x / 5 + 33 + maxSize - 3, 3 + chord.y / 5 + cursoreLine * 3 + 2);
+			SetConsoleTextAttribute(hC, activeColor);
+			cout << ">> " << setting2_Templates[cursoreLine];
+
+			setCursorPosition(chord.x / 5 + 33 + maxSize*2, 3 + chord.y / 5 + cursoreLine * 3 + 2);
+
+			for (int i = 0; i < sizeTempl; i++) {
+				SetConsoleTextAttribute(hC, activeColor);
+				setCursorPosition(chord.x / 5 + 33 + maxSize * 2, 3 + chord.y / 5 + i * 3 + 2);
+				cout << "                                      ";
+				setCursorPosition(chord.x / 5 + 33 + maxSize * 2, 3 + chord.y / 5 + i * 3 + 2);
+				if (cursoreLine == 0) cout << userSetting[userInSystem].sex2;
+				if (cursoreLine == 1) cout << userSetting[userInSystem].theme2;
+				if (cursoreLine == 2) cout << userSetting[userInSystem].role2;
+			}
+
+			tapp = _getch();
+
+			if (tapp == 80 || tapp == 72)
+			{
+				lastCursore = cursoreLine;
+				cursoreLine = gotoThisLine(sizeTempl, cursoreLine, tapp);
+			}
+			else if (tapp == 75 || tapp == 27)
+			{
+				setCursorPosition(chord.x / 5 + 33 + maxSize - 3, 3 + chord.y / 5 + cursoreLine * 3 + 2);
+				SetConsoleTextAttribute(hC, lastColor);
+				cout << "   " << setting2_Templates[cursoreLine];
+
+				ofstream r("Data/users.txt");
+				for (int i = 0; i < sizeUserSettings; i++) r << userSetting[i].getAll() << endl;
+				break;
+			}
+			else if (tapp == 13 || tapp == 77)
+			{
+				if (cursoreLine == 0) if (userSetting[userInSystem].sex2 == "М") userSetting[userInSystem].sex2 = "Ж"; else  userSetting[userInSystem].sex2 = "М";
+				if (cursoreLine == 1)
+				{
+					themeNum++;
+					if (themeNum > 3)themeNum == 1;
+					userSetting[userInSystem].theme2 == to_string(themeNum);
+				}
+				if (cursoreLine == 2)
+				{
+					roleNum++;
+					if (roleNum > 4)roleNum == 0;
+					userSetting[userInSystem].role2 = setting.customizableChar[roleNum];
+				}
+			}
+		}
+}
+void settings2()
+{
+
+}
+
 void myCab_Continuation()
 {
 	const int interface1Size = 6;
