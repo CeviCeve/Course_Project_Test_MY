@@ -245,11 +245,10 @@ void readProductBase(string name);
 //--------------------------- main menu ---------------------------//
 void newSettings();
 //---------------------------objects-----------------------------//
-void printUserCardController(int numCardStyle, SETTINGS settings, USER_SETTINGS userSettings);
-void userCard1(string name[], string name2[], string thisData[], string thisData2[], int maxsize);
-void userCard2(string name[], string name2[], string thisData[], string thisData2[], int maxsize);
-void userCard3(string name[], string name2[], string thisData[], string thisData2[], int maxsize);
-
+void printUserCardController(int numCardStyle, SETTINGS settings, USER_SETTINGS userSettings, int color, int X);
+void userCard1(string name[], string name2[], string thisData[], int maxsize, int color, int X);
+void userCard2(string name[], string name2[], string thisData[], int maxsize, int color, int X);
+void userCard3(string name[], string name2[], string thisData[], int maxsize, int color, int X);
 void nameController(string name);
 void a(int space);
 //---------------------------myApp--------------------------//

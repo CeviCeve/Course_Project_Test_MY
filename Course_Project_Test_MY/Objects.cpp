@@ -4,15 +4,15 @@ HANDLE honsole = GetStdHandle(STD_OUTPUT_HANDLE);
 string letters[26];
 CHORDS hords = getConsleChords();
 
-void printUserCardController(int numCardStyle, SETTINGS settings, USER_SETTINGS userSettings)
+void printUserCardController(int numCardStyle, SETTINGS settings, USER_SETTINGS userSettings, int color, int X)
 {
 	string thisData[4] = { "","","","" };
 	string name[4] = { "","","","" };
 	int ch = 0;
-	if (settings.role) { thisData[ch] = settings.personalChar[0]; name[ch] = "Роль:    "; ch++; }
-	if (settings.age) { thisData[ch] = settings.personalChar[1]; name[ch] = "Возраст: "; ch++; }
-	if (settings.specialization) { thisData[ch] = settings.personalChar[2]; name[ch] = "Профиль: "; ch++; }
-	if (settings.sex) { thisData[ch] = settings.personalChar[3]; name[ch] = "Пол:     "; ch++; }
+	if (settings.role) { thisData[ch] = userSettings.role2; name[ch] = "Роль:    "; ch++; }
+	if (settings.age) { thisData[ch] = userSettings.age2; name[ch] = "Возраст: "; ch++; }
+	if (settings.specialization) { thisData[ch] = userSettings.specialization2; name[ch] = "Профиль: "; ch++; }
+	if (settings.sex) { thisData[ch] = userSettings.sex2; name[ch] = "Пол:     "; ch++; }
 	for (int i = 0; i < 4; i++) if (name[i] == "") name[i] = "         ";
 
 	string thisData2[5] = { "","","","","" };
@@ -24,57 +24,62 @@ void printUserCardController(int numCardStyle, SETTINGS settings, USER_SETTINGS 
 		maxsize = max(maxsize, name2[i].size());
 		if (settings.customizableChar[i] != "")
 		{
-			thisData2[ch2] = settings.customizableChar[i] + ":";
 			name2[ch2] = userSettings.customizableChar[i];
 			ch2++;
 		}
 	}
 
-	if (numCardStyle == 1)userCard1(name, name2, thisData, thisData2, maxsize);
-	if (numCardStyle == 2)userCard2(name, name2, thisData, thisData2, maxsize);
-	if (numCardStyle == 3)userCard3(name, name2, thisData, thisData2, maxsize);
+	if (numCardStyle == 1)userCard1(name, name2, thisData, maxsize,color, X);
+	if (numCardStyle == 2)userCard2(name, name2, thisData,  maxsize, color, X);
+	if (numCardStyle == 3)userCard3(name, name2, thisData,  maxsize, color, X);
 
 }
 
-void userCard1(string name[], string name2[], string thisData[], string thisData2[], int maxsize)
+void userCard1(string name[], string name2[], string thisData[], int maxsize, int color, int X)
 {
-
-	cout << "[================т----------------------------------------------]\n"
-		<< "|    ________    | " << name[0] << setw(15) << thisData[0] << " | " << setw(maxsize) << thisData2[0] << " " << name2[0] << endl
-		<< "|   /        \\   | " << "                         | " << setw(maxsize) << thisData2[1] << " " << name2[1] << endl
-		<< "|  |          |  | " << name[1] << setw(15) << thisData[1] << " | " << setw(maxsize) << thisData2[2] << " " << name2[2] << endl
-		<< "|  |          |  | " << "                         | " << setw(maxsize) << thisData2[3] << " " << name2[3] << endl
-		<< "|   \\        /   | " << name[2] << setw(15) << thisData[2] << " | " << setw(maxsize) << thisData2[4] << " " << name2[4] << endl
-		<< "|   /\\______/\\   | " << "                         | " << endl
-		<< "|  /          \\  | " << name[3] << setw(15) << thisData[3] << " | " << endl
-		<< "[================L----------------------------------------------]";
+	string a="";
+	for (int i = 0; i < X; i++)a += " ";
+	SetConsoleTextAttribute(honsole,color);
+	cout << a << "[================т----------------------------------------------]\n"
+		<< a << "|    ________    | " << name[0] << setw(15) << thisData[0] << " | " << setw(maxsize) << name2[0] << endl
+		<< a << "|   /        \\   | " << "                         | " << setw(maxsize) << name2[1] << endl
+		<< a << "|  |          |  | " << name[1] << setw(15) << thisData[1] << " | " << setw(maxsize) << name2[2] << endl
+		<< a << "|  |          |  | " << "                         | " << setw(maxsize) << name2[3] << endl
+		<< a << "|   \\        /   | " << name[2] << setw(15) << thisData[2] << " | " << setw(maxsize) << name2[4] << endl
+		<< a << "|   /\\______/\\   | " << "                         | " << endl
+		<< a << "|  /          \\  | " << name[3] << setw(15) << thisData[3] << " | " << endl
+		<< a << "[================L----------------------------------------------]";
 }
-void userCard2(string name[], string name2[], string thisData[], string thisData2[], int maxsize)
+void userCard2(string name[], string name2[], string thisData[], int maxsize, int color, int X)
 {
-SetConsoleTextAttribute(honsole, 14);
-	cout << "[================т-----------------------------------------------]\n"
-		<< "|    ________    | "   << name[0] << setw(15) << thisData[0] << " | " << setw(maxsize) << thisData2[0] << " " << name2[0] << endl
-		<< "|   / ___  __\\   | "                 <<"                         | " << setw(maxsize) << thisData2[1] << " " << name2[1] <<endl
-		<< "|  |_/"; SetConsoleTextAttribute(honsole, 51); cout << "   "; SetConsoleTextAttribute(honsole, 14); cout << "=="; SetConsoleTextAttribute(honsole, 51); cout << "   "; SetConsoleTextAttribute(honsole, 14); 
-	cout << "|  | " << name[1] << setw(15) << thisData[1] << " | " << setw(maxsize) << thisData2[2] << " " << name2[2] << endl
-		<< "|  |          |  | " << "                         | " << setw(maxsize) << thisData2[3] << " " << name2[3] << endl
-		<< "|   \\        /   | " << name[2] << setw(15) << thisData[2] << " | " << setw(maxsize) << thisData2[4] << " " << name2[4] << endl
-		<< "|   /\\______/\\   | " << "                         | " << setw(maxsize) << thisData2[5] << " " << name2[5] << endl
-		<< "|  /          \\  | " << name[3] << setw(15) << thisData[3] << " | " << setw(maxsize) << thisData2[6] << " " << name2[6] << endl
-		<< "[================L----------------------------------------------]";
+SetConsoleTextAttribute(honsole,color);
+string a = "";
+for (int i = 0; i < X; i++)a += " ";
+	cout << a << "[================т-----------------------------------------------]\n"
+		<< a << "|    ________    | "   << name[0] << setw(15) << thisData[0] << " | " << setw(maxsize) << name2[0] << endl
+		<< a << "|   / ___  __\\   | "                 <<"                         | " << setw(maxsize)  << name2[1] <<endl
+		<< a << "|  |_/"; SetConsoleTextAttribute(honsole, 51); cout << "   "; SetConsoleTextAttribute(honsole, color); cout << "=="; SetConsoleTextAttribute(honsole, 51); cout << "   "; SetConsoleTextAttribute(honsole, color);
+	cout<< "|  | " << name[1] << setw(15) << thisData[1] << " | " << setw(maxsize) << name2[2] << endl
+		<< a << "|  |          |  | " << "                         | " << setw(maxsize) << name2[3] << endl
+		<< a << "|   \\        /   | " << name[2] << setw(15) << thisData[2] << " | " << setw(maxsize) << name2[4] << endl
+		<< a << "|   /\\______/\\   | " << "                         | " << setw(maxsize) << endl
+		<< a << "|  /          \\  | " << name[3] << setw(15) << thisData[3] << " | " << setw(maxsize)<< endl
+		<< a << "[================L----------------------------------------------]";
 }
-void userCard3(string name[], string name2[], string thisData[], string thisData2[], int maxsize)
+void userCard3(string name[], string name2[], string thisData[], int maxsize, int color, int X)
 {
-	SetConsoleTextAttribute(honsole, 14);
-	cout << "[================т-----------------------------------------------]\n"
-		<< "|    ________    | " << name[0] << setw(15) << thisData[0] << " | " << setw(maxsize) << thisData2[0] << " " << name2[0] << endl
-		<< "|   / ___  __\\   | " << "                         | " << setw(maxsize) << thisData2[1] << " " << name2[1] << endl
-		<< "|  |          |  | " << name[1] << setw(15) << thisData[1] << " | " << setw(maxsize) << thisData2[2] << " " << name2[2] << endl
-		<< "|  |   /____\\ |  | " << "                         | " << setw(maxsize) << thisData2[3] << " " << name2[3] << endl
-		<< "|   \\   ____ /   | " << name[2] << setw(15) << thisData[2] << " | " << setw(maxsize) << thisData2[4] << " " << name2[4] << endl
-		<< "|   /\\______/\\   | " << "                         | " << setw(maxsize) << thisData2[5] << " " << name2[5] << endl
-		<< "|  /          \\  | " << name[3] << setw(15) << thisData[3] << " | " << setw(maxsize) << thisData2[6] << " " << name2[6] << endl
-		<< "[================L----------------------------------------------]";
+	string a = "";
+	for (int i = 0; i < X; i++)a += " ";
+	SetConsoleTextAttribute(honsole, color);
+	cout << a << "[================т-----------------------------------------------]\n"
+		<< a << "|    ________    | " << name[0] << setw(15) << thisData[0] << " | " << setw(maxsize)  << name2[0] << endl
+		<< a << "|   / ___  __\\   | " << "                         | " << setw(maxsize)  << name2[1] << endl
+		<< a << "|  |          |  | " << name[1] << setw(15) << thisData[1] << " | " << setw(maxsize)  << name2[2] << endl
+		<< a << "|  |   /____\\ |  | " << "                         | " << setw(maxsize) << name2[3] << endl
+		<< a << "|   \\   ____ /   | " << name[2] << setw(15) << thisData[2] << " | " << setw(maxsize) << name2[4] << endl
+		<< a << "|   /\\______/\\   | " << "                         | " << setw(maxsize)  << name2[5] << endl
+		<< a << "|  /          \\  | " << name[3] << setw(15) << thisData[3] << " | " << setw(maxsize) << name2[6] << endl
+		<< a << "[================L----------------------------------------------]";
 }
 
 

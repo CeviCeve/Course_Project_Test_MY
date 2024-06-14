@@ -1237,6 +1237,7 @@ void myCab(int t)
 	int tapp;
 	int numRole = 0;
 
+
 	string buttons[2] = { "1. Редактировать","2. Назад" };
 	string settingsInterface1[interface1Size] = { "Логин:         ", "Пароль:        ","Код доступа:   ", "Роль:          "
 		, "Возраст:       ","Специализация: ",  "Пол:           " , "Тема анкеты: "};
@@ -1250,6 +1251,9 @@ void myCab(int t)
 
 	nameController(userSetting[userInSystem].login2);
 
+
+	setCursorPosition(0, 17);
+	printUserCardController(stoi(userSetting[userInSystem].theme2), setting, userSetting[userInSystem], activeColor, 120);
 
 	for (int i = 0; i < interface1Size; i++)maxSize = max(buttons[i].size(), maxSize);
 
@@ -1375,6 +1379,7 @@ void myCab_part1()
 		}
 		else if (tapp == 27 || (cursoreLine == 2 && tapp == 13))
 		{
+			system("cls");
 			break;
 		}
 	}
