@@ -15,11 +15,11 @@ void printUserCardController(int numCardStyle, SETTINGS settings, USER_SETTINGS 
 	if (settings.sex) { thisData[ch] = settings.personalChar[3]; name[ch] = "Пол:     "; ch++; }
 	for (int i = 0; i < 4; i++) if (name[i] == "") name[i] = "         ";
 
-	string thisData2[7] = { "","","","","","","" };
-	string name2[7] = { "","","","","","","" };
+	string thisData2[5] = { "","","","","" };
+	string name2[5] = { "","","","","" };
 	int maxsize = 0;
 	int ch2 = 0;
-	for (int i = 0; i < 7; i++)
+	for (int i = 0; i < 5; i++)
 	{
 		maxsize = max(maxsize, name2[i].size());
 		if (settings.customizableChar[i] != "")
@@ -45,8 +45,8 @@ void userCard1(string name[], string name2[], string thisData[], string thisData
 		<< "|  |          |  | " << name[1] << setw(15) << thisData[1] << " | " << setw(maxsize) << thisData2[2] << " " << name2[2] << endl
 		<< "|  |          |  | " << "                         | " << setw(maxsize) << thisData2[3] << " " << name2[3] << endl
 		<< "|   \\        /   | " << name[2] << setw(15) << thisData[2] << " | " << setw(maxsize) << thisData2[4] << " " << name2[4] << endl
-		<< "|   /\\______/\\   | " << "                         | " << setw(maxsize) << thisData2[5] << " " << name2[5] << endl
-		<< "|  /          \\  | " << name[3] << setw(15) << thisData[3] << " | " << setw(maxsize) << thisData2[6] << " " << name2[6] << endl
+		<< "|   /\\______/\\   | " << "                         | " << endl
+		<< "|  /          \\  | " << name[3] << setw(15) << thisData[3] << " | " << endl
 		<< "[================L----------------------------------------------]";
 }
 void userCard2(string name[], string name2[], string thisData[], string thisData2[], int maxsize)

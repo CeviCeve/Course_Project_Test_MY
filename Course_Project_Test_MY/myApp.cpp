@@ -157,8 +157,8 @@ void reg()
 		}
 		else if (((tapp >= 65 && tapp <= 122 && cursoreLine != interface1Size - 1) || (tapp >= 48 && tapp <= 57) || tapp == 64 || tapp == 46) && cursoreLine != interface1Size - 1)
 		{
-			newSettings[cursoreLine] = newSettings[cursoreLine] + static_cast<char>(tapp);
-			cout << static_cast<char>(tapp);
+			newSettings[cursoreLine] = newSettings[cursoreLine] + char(tapp);
+			cout << char(tapp);
 		}
 		else if (tapp == 8 && newSettings[cursoreLine] != "")
 		{
@@ -1228,6 +1228,8 @@ void newJob(int num)
 }
 void myCab(int t)
 {
+	system("cls");
+
 	const int interface1Size = 8;
 	int interface1Size2 = 0;
 	int maxSize = 0;
@@ -1239,12 +1241,16 @@ void myCab(int t)
 	string buttons[2] = { "1. Редактировать","2. Назад" };
 	string settingsInterface1[interface1Size] = { "Логин:         ", "Пароль:        ","Код доступа:   ", "Роль:          "
 		, "Возраст:       ","Специализация: ",  "Пол:           " , "Тема анкеты: "};
-	string settingsInterface2[interface1Size] = { userSetting[userInSystem].login2, userSetting[userInSystem].password2, userSetting[userInSystem].codeIn2
+	string settingsInterface2[interface1Size] = { userSetting[userInSystem].login2, userSetting[userInSystem].password2, 
+		userSetting[userInSystem].codeIn2,userSetting[userInSystem].role2
 		,userSetting[userInSystem].age2,userSetting[userInSystem].specialization2,userSetting[userInSystem].sex2,userSetting[userInSystem].theme2};
-	string newSettings[interface1Size] = { "","","","","","","" };
+	string newSettings[5];
+	string nameNewSetting;
+	for (int i = 0; i < 5; i++)newSettings[i] = userSetting[userInSystem].personalChar2[i];
 	string sexMass[2] = { "М","Ж" };
 
-	settingsInterface2[interface1Size2] = settingsInterface1[7]; interface1Size2++;
+	nameController(userSetting[userInSystem].login2);
+
 
 	for (int i = 0; i < interface1Size; i++)maxSize = max(buttons[i].size(), maxSize);
 
@@ -1273,6 +1279,14 @@ void myCab(int t)
 	cout << settingsInterface1[7] << settingsInterface2[7];
 
 
+	setCursorPosition(73, 19);
+	cout << "Персональные характеристики:";
+	for (int i = 0; i < 5; i++) {
+		setCursorPosition(75, 21+2*i);
+		cout << newSettings[i];
+	}
+
+
 	while (1)
 	{
 		SetConsoleTextAttribute(hC, activeColor);
@@ -1296,6 +1310,7 @@ void myCab(int t)
 		}
 		else if (tapp == 27 || tapp == 2 || (cursoreLine == 1 && tapp == 13))
 		{
+			system("cls");
 			break;
 		}
 	}
