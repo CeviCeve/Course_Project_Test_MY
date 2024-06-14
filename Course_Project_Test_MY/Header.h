@@ -270,6 +270,7 @@ void thisProduct(int num);
 void thisProduct2(int num);
 void newJob(int num);
 void settings1(int code);
+void settings2(int code);
 void myCab_part1();
 
 #endif

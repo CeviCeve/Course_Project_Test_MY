@@ -1463,98 +1463,98 @@ void settings1(int code)
 			}
 		}
 }
-void settings2(int code)
-{
-	int tapp = 0;
-	int lastCursore = 0;
-	int cursoreLine = 0;
-	int maxSize = 0;
-	const int sizeBase = 8;
-
-	string allname[sizeBase] = { "Тип занятости:   " ,"Спеиальность:    " ,"Опыт:            " ,"Время от:        ","Время до:        ","Адрес:           " ,"Зарплата:        " ,"Номер для связи: " };
-	string allFunc[sizeBase] = {};
-
-	system("cls");
-
-	string setting2_Base[sizeBase] = { "!. Удалить", "%. Назад" };
-	for (int i = 0; i < sizeBase; i++) maxSize = max(setting2_Base[i].size(), maxSize);
-	for (int i = 0; i < 2; i++)
-	{
-		SetConsoleTextAttribute(hC, lastColor);
-		setCursorPosition(chord.x / 5 + 28 + maxSize + 2, 3 + chord.y / 5 + i * 3 + 2);
-		cout << setting2_Base[i];
-	}
-
-	for (int i = 0; i < sizeBase; i++)
-	{
-		SetConsoleTextAttribute(hC, lastColor);
-		setCursorPosition(chord.x / 5 + 28 + maxSize + 2, 3 + chord.y / 3 + i * 3);
-		cout << allname[i] << " " << allFunc[i];
-	}
-
-	while (1)
-	{
-		setCursorPosition(chord.x / 5 + 28 + maxSize + 2 - 3, 3 + chord.y / 3 + lastCursore * 3);
-		SetConsoleTextAttribute(hC, lastColor);
-		cout << "   " << allname[lastCursore] << " " << allFunc[lastCursore];
-
-		setCursorPosition(chord.x / 5 + 28 + maxSize + 2 - 3, 3 + chord.y / 3 + cursoreLine * 3);
-		SetConsoleTextAttribute(hC, activeColor);
-		cout << ">> " << allname[cursoreLine] << " " << allFunc[cursoreLine];
-
-		setCursorPosition(chord.x / 5 + 28 + maxSize + 2 + allFunc[cursoreLine].size(), 3 + chord.y / 3 + cursoreLine * 3);
-
-		tapp = _getch();
-
-		if (tapp == 80 || tapp == 72)
-		{
-			lastCursore = cursoreLine;
-			cursoreLine = gotoThisLine(sizeBase, cursoreLine, tapp);
-		}
-		else if (tapp == 8 && allFunc[cursoreLine] != "")
-		{
-			allFunc[cursoreLine].pop_back();
-			setCursorPosition(chord.x / 5 + 28 + maxSize + 2 - 3, 3 + chord.y / 3 + cursoreLine * 3);
-			cout << "                                                           ";
-			setCursorPosition(chord.x / 5 + 28 + maxSize + 2 - 3, 3 + chord.y / 3 + cursoreLine * 3);
-			cout << ">> " << allname[cursoreLine] << " " << allFunc[cursoreLine];
-
-		}
-		else if (tapp == 27 || (cursoreLine == 1 && tapp == 13))
-		{
-			system("cls");
-			break;
-		}
-		else if (((tapp >= 65 && tapp <= 122) || (tapp >= 48 && tapp <= 57) || tapp == 64 || tapp == 46))
-		{
-
-			allFunc[cursoreLine] = allFunc[cursoreLine] + static_cast<char>(tapp);
-			cout << static_cast<char>(tapp);
-		}
-		else if (tapp == 37)
-		{
-			product[num].type = allFunc[0];
-			product[num].profession = allFunc[1];
-			product[num].exp = allFunc[2];
-			product[num].from = allFunc[3];
-			product[num].to = allFunc[4];
-			product[num].adress = allFunc[5];
-			product[num].salary = allFunc[6];
-			product[num].contacts = allFunc[7];
-
-			ofstream rite("Users/" + userSetting[userInSystem].login2 + ".txt");
-			for (int i = 0; i < sizeProductBase; i++)
-			{
-				rite << product[i].getall() << endl;
-			}
-			rite.close();
-		}
-		else if (tapp == 33)
-		{
-
-		}
-	}
-}
+//void settings2(int code)
+//{
+//	int tapp = 0;
+//	int lastCursore = 0;
+//	int cursoreLine = 0;
+//	int maxSize = 0;
+//	const int sizeBase = 8;
+//
+//	string allname[sizeBase] = { "Тип занятости:   " ,"Спеиальность:    " ,"Опыт:            " ,"Время от:        ","Время до:        ","Адрес:           " ,"Зарплата:        " ,"Номер для связи: " };
+//	string allFunc[sizeBase] = {};
+//
+//	system("cls");
+//
+//	string setting2_Base[sizeBase] = { "!. Удалить", "%. Назад" };
+//	for (int i = 0; i < sizeBase; i++) maxSize = max(setting2_Base[i].size(), maxSize);
+//	for (int i = 0; i < 2; i++)
+//	{
+//		SetConsoleTextAttribute(hC, lastColor);
+//		setCursorPosition(chord.x / 5 + 28 + maxSize + 2, 3 + chord.y / 5 + i * 3 + 2);
+//		cout << setting2_Base[i];
+//	}
+//
+//	for (int i = 0; i < sizeBase; i++)
+//	{
+//		SetConsoleTextAttribute(hC, lastColor);
+//		setCursorPosition(chord.x / 5 + 28 + maxSize + 2, 3 + chord.y / 3 + i * 3);
+//		cout << allname[i] << " " << allFunc[i];
+//	}
+//
+//	while (1)
+//	{
+//		setCursorPosition(chord.x / 5 + 28 + maxSize + 2 - 3, 3 + chord.y / 3 + lastCursore * 3);
+//		SetConsoleTextAttribute(hC, lastColor);
+//		cout << "   " << allname[lastCursore] << " " << allFunc[lastCursore];
+//
+//		setCursorPosition(chord.x / 5 + 28 + maxSize + 2 - 3, 3 + chord.y / 3 + cursoreLine * 3);
+//		SetConsoleTextAttribute(hC, activeColor);
+//		cout << ">> " << allname[cursoreLine] << " " << allFunc[cursoreLine];
+//
+//		setCursorPosition(chord.x / 5 + 28 + maxSize + 2 + allFunc[cursoreLine].size(), 3 + chord.y / 3 + cursoreLine * 3);
+//
+//		tapp = _getch();
+//
+//		if (tapp == 80 || tapp == 72)
+//		{
+//			lastCursore = cursoreLine;
+//			cursoreLine = gotoThisLine(sizeBase, cursoreLine, tapp);
+//		}
+//		else if (tapp == 8 && allFunc[cursoreLine] != "")
+//		{
+//			allFunc[cursoreLine].pop_back();
+//			setCursorPosition(chord.x / 5 + 28 + maxSize + 2 - 3, 3 + chord.y / 3 + cursoreLine * 3);
+//			cout << "                                                           ";
+//			setCursorPosition(chord.x / 5 + 28 + maxSize + 2 - 3, 3 + chord.y / 3 + cursoreLine * 3);
+//			cout << ">> " << allname[cursoreLine] << " " << allFunc[cursoreLine];
+//
+//		}
+//		else if (tapp == 27 || (cursoreLine == 1 && tapp == 13))
+//		{
+//			system("cls");
+//			break;
+//		}
+//		else if (((tapp >= 65 && tapp <= 122) || (tapp >= 48 && tapp <= 57) || tapp == 64 || tapp == 46))
+//		{
+//
+//			allFunc[cursoreLine] = allFunc[cursoreLine] + static_cast<char>(tapp);
+//			cout << static_cast<char>(tapp);
+//		}
+//		else if (tapp == 37)
+//		{
+//			product[num].type = allFunc[0];
+//			product[num].profession = allFunc[1];
+//			product[num].exp = allFunc[2];
+//			product[num].from = allFunc[3];
+//			product[num].to = allFunc[4];
+//			product[num].adress = allFunc[5];
+//			product[num].salary = allFunc[6];
+//			product[num].contacts = allFunc[7];
+//
+//			ofstream rite("Users/" + userSetting[userInSystem].login2 + ".txt");
+//			for (int i = 0; i < sizeProductBase; i++)
+//			{
+//				rite << product[i].getall() << endl;
+//			}
+//			rite.close();
+//		}
+//		else if (tapp == 33)
+//		{
+//
+//		}
+//	}
+//}
 
 void myCab_Continuation()
 {
