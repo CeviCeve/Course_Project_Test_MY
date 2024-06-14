@@ -5,7 +5,7 @@ int main()
 	//draw();
 	basikSettings();
 	//job(0);
-	//writeBorder();
+	writeBorder();
 
 	if (readSettings("Settings/settings.txt")) { myApp(); }
 	else { masterOfSettings(); }
