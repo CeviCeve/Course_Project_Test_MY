@@ -555,12 +555,16 @@ void userMenu()
 void job(int num)
 {
 	string line = "";
+	string text = "! - Мои отклики";
 	string fuck = "Номер понравившейся вакансии: ";
 	while (1)
 	{
 		system("cls");
 		readProductBase();
 		if (sizeProductBase / 5 != 0) sizeProductBase++;
+
+		setCursorPosition(chord.x - 56, 3);
+		cout << "! - Мои отклики";
 
 		setCursorPosition(chord.x - 56, 5);
 		cout << fuck << line;
@@ -730,6 +734,10 @@ void job(int num)
 			setting = readSettingsFile();
 			break;
 		}
+		else if (a == 33)
+		{
+			myCard(0);
+		}
 		else if (a >= 48 && a <= 57)
 		{
 			setCursorPosition(chord.x - 56 + line.size() + fuck.size(), 15);
@@ -746,6 +754,239 @@ void job(int num)
 		{
 			if (stoi(line) >= 0 && stoi(line) <= sizeProductBase)
 			thisProduct(stoi(line));
+		}
+	}
+}
+	PRODUCT product2[10000];
+void myCard(int num)
+{
+	//system("cls");
+	ifstream read("Data/link.txt");
+	string a, b, c;
+	string fuck = "Номер понравившейся вакансии: ";
+	string line = "";
+
+	sizeProductBase = 0;
+
+	while (!read.eof())
+	{
+		read >> a >> b >> c;
+		if (a == "" || b == "" || c == "")break;
+		if (b == userSetting[userInSystem].login2)
+		{
+			for (PRODUCT i : product)
+			{
+				if (c == i.name)
+				{
+					product2[sizeProductBase].setAll(i);
+					sizeProductBase++;
+					break;
+				}
+			}
+		}
+	}
+	for (int i = 0; i < 10000; i++)product[i] = product2[i];
+	sizeProductBase--;
+
+	while (1)
+	{
+		system("cls");
+		if (sizeProductBase / 5 != 0) sizeProductBase++;
+
+		setCursorPosition(chord.x - 56, 5);
+		cout << fuck << line;
+		setCursorPosition(chord.x - 56, 7);
+		cout << "! - для удаления";
+		setCursorPosition(chord.x - 56 + line.size() + fuck.size(), 5);
+
+		//cout << sizeProductBase;
+		//cout << endl << num;
+		if (sizeProductBase == 0) { cout << "Вакансии отсутствуют"; }
+
+		if (num == 0) {
+			if (sizeProductBase < 5) {
+				for (int i = 0; i < sizeProductBase; i++) {
+
+					setCursorPosition(chord.x - 56, 3 + chord.y / 8 + 8 + 10 * i);
+					cout << "_/==================================================\\_\n";
+
+					setCursorPosition(chord.x - 56, 4 + chord.y / 8 + 8 + 10 * i);
+					cout << "| " << setw(16) << product[i].name << "| #" << setw(3) << i << setw(31) << "        |\n";
+
+					setCursorPosition(chord.x - 56, 5 + chord.y / 8 + 8 + 10 * i);
+					cout << "|                 |" << "----------------------------------|\n";
+
+					setCursorPosition(chord.x - 56, 6 + chord.y / 8 + 8 + 10 * i);
+					cout << "| " << setw(16) << product[i].profession << "| Адрес:" << setw(26) << product[i].adress << " |\n";
+
+					setCursorPosition(chord.x - 56, 7 + chord.y / 8 + 8 + 10 * i);
+					cout << "| " << setw(16) << product[i].salary << "| Опыт:" << setw(27) << product[i].exp << " |\n";
+
+					setCursorPosition(chord.x - 56, 8 + chord.y / 8 + 8 + 10 * i);
+					cout << "|_________________|__________________________________|\n";
+				}
+			}
+
+			else {
+				for (int i = 0; i < 5; i++) {
+
+
+					setCursorPosition(chord.x - 56, 3 + chord.y / 8 + 8 + 10 * i);
+					cout << "_/==================================================\\_\n";
+
+					setCursorPosition(chord.x - 56, 4 + chord.y / 8 + 8 + 10 * i);
+					cout << "| " << setw(16) << product[i].name << "| #" << setw(3) << i << setw(31) << "       |\n";
+
+					setCursorPosition(chord.x - 56, 5 + chord.y / 8 + 8 + 10 * i);
+					cout << "|                 |" << "----------------------------------|\n";
+
+					setCursorPosition(chord.x - 56, 6 + chord.y / 8 + 8 + 10 * i);
+					cout << "| " << setw(16) << product[i].profession << "| Адрес:" << setw(26) << product[i].adress << " |\n";
+
+					setCursorPosition(chord.x - 56, 7 + chord.y / 8 + 8 + 10 * i);
+					cout << "| " << setw(16) << product[i].salary << "| Опыт:" << setw(27) << product[i].exp << " |\n";
+
+					setCursorPosition(chord.x - 56, 8 + chord.y / 8 + 8 + 10 * i);
+					cout << "|_________________|__________________________________|\n";
+
+				}
+			}
+		}
+		else {
+			int fulllist = sizeProductBase / 5;
+			int costrat = sizeProductBase - fulllist * 5;
+			int counter = 0;
+			if (costrat == 0) { costrat = 5; }
+
+			if (sizeProductBase < (num + 1) * 5) {
+
+				for (int i = num * 5; counter < costrat; i++) {
+
+					setCursorPosition(chord.x - 56, 3 + chord.y / 8 + 8 + 10 * counter);
+					cout << "_/==================================================\\_\n";
+
+					setCursorPosition(chord.x - 56, 4 + chord.y / 8 + 8 + 10 * counter);
+					cout << "| " << setw(16) << product[i].name << "| #" << setw(3) << i << setw(31) << "       |\n";
+
+					setCursorPosition(chord.x - 56, 5 + chord.y / 8 + 8 + 10 * counter);
+					cout << "|                 |----------------------------------|\n";
+
+					setCursorPosition(chord.x - 56, 6 + chord.y / 8 + 8 + 10 * counter);
+					cout << "| " << setw(16) << product[i].profession << "| Адрес:" << setw(26) << product[i].adress << " |\n";
+
+					setCursorPosition(chord.x - 56, 7 + chord.y / 8 + 8 + 10 * counter);
+					cout << "| " << setw(16) << product[i].salary << "| Опыт:" << setw(27) << product[i].exp << " |\n";
+
+					setCursorPosition(chord.x - 56, 8 + chord.y / 8 + 8 + 10 * counter);
+					cout << "|_________________|__________________________________|\n";
+					counter++;
+				}
+
+			}
+			else {
+				for (int i = num * 5; counter < 5; i++) {
+					setCursorPosition(chord.x - 56, 3 + chord.y / 8 + 8 + 10 * counter);
+					cout << "_/==================================================\\_\n";
+
+					setCursorPosition(chord.x - 56, 4 + chord.y / 8 + 8 + 10 * counter);
+					cout << "| " << setw(16) << product[i].name << "| #" << setw(3) << i << setw(31) << "       |\n";
+
+					setCursorPosition(chord.x - 56, 5 + chord.y / 8 + 8 + 10 * counter);
+					cout << "|                 |----------------------------------|\n";
+
+					setCursorPosition(chord.x - 56, 6 + chord.y / 8 + 8 + 10 * counter);
+					cout << "| " << setw(16) << product[i].profession << "| Адрес:" << setw(26) << product[i].adress << " |\n";
+					;
+
+					setCursorPosition(chord.x - 56, 7 + chord.y / 8 + 8 + 10 * counter);
+					cout << "| " << setw(16) << product[i].salary << "| Опыт:" << setw(27) << product[i].exp << " |\n";
+
+
+					setCursorPosition(chord.x - 56, 8 + chord.y / 8 + 8 + 10 * counter);
+					cout << "|_________________|__________________________________|\n";
+					counter++;
+				}
+
+			}
+		}
+
+		setlocale(LC_ALL, "en_US.UTF-8");
+		SetConsoleOutputCP(CP_UTF8);
+		SetConsoleCP(CP_UTF8);
+		if (num != 0)
+		{
+			setCursorPosition(3, chord.y - 2);
+			cout << u8"░░██╗";
+			setCursorPosition(3, chord.y - 1);
+			cout << u8"░██╔╝";
+			setCursorPosition(3, chord.y);
+			cout << u8"██╔╝░";
+			setCursorPosition(3, chord.y + 1);
+			cout << u8"╚██╗░";
+			setCursorPosition(3, chord.y + 2);
+			cout << u8"░╚██╗";
+			setCursorPosition(3, chord.y + 3);
+			cout << u8"░░╚═╝";
+		}
+		if (num != sizeProductBase / 5)
+		{
+			setCursorPosition(chord.x * 1.6, chord.y - 2);
+			cout << u8"██╗░░";
+			setCursorPosition(chord.x * 1.6, chord.y - 1);
+			cout << u8"╚██╗░";
+			setCursorPosition(chord.x * 1.6, chord.y);
+			cout << u8"░╚██╗";
+			setCursorPosition(chord.x * 1.6, chord.y + 1);
+			cout << u8"░██╔╝";
+			setCursorPosition(chord.x * 1.6, chord.y + 2);
+			cout << u8"██╔╝░";
+			setCursorPosition(chord.x * 1.6, chord.y + 3);
+			cout << u8"╚═╝░░";
+		}
+		setlocale(LC_ALL, "rus");
+		SetConsoleCP(1251);
+		SetConsoleOutputCP(1251);
+
+		int a = _getch();
+		if (a == 75) {
+			num--;
+			if (num < 0)num++;
+		}
+		else if (a == 77) {
+			num++;
+			//if (num > (sizeProductBase+4)/5 -1)num--;
+			if (num * 5 > sizeProductBase)num--;
+		}
+		else if (a == 27)
+		{
+			system("cls");
+			setting = readSettingsFile();
+			break;
+		}
+		else if (a == 33 && line != "")
+		{
+			if (stoi(line) >= 0 && stoi(line) <= sizeProductBase)
+			{
+				string l = product2[stoi(line)].name;
+				
+			}
+		}
+		else if (a >= 48 && a <= 57)
+		{
+			setCursorPosition(chord.x - 56 + line.size() + fuck.size(), 15);
+			line = line + static_cast<char>(a);
+			cout << static_cast<char>(a);
+		}
+		else if (a == 8 && line != "")
+		{
+			line.pop_back();
+			setCursorPosition(chord.x - 56 + line.size(), 5);
+			cout << " ";
+		}
+		else if (a == 13 && line != "")
+		{
+			if (stoi(line) >= 0 && stoi(line) <= sizeProductBase)
+				thisProduct(stoi(line));
 		}
 	}
 }
@@ -1807,4 +2048,3 @@ void readProductBase(string line)
 	}
 	sizeProductBase--;
 }
-

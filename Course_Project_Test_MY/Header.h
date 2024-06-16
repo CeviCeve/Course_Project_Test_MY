@@ -271,5 +271,6 @@ void newJob(int num);
 void settings1(int code);
 void settings2(int code);
 void myCab_part1();
+void myCard(int num);
 
 #endif

@@ -77,8 +77,8 @@ void userCard3(string name[], string name2[], string thisData[], int maxsize, in
 		<< a << "|  |          |  | " << name[1] << setw(15) << thisData[1] << " | " << setw(maxsize)  << name2[2] << endl
 		<< a << "|  |   /____\\ |  | " << "                         | " << setw(maxsize) << name2[3] << endl
 		<< a << "|   \\   ____ /   | " << name[2] << setw(15) << thisData[2] << " | " << setw(maxsize) << name2[4] << endl
-		<< a << "|   /\\______/\\   | " << "                         | " << setw(maxsize)  << name2[5] << endl
-		<< a << "|  /          \\  | " << name[3] << setw(15) << thisData[3] << " | " << setw(maxsize) << name2[6] << endl
+		<< a << "|   /\\______/\\   | " << "                         | " <<  endl
+		<< a << "|  /          \\  | " << name[3] << setw(15) << thisData[3] << " | " << endl
 		<< a << "[================L----------------------------------------------]";
 }
 
