@@ -203,7 +203,23 @@ struct PRODUCT
 		return name + " " + from + " " + to + " " + adress + " " + salary + " " + type + " " + exp + " " + login + " " + profession + " " + contacts;
 	}
 };
+struct LINK
+{
+	string nameMy;
+	string nameHim;
+	string nameProduct;
 
+	void setAll(string nameHim, string nameMy, string nameProduct)
+	{
+		this->nameMy = nameMy;
+		this->nameHim = nameHim;
+		this->nameProduct = nameProduct;
+	}
+	string getAll()
+	{
+		return nameHim + " " + nameMy + " " + nameProduct;
+	}
+};
 //--------------------------basic settings--------------------------//
 //----------workFunctions.cpp----------//
 void basikSettings();

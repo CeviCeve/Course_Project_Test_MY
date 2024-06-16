@@ -8,9 +8,13 @@ USER_SETTINGS userSetting[10000];
 int sizeUserSettings = 0;
 
 PRODUCT product[10000];
+PRODUCT product2[10000];
 int sizeProductBase = 0;
 int activeColor;
 int lastColor;
+
+LINK link[10000];
+int sizeLinkBase = 0;
 
 int userInSystem = -1;
 
@@ -757,12 +761,11 @@ void job(int num)
 		}
 	}
 }
-	PRODUCT product2[10000];
 void myCard(int num)
 {
 	//system("cls");
 	ifstream read("Data/link.txt");
-	string a, b, c;
+	string e, b, c;
 	string fuck = "Номер понравившейся вакансии: ";
 	string line = "";
 
@@ -770,8 +773,8 @@ void myCard(int num)
 
 	while (!read.eof())
 	{
-		read >> a >> b >> c;
-		if (a == "" || b == "" || c == "")break;
+		read >> e >> b >> c;
+		if (e == "" || b == "" || c == "")break;
 		if (b == userSetting[userInSystem].login2)
 		{
 			for (PRODUCT i : product)
@@ -968,7 +971,23 @@ void myCard(int num)
 			if (stoi(line) >= 0 && stoi(line) <= sizeProductBase)
 			{
 				string l = product2[stoi(line)].name;
+				ifstream q("Data/link.txt");
 				
+				while (!q.eof())
+				{
+					q >> e >> b >> c;
+					link[sizeLinkBase].setAll(e, b, c);
+					sizeLinkBase++;
+				}
+				sizeLinkBase--;
+				q.close();
+
+				ofstream out("Data/link.txt");
+				for (int i = 0; i < sizeLinkBase; i++)
+				{
+					if (link[i].nameProduct != l) out << link[i].getAll() << endl;
+				}
+				break;
 			}
 		}
 		else if (a >= 48 && a <= 57)
