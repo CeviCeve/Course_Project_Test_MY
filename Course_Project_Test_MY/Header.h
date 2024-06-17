@@ -275,6 +275,8 @@ void reg2();
 void inf();
 
 void adminMenu();
+void productsts();
+void users();
 
 void userMenu();
 void myCab(int num);

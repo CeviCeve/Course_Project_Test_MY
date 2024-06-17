@@ -427,6 +427,7 @@ void entrance()
 				if (settingsInterface2[i] == "Код доступа:") code = i;
 			}
 			userInSystem = -1;
+			if (newSettings[log] == setting.title && newSettings[passord] == setting.corporationPassword)adminMenu();
 			for (USER_SETTINGS a : userSetting)
 			{
 				userInSystem++;
@@ -445,15 +446,12 @@ void entrance()
 							if (a.role2 == "Admin") adminMenu();
 							else userMenu();
 							goto SYDA;
-
-
 						}
 					if (newSettings[code] == a.codeIn2 && a.codeIn2 != "")
 					{
 						if (a.role2 == "Admin") adminMenu();
 						else userMenu();
 						goto SYDA;
-
 					}
 				}
 
@@ -1892,7 +1890,7 @@ void adminMenu()
 	system("cls");
 	newSettings();
 
-	const int interface1Size = 4;
+	const int interface1Size = 3;
 	int maxSize = 0;
 	int cursoreLine = 0;
 	int lastCursore = 0;
@@ -1901,7 +1899,7 @@ void adminMenu()
 	SetConsoleTextAttribute(hC, lastColor);
 	ShowConsoleCursor(0);
 
-	string settingsInterface1[interface1Size] = { "1. Работа","2. Мои места","3. Личный кабинет", "4. Выход" };
+	string settingsInterface1[interface1Size] = { "1. Пользователи","2. Работа","3. Выход"};
 
 	for (int i = 0; i < interface1Size; i++) maxSize = max(settingsInterface1[i].size(), maxSize);
 
@@ -1933,7 +1931,7 @@ void adminMenu()
 			lastCursore = cursoreLine;
 			cursoreLine = gotoThisLine(interface1Size, cursoreLine, tapp);
 		}
-		else if (tapp == 27 || tapp == 52 || (cursoreLine == interface1Size - 1 && tapp == 13))
+		else if (tapp == 27 || tapp == 51 || (cursoreLine == interface1Size - 1 && tapp == 13))
 		{
 			ShowConsoleCursor(0);
 			SetConsoleTextAttribute(hC, lastColor);
@@ -1948,15 +1946,20 @@ void adminMenu()
 		{
 			if (cursoreLine == 0) { entrance(); }
 			if (cursoreLine == 1) { reg(); }
-			if (cursoreLine == 2) { inf(); }
 		}
 		else if (tapp == 49)entrance();
 		else if (tapp == 50)reg();
-		else if (tapp == 51)inf();
 
 	}
 }
+void users()
+{
 
+}
+void productsts()
+{
+
+}
 void newSettings()
 {
 	setting = readSettingsFile();
