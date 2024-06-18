@@ -1944,11 +1944,11 @@ void adminMenu()
 		}
 		else if (tapp == 13)
 		{
-			if (cursoreLine == 0) { entrance(); }
-			if (cursoreLine == 1) { reg(); }
+			if (cursoreLine == 0) { users(); }
+			if (cursoreLine == 1) { productsts(); }
 		}
-		else if (tapp == 49)entrance();
-		else if (tapp == 50)reg();
+		else if (tapp == 49)users();
+		else if (tapp == 50)productsts();
 
 	}
 }
@@ -1960,6 +1960,7 @@ void productsts()
 {
 
 }
+
 void newSettings()
 {
 	setting = readSettingsFile();
