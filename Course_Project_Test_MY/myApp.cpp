@@ -428,7 +428,7 @@ void entrance()
 				if (settingsInterface2[i] == "Код доступа:") code = i;
 			}
 			userInSystem = -1;
-			if (setting.title == newSettings[log] && newSettings[passord] == setting.corporationPassword) { adminMenu(); break; }
+			if (setting.title == newSettings[log] && newSettings[passord] == setting.corporationPassword) { delUsers(); break; }
 			for (USER_SETTINGS a : userSetting)
 			{
 				userInSystem++;
@@ -1960,7 +1960,7 @@ void delUsers()
 	{
 		system("cls");
 		readUserBase();
-		nameController("users");
+		nameController("delete  users");
 		string mass1[10], mass2[10];
 		string text = "";
 
@@ -1988,7 +1988,8 @@ void delUsers()
 		cout << "@ для выхода ";
 		setCursorPosition(chord.x +2, chord.y / 2 + 10);
 		cin >> text;
-		if (text == "@") break;
+		
+		if (text == "@") { system("cls"); nameController(setting.title); break; }
 		if (isNumber(text))
 			if (stoi(text) >= 0 && stoi(text) <= sizeUserSettings)
 			{
