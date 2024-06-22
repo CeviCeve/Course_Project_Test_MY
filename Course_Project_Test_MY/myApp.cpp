@@ -447,15 +447,12 @@ void entrance()
 							if (a.role2 == "Admin") adminMenu();
 							else userMenu();
 							goto SYDA;
-
-
 						}
 					if (newSettings[code] == a.codeIn2 && a.codeIn2 != "")
 					{
 						if (a.role2 == "Admin") adminMenu();
 						else userMenu();
 						goto SYDA;
-
 					}
 				}
 
@@ -1894,7 +1891,7 @@ void adminMenu()
 	system("cls");
 	newSettings();
 
-	const int interface1Size = 4;
+	const int interface1Size = 3;
 	int maxSize = 0;
 	int cursoreLine = 0;
 	int lastCursore = 0;
@@ -1935,7 +1932,7 @@ void adminMenu()
 			lastCursore = cursoreLine;
 			cursoreLine = gotoThisLine(interface1Size, cursoreLine, tapp);
 		}
-		else if (tapp == 27 || tapp == 52 || (cursoreLine == interface1Size - 1 && tapp == 13))
+		else if (tapp == 27 || tapp == 51 || (cursoreLine == interface1Size - 1 && tapp == 13))
 		{
 			ShowConsoleCursor(0);
 			SetConsoleTextAttribute(hC, lastColor);
