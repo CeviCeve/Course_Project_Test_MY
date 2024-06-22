@@ -1312,10 +1312,11 @@ void thisProduct2(int num)
 	for (int i = 0; i < sizeBase; i++) maxSize = max(setting2_Base[i].size(), maxSize);
 	for (int i = 0; i < 2; i++)
 	{
-		SetConsoleTextAttribute(hC, lastColor);
-		setCursorPosition(chord.x / 5 + 28 + maxSize + 2, 3 + chord.y / 5 + i * 3 + 2);
+		SetConsoleTextAttribute(hC, activeColor);
+		setCursorPosition(chord.x / 5 + 28 + maxSize + 2 + 80, 3 + chord.y / 5 + i * 3 + 17);
 		cout << setting2_Base[i];
 	}
+	SetConsoleTextAttribute(hC, lastColor);
 
 	for (int i = 0; i < sizeBase; i++)
 	{
@@ -1751,18 +1752,18 @@ void settings2(int code)
 		cout << allname[i] << " " << allFunc[i];
 	}
 
-	if(tapp==77)
+	if(code==77)
 		while (1)
 		{
-			setCursorPosition(chord.x / 5 + 28 + maxSize + 2 - 3, 3 + chord.y / 3 + lastCursore * 3);
+			setCursorPosition(chord.x / 5 + 28 + maxSize + 2 - 3, 3 + chord.y / 3 + lastCursore * 3 - 4 );
 			SetConsoleTextAttribute(hC, lastColor);
 			cout << "   " << allname[lastCursore] << " " << allFunc[lastCursore];
 
-			setCursorPosition(chord.x / 5 + 28 + maxSize + 2 - 3, 3 + chord.y / 3 + cursoreLine * 3);
+			setCursorPosition(chord.x / 5 + 28 + maxSize + 2 - 3, 3 + chord.y / 3 + cursoreLine * 3 -4 );
 			SetConsoleTextAttribute(hC, activeColor);
 			cout << ">> " << allname[cursoreLine] << " " << allFunc[cursoreLine];
 
-			setCursorPosition(chord.x / 5 + 28 + maxSize + 2 + allFunc[cursoreLine].size(), 3 + chord.y / 3 + cursoreLine * 3);
+			setCursorPosition(chord.x / 5 + 28 + maxSize + 2 + allFunc[cursoreLine].size(), 3 + chord.y / 3 + cursoreLine * 3 -4);
 
 			tapp = _getch();
 
@@ -1774,9 +1775,9 @@ void settings2(int code)
 			else if (tapp == 8 && allFunc[cursoreLine] != "")
 			{
 				allFunc[cursoreLine].pop_back();
-				setCursorPosition(chord.x / 5 + 28 + maxSize + 2 - 3, 3 + chord.y / 3 + cursoreLine * 3);
+				setCursorPosition(chord.x / 5 + 28 + maxSize + 2 - 3, 3 + chord.y / 3 + cursoreLine * 3 -4 );
 				cout << "                                                           ";
-				setCursorPosition(chord.x / 5 + 28 + maxSize + 2 - 3, 3 + chord.y / 3 + cursoreLine * 3);
+				setCursorPosition(chord.x / 5 + 28 + maxSize + 2 - 3, 3 + chord.y / 3 + cursoreLine * 3 - 4);
 				cout << ">> " << allname[cursoreLine] << " " << allFunc[cursoreLine];
 
 			}
