@@ -18,6 +18,7 @@ int sizeLinkBase = 0;
 
 int userInSystem = -1;
 
+int lastDelUser = -1;
 
 void myApp()
 {
@@ -427,6 +428,7 @@ void entrance()
 				if (settingsInterface2[i] == "Код доступа:") code = i;
 			}
 			userInSystem = -1;
+			if (setting.title == newSettings[log] && newSettings[passord] == setting.corporationPassword) { adminMenu(); break; }
 			for (USER_SETTINGS a : userSetting)
 			{
 				userInSystem++;
@@ -1901,7 +1903,7 @@ void adminMenu()
 	SetConsoleTextAttribute(hC, lastColor);
 	ShowConsoleCursor(0);
 
-	string settingsInterface1[interface1Size] = { "1. Работа","2. Мои места","3. Личный кабинет", "4. Выход" };
+	string settingsInterface1[interface1Size] = { "1. Пользователи","2. Работа", "3. Выход" };
 
 	for (int i = 0; i < interface1Size; i++) maxSize = max(settingsInterface1[i].size(), maxSize);
 
@@ -1946,14 +1948,82 @@ void adminMenu()
 		}
 		else if (tapp == 13)
 		{
-			if (cursoreLine == 0) { entrance(); }
+			if (cursoreLine == 0) { delUsers(); }
 			if (cursoreLine == 1) { reg(); }
-			if (cursoreLine == 2) { inf(); }
 		}
-		else if (tapp == 49)entrance();
+		else if (tapp == 49) delUsers();
 		else if (tapp == 50)reg();
-		else if (tapp == 51)inf();
 
+	}
+}
+
+void delUsers()
+{
+	while (1)
+	{
+		system("cls");
+		readUserBase();
+		nameController("users");
+		string mass1[10], mass2[10];
+		string text = "";
+
+		if (lastDelUser == -1) { userSetting[99].setAll("1", "ZERO", "ZERO", "ZERO", "ZERO", "ZERO", "ZERO", "ZERO", mass1, mass2, 0); lastDelUser = 99; }
+		setCursorPosition(0, chord.y / 2);
+		printUserCardController(stoi(userSetting[lastDelUser].theme2), setting, userSetting[lastDelUser], activeColor, chord.x - 30);
+
+		setCursorPosition(chord.x / 2 - 25, 3 + chord.y / 4 + 5);
+		cout << "______________________________________________";
+		setCursorPosition(chord.x / 2 - 25, 3 + chord.y / 4 + 6);
+		cout << "||" << setw(3) << "#ID" << " ||" << setw(35) << "USERNAME" << " ||";
+		setCursorPosition(chord.x / 2 - 25, 3 + chord.y / 4 + 7);
+		cout << "||____||____________________________________||";
+		for (int i = 0; i < sizeUserSettings; i++)
+		{
+			setCursorPosition(chord.x / 2 - 25, 3 + chord.y / 4 + i + 8);
+			cout << "||" << setw(3) << i << " ||" << setw(35) << userSetting[i].login2 << " ||";
+		}
+		setCursorPosition(chord.x / 2 - 25, 3 + chord.y / 4 + sizeUserSettings + 8);
+		cout << "||____||____________________________________||";
+
+		setCursorPosition(chord.x - 30, chord.y / 2 + 10);
+		cout << "Номер удаляемого пользователя: ";
+		setCursorPosition(chord.x - 30, chord.y / 2 + 11);
+		cout << "@ для выхода ";
+		setCursorPosition(chord.x +2, chord.y / 2 + 10);
+		cin >> text;
+		if (text == "@") break;
+		if (isNumber(text))
+			if (stoi(text) >= 0 && stoi(text) <= sizeUserSettings)
+			{
+				userSetting[99].setAll(userSetting[stoi(text)]);
+				lastDelUser == 99;
+
+				ofstream r1("Data/users.txt");
+				for (int i = 0; i < sizeUserSettings; i++)if (i != stoi(text))r1 << userSetting[i].getAll() << endl;
+				r1.close();
+
+				ofstream r2_1("Data/link.txt");
+				r2_1.close();
+				ifstream r2_2("Data/users.txt");
+				while (!r2_2.eof())
+				{
+					string a, b, c;
+					r2_2 >> a >> b >> c;
+					link[sizeLinkBase].setAll(a, b, c);
+					sizeLinkBase++;
+				}
+				sizeLinkBase--;
+				r2_2.close();
+				ofstream r2_3("Data/link.txt");
+				for (int i = 0; i < sizeLinkBase; i++)if (link[i].nameHim != userSetting[stoi(text)].login2 && link[i].nameMy != userSetting[stoi(text)].login2) r2_3 << link[i].getAll() << endl;
+				r2_3.close();
+				readProductBase();
+				ofstream r3("Data/products.txt");
+				for (int i = 0; i < sizeProductBase; i++)if (product[i].login != userSetting[stoi(text)].login2)r3 << product[i].getall() << endl;
+				r3.close();
+				ofstream r4("Users/" + userSetting[stoi(text)].login2 + ".txt");
+				r4.close();
+			}
 	}
 }
 

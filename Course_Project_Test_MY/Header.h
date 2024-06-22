@@ -133,6 +133,21 @@ struct USER_SETTINGS
 		this->card;
 	}
 
+	void setAll(USER_SETTINGS user_settings)
+	{
+		this->theme2 = user_settings.theme2;
+		this->login2 = user_settings.login2;
+		this->password2 = user_settings.password2;
+		this->codeIn2 = user_settings.codeIn2;
+		this->role2 = user_settings.role2;
+		this->age2 = user_settings.age2;
+		this->specialization2 = user_settings.specialization2;
+		this->sex2 = user_settings.sex2;
+		for (int i = 0; i < 4; i++)this->personalChar2[i] = user_settings.personalChar2[i];
+		for (int i = 0; i < 5; i++)this->customizableChar[i] =user_settings.customizableChar[i];
+		this->card= user_settings.card;
+	}
+
 	string retStr()
 	{
 		string line = "";
@@ -230,6 +245,7 @@ CHORDS getConsleChords();
 void ShowConsoleCursor(bool showFlag);
 string generateRandomString(int size);
 string inOneLine(string str);
+bool isNumber(const string& str);
 
 void draw();
 void writeBorder();
@@ -275,6 +291,7 @@ void reg2();
 void inf();
 
 void adminMenu();
+void delUsers();
 
 void userMenu();
 void myCab(int num);

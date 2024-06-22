@@ -181,3 +181,12 @@ string inOneLine(string str)
     replace(str.begin(), str.end(), ' ', '_');
     return str;
 }
+
+bool isNumber(const string& str) {
+    for (char c : str) {
+        if (!isdigit(c)) {
+            return false;
+        }
+    }
+    return true;
+}
